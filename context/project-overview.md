@@ -6,6 +6,30 @@ Wikrena Academy is the learning management platform for **Wikrena Limited**, an 
 
 The platform targets adult learners across Africa and the diaspora who want to build careers in data and AI. It is not a kids or junior platform.
 
+## Company Background
+
+Wikrena Limited was founded by **Chris Awoke**, a self-taught data analyst and former front-end engineer (background in biological sciences) with 7+ years in tech. The company started in 2021 as "Wise Breed Analytics" and rebranded to Wikrena in 2025 with an expanded vision. Chris is also the author of *The Self-Taught Data Analyst* and *Simplified SQL for Data Professionals*. Other team members referenced in real company content: Goodness Oga (Project Management & Content Lead) and Edikan Bassey (Data Analytics Instructor).
+
+Wikrena operates **three pillars**, of which this app is only one:
+
+1. **Wikrena OS** — operating system SaaS for African service businesses (`os.wikrena.com`). Not part of this codebase.
+2. **Wikrena Academy** — cohort-based data/AI training for professionals. **This app.**
+3. **Wikrena Consulting** ("AnalyticsHQ") — B2B data strategy, analysis & reporting, and corporate data training. Not part of this codebase, but Academy marketing pages should link to it.
+
+Real marketing copy, founder bio, testimonials, and legal page content extracted from the legacy wikrena.com site live in `wikrena-pages/` at the repo root — use it as source material rather than inventing placeholder copy.
+
+## Real Academy Programs
+
+These are the actual programs the Academy sells (per `wikrena-pages/academy.md`, `data-analytics-professional.md`, `automation-program.md`, `research-analysis-with-spss.md`). Program duration is stated inconsistently across legacy source pages (12 vs. 15 weeks for the flagship program) — see the open question in `progress-tracker.md` before hardcoding a number into new copy.
+
+| Program | Format | Notes |
+|---|---|---|
+| **Data Analytics Professional Program** | Cohort-based, live, ~12–15 weeks | Flagship program. Python, SQL, Power BI, Excel. Fintech / Healthcare / Retail industry tracks. Capstone project, 90-day career support. |
+| **AI Automation Specialist Program** | Cohort-based, 8 weeks + 2-week capstone | No-code automation (Make.com, Zapier, n8n) plus AI API integration (OpenAI/Claude). Career, Professional, and Business tracks. |
+| **Research & Data Analysis with SPSS** | Self-paced, 7 weeks / 34 lessons | For postgraduate researchers, academics, healthcare/NGO staff. Tiered pricing (Starter/Professional/Premium). |
+
+Cohort sizes, pricing, and start dates vary across legacy pages and should be confirmed with the product owner before being treated as final — do not hardcode legacy WordPress pricing/dates into new pages without confirmation.
+
 ## Goals
 
 1. Present Wikrena Limited as a credible AI and data company through polished marketing pages (home, about, contact, and others).
@@ -42,10 +66,11 @@ The platform targets adult learners across Africa and the diaspora who want to b
 ## Features
 
 ### Marketing Site
-- Home page — company overview, value proposition, featured courses, social proof.
-- About page — Wikrena Limited mission, team, and story.
-- Contact page — contact form and company details.
-- Pricing page — plan tiers with Africa and diaspora pricing.
+- Home page — company overview, value proposition, featured courses, social proof. (`app/page.tsx` exists; real copy available in `wikrena-pages/home.md`.)
+- About page — Wikrena Limited mission, team, and story. (Not yet built; real copy in `wikrena-pages/about-us.md`.)
+- Contact page — contact form and company details. (Not yet built; emails referenced across legacy pages: `hello@wikrena.com` general, `help@wikrena.com` programs, `privacy@wikrena.com`, `legal@wikrena.com`, `billing@wikrena.com`.)
+- Pricing page — plan tiers with Africa and diaspora pricing. (`app/pricing/page.tsx` exists.)
+- Legal pages (Privacy Policy, Terms of Use, Cookie Policy) — not yet built; real legal copy available in `wikrena-pages/privacy-policy.md`, `terms-of-use.md`, `cookie-policy.md`.
 - Additional marketing pages as needed.
 
 ### Learning Paths & Courses

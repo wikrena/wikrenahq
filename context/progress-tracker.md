@@ -41,13 +41,18 @@ Review and improve existing LMS features, then begin adding new features as dire
 
 ## Next Up
 
-- Review and improve marketing pages (home, about, contact, pricing) with correct Wikrena Limited content.
+- Build out missing marketing pages using real copy from `wikrena-pages/`: `/about`, `/contact`, `/privacy-policy`, `/terms-of-use`, `/cookie-policy`. None of these exist in `app/` yet — only `app/page.tsx` (home) and `app/pricing/` exist.
+- Rewrite home page copy against `wikrena-pages/home.md` (real hero, three-pillar ecosystem, founder section, FAQ, testimonials) — current implementation should be checked against this for placeholder content.
+- Align Academy program copy/pricing with the real programs (Data Analytics Professional Program, AI Automation Specialist Program, SPSS course) — see `project-overview.md` for details and the duration/pricing inconsistency below.
 - Review and fine-tune existing LMS features.
 - Add new features as directed by the product owner.
 
 ## Open Questions
 
-- Which marketing pages beyond home, about, contact, and pricing should exist?
+- **Program duration conflict**: `wikrena-pages/academy.md` states the Data Analytics Professional Program is 15 weeks; `wikrena-pages/data-analytics-professional.md` states 12 weeks. Needs confirmation from the product owner before any new copy hardcodes a number.
+- **Cohort size conflict**: stated as max 30, 45, and 25 students in different legacy pages (varies by program). Needs confirmation.
+- Should this app build out `/about`, `/contact`, and legal pages now, or are those staying on a separate marketing site? (Legacy WordPress content suggests they were on `wikrena.com` directly — need to confirm whether this Next.js app is meant to absorb them.)
+- Should marketing pages here link out to Wikrena OS (`os.wikrena.com`) and Wikrena Consulting/AnalyticsHQ, given the three-pillar company structure described in `wikrena-pages/home.md` and `about-us.md`?
 - What new features are planned after the cleanup phase?
 - Should the parent dashboard be rebuilt with adult-platform monitoring features?
 

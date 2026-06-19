@@ -2,9 +2,25 @@
 
 ## What This Project Is
 
-Wikrena Academy is the learning management platform for **Wikrena Limited**, an AI and data company. It is a full-stack web application that combines a marketing site (home, about, contact, etc.) with a feature-rich LMS — learning paths, AI tutoring, coding challenges, career development tools, and an Africa-focused data lab.
+Wikrena Academy is the learning management platform for **Wikrena Limited**, an AI and data company founded by **Chris Awoke** (started as "Wise Breed Analytics" in 2021, rebranded to Wikrena in 2025). It is a full-stack web application that combines a marketing site (home, about, contact, etc.) with a feature-rich LMS — learning paths, AI tutoring, coding challenges, career development tools, and an Africa-focused data lab.
 
 The platform is built for adult learners pursuing careers in data science, AI, and technology. It is **not** a kids platform — all Junior-related content is being removed.
+
+### Where This App Sits in the Wikrena Ecosystem
+
+Wikrena Limited operates three pillars. This repo is **only** the Academy:
+
+| Pillar | What it is | In this repo? |
+|---|---|---|
+| **Wikrena OS** | SaaS for African service businesses (clients, scope, payments) at `os.wikrena.com` | No — separate product |
+| **Wikrena Academy** | Cohort-based data/AI training for professionals | **Yes — this app** |
+| **Wikrena Consulting** ("AnalyticsHQ") | B2B data strategy, analysis, and corporate training | No — but Academy marketing pages link out to it |
+
+Marketing copy on this app's public pages (home, about) should acknowledge all three pillars even though only the Academy is built here.
+
+### Source Content
+
+`wikrena-pages/` contains real copy extracted from the legacy wikrena.com WordPress site (home, about, programs, legal pages, blog posts, etc.). Treat it as the source of truth for marketing copy, founder bio, testimonials, and program details when building out marketing pages — do not invent placeholder content where real copy already exists there. See `context/project-overview.md` for what's been reconciled from it and `context/progress-tracker.md` for open inconsistencies (e.g. program duration conflicts between source pages).
 
 ---
 

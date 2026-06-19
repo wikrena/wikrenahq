@@ -2,6 +2,7 @@ import type { Metadata } from "next"
 import { ResetPasswordForm } from "@/components/auth/reset-password-form"
 
 export const metadata: Metadata = { title: "Set New Password — Wikrena Academy" }
+export const dynamic = "force-dynamic"
 
 export default function ResetPasswordPage() {
   return (
