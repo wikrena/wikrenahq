@@ -10,8 +10,8 @@ import {
   welcomeStudentEmail, passwordResetEmail, emailVerificationEmail,
   instructorInviteEmail, courseSubmittedEmail, coursePublishedEmail,
   newEnrollmentInstructorEmail, newEnrollmentStudentEmail,
-  badgeEarnedEmail, streakReminderEmail, schoolInvitationEmail,
-  verificationStudentEmail, verificationParentEmail, verificationSchoolEmail,
+  badgeEarnedEmail, streakReminderEmail,
+  verificationStudentEmail,
 } from "./templates"
 
 const APP_URL = process.env.NEXT_PUBLIC_APP_URL ?? "https://academy.wikrena.com"
@@ -115,33 +115,11 @@ export const sendEmail = {
       streakReminderEmail(name, streak, loginUrl))
   },
 
-  async verification({ name, email, role, verifyUrl }: {
-    name: string; email: string; role: string; verifyUrl: string
+  async verification({ name, email, verifyUrl }: {
+    name: string; email: string; verifyUrl: string
   }) {
-    const isParent = role === "PARENT"
-    const isSchool = role === "SCHOOL" || role === "TEACHER"
-
-    const subject = isParent
-      ? "Confirm your Wikrena Academy parent account"
-      : isSchool
-      ? "Confirm your Wikrena Academy school account"
-      : "Confirm your email — Wikrena Academy"
-
-    const html = isParent
-      ? verificationParentEmail(name, verifyUrl)
-      : isSchool
-      ? verificationSchoolEmail(name, verifyUrl)
-      : verificationStudentEmail(name, verifyUrl)
-
-    return send(email, subject, html)
-  },
-
-  async schoolInvitation({ email, studentName, schoolName, cohortName, token }: {
-    email: string; studentName: string; schoolName: string; cohortName: string; token: string
-  }) {
-    const acceptUrl = `${APP_URL}/school/join?token=${token}`
-    return send(email, `${schoolName} invited you to learn on Wikrena`,
-      schoolInvitationEmail(studentName, schoolName, cohortName, acceptUrl))
+    return send(email, "Confirm your email — Wikrena Academy",
+      verificationStudentEmail(name, verifyUrl))
   },
 }
 
@@ -160,8 +138,6 @@ export async function sendInvitationEmail(params: {
   const roleLabel: Record<string, string> = {
     ADMIN:      "Platform Administrator",
     INSTRUCTOR: "Course Instructor",
-    SCHOOL:     "School Account",
-    TEACHER:    "Teacher Account",
   }
 
   const subject = `You've been invited to join Wikrena Academy as ${roleLabel[role] ?? role}`

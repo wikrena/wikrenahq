@@ -18,7 +18,7 @@ export default async function CoursePage({ params }: Props) {
   const { data: profile } = await admin
     .from("profiles").select("role, name").eq("id", user.id).single()
 
-  if (!["ADMIN", "TEACHER", "INSTRUCTOR"].includes(profile?.role ?? "")) {
+  if (!["ADMIN", "INSTRUCTOR"].includes(profile?.role ?? "")) {
     redirect("/dashboard")
   }
 

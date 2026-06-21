@@ -45,8 +45,6 @@ export function MarketingNav() {
 
   function getDashboardUrl(role: string) {
     const r = role.toUpperCase();
-    if (r === "PARENT") return "/parent/dashboard";
-    if (r === "SCHOOL" || r === "TEACHER") return "/school/dashboard";
     if (r === "ADMIN") return "/admin/dashboard";
     if (r === "INSTRUCTOR") return "/instructor/dashboard";
     return "/dashboard";
@@ -54,8 +52,6 @@ export function MarketingNav() {
 
   function getRoleLabel(role: string) {
     const r = role.toUpperCase();
-    if (r === "PARENT") return "Parent";
-    if (r === "SCHOOL") return "School";
     if (r === "ADMIN") return "Admin";
     if (r === "INSTRUCTOR") return "Instructor";
     return "Student";
@@ -82,8 +78,11 @@ export function MarketingNav() {
 
   const linkClass = (active: boolean) =>
     cn(
-      "relative px-3.5 py-2 text-sm font-medium rounded-full transition-colors",
-      active ? "text-navy-800" : "text-neutral-500 hover:text-navy-800",
+      "relative px-3.5 py-2 text-sm font-medium transition-colors",
+      "after:content-[''] after:absolute after:left-3.5 after:right-3.5 after:-bottom-0.5 after:h-px after:bg-teal-500 after:origin-center after:transition-transform after:duration-300",
+      active
+        ? "text-navy-800 after:scale-x-100"
+        : "text-neutral-500 hover:text-navy-800 after:scale-x-0 hover:after:scale-x-100",
     );
 
   return (
@@ -98,8 +97,8 @@ export function MarketingNav() {
         >
           <nav
             className={cn(
-              "relative pointer-events-auto flex items-center justify-between gap-6 rounded-full bg-white border border-neutral-200 transition-all duration-300",
-              scrolled ? "shadow-card px-3 py-2" : "shadow-surface px-5 py-3",
+              "relative pointer-events-auto flex items-center justify-between gap-6 rounded-2xl bg-white border border-neutral-200 transition-all duration-300",
+              scrolled ? "shadow-card px-4 py-2.5" : "shadow-surface px-6 py-3.5",
             )}
           >
             {/* Gradient accent line — visible on scroll */}
@@ -125,7 +124,7 @@ export function MarketingNav() {
               {userRole && (
                 <Link
                   href={getDashboardUrl(userRole)}
-                  className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-white bg-teal-500 hover:bg-teal-400 rounded-full transition-all"
+                  className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-white bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
                 >
                   Dashboard <ArrowRight className="w-3.5 h-3.5" />
                 </Link>

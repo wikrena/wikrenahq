@@ -81,21 +81,21 @@ export function withAuth(handler: RouteHandler) {
 }
 
 /**
- * withAdmin — wraps a route requiring ADMIN or TEACHER role.
+ * withAdmin — wraps a route requiring ADMIN role.
  */
 export function withAdmin(handler: RouteHandler) {
   return withAuth(async (req, ctx, params) => {
-    if (!["ADMIN", "TEACHER"].includes(ctx.role)) return E.forbidden()
+    if (!["ADMIN"].includes(ctx.role)) return E.forbidden()
     return handler(req, ctx, params)
   })
 }
 
 /**
- * withInstructor — wraps a route requiring ADMIN, TEACHER or INSTRUCTOR role.
+ * withInstructor — wraps a route requiring ADMIN or INSTRUCTOR role.
  */
 export function withInstructor(handler: RouteHandler) {
   return withAuth(async (req, ctx, params) => {
-    if (!["ADMIN", "TEACHER", "INSTRUCTOR"].includes(ctx.role)) return E.forbidden()
+    if (!["ADMIN", "INSTRUCTOR"].includes(ctx.role)) return E.forbidden()
     return handler(req, ctx, params)
   })
 }

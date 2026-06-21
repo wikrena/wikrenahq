@@ -20,7 +20,7 @@ export default async function AdminInstructorsPage() {
   const { data: instructors } = await admin
     .from("profiles")
     .select("id, name, email, avatar, role, instructor_bio, instructor_title, created_at")
-    .in("role", ["INSTRUCTOR", "TEACHER"])
+    .eq("role", "INSTRUCTOR")
     .eq("is_active", true)
     .order("created_at", { ascending: false })
 

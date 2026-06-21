@@ -4,7 +4,7 @@ import Link from "next/link"
 import { BarChart, Bar, XAxis, Cell, ResponsiveContainer, Tooltip } from "recharts"
 import {
   Users, BookOpen, Zap, TrendingUp,
-  GraduationCap, Building2, ArrowRight, Plus
+  GraduationCap, ArrowRight, Plus
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -21,17 +21,13 @@ interface Props {
   recentUsers:       any[]
   topCourses:        any[]
   instructors:       any[]
-  schools:           any[]
   registrationChart: { day: string; count: number }[]
   passRate: number
 }
 
 const ROLE_STYLES: Record<string, string> = {
   STUDENT:    "bg-teal-50 text-teal-700 border-teal-200",
-  PARENT:     "bg-orange-50 text-orange-700 border-orange-200",
-  SCHOOL:     "bg-blue-50 text-blue-700 border-blue-200",
   INSTRUCTOR: "bg-purple-50 text-purple-700 border-purple-200",
-  TEACHER:    "bg-indigo-50 text-indigo-700 border-indigo-200",
   ADMIN:      "bg-red-50 text-red-700 border-red-200",
 }
 
@@ -49,7 +45,7 @@ function timeAgo(iso: string): string {
 
 export function AdminDashboard({
   adminName, adminEmail, stats,
-  recentUsers, topCourses, instructors, schools,
+  recentUsers, topCourses, instructors,
   registrationChart, passRate
 }: Props) {
   const hour     = new Date().getHours()
@@ -77,7 +73,6 @@ export function AdminDashboard({
               { label: "Users",       value: stats.totalUsers.toLocaleString() },
               { label: "Courses",     value: topCourses.length },
               { label: "Enrollments", value: stats.activeEnrollments },
-              { label: "Schools",     value: schools.length },
             ].map(s => (
               <div key={s.label} className="text-center bg-white/[0.07] border border-white/10 rounded-xl px-5 py-3">
                 <div className="font-black text-white text-2xl leading-none">{s.value}</div>
@@ -89,7 +84,7 @@ export function AdminDashboard({
       </div>
 
       {/* ── STAT CARDS ── */}
-      <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
         {[
           {
             label: "Total Users",
@@ -118,15 +113,6 @@ export function AdminDashboard({
             trend: "Platform-wide",
             trendColor: "text-amber-600",
           },
-          {
-            label: "Schools",
-            value: schools.length,
-            icon:  Building2,
-            color: "text-purple-600",
-            bg:    "bg-purple-50",
-            trend: "Enrolled organisations",
-            trendColor: "text-purple-600",
-          },
         ].map(s => (
           <div key={s.label} className="bg-white border border-neutral-100 rounded-xl p-4 shadow-sm">
             <div className={cn("w-9 h-9 rounded-xl flex items-center justify-center mb-3", s.bg)}>
@@ -141,8 +127,8 @@ export function AdminDashboard({
         ))}
       </div>
 
-      {/* ── MIDDLE ROW — Chart + Pass Rate + Schools ── */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-4">
+      {/* ── MIDDLE ROW — Chart + Pass Rate ── */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
 
         {/* Registration Chart */}
         <div className="lg:col-span-1 bg-white border border-neutral-100 rounded-xl p-5 shadow-sm">
@@ -203,33 +189,6 @@ export function AdminDashboard({
               </div>
             ))}
           </div>
-        </div>
-
-        {/* Schools */}
-        <div className="bg-white border border-neutral-100 rounded-xl p-5 shadow-sm">
-          <div className="flex items-center justify-between mb-4">
-            <h3 className="font-bold text-navy-800 text-sm">Schools</h3>
-            <Link href="/admin/schools" className="text-xs text-teal-600 font-semibold hover:underline">
-              View →
-            </Link>
-          </div>
-          {schools.length === 0 ? (
-            <div className="text-center py-8">
-              <Building2 className="w-8 h-8 text-neutral-200 mx-auto mb-2" />
-              <p className="text-xs text-neutral-400">No schools enrolled yet</p>
-            </div>
-          ) : (
-            <div className="space-y-3">
-              {schools.slice(0, 4).map((school: any) => (
-                <div key={school.id} className="flex items-center gap-3">
-                  <div className="w-8 h-8 rounded-lg bg-blue-50 flex items-center justify-center shrink-0">
-                    <Building2 className="w-4 h-4 text-blue-500" />
-                  </div>
-                  <span className="text-xs text-neutral-700 flex-1 truncate">{school.name ?? school.email}</span>
-                </div>
-              ))}
-            </div>
-          )}
         </div>
       </div>
 

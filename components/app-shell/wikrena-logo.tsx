@@ -10,13 +10,13 @@ interface LogoProps {
 }
 
 export function WikrenaLogo({ variant = "light-bg", href = "/dashboard", className, height = 32 }: LogoProps) {
-  // "dark-bg" = this logo is placed ON a dark background → needs light/white version
-  // "light-bg" = this logo is placed ON a light background → needs dark version
+  // "dark-bg" = this logo is placed ON a dark background → needs the white-wordmark version
+  // "light-bg" = this logo is placed ON a light background → needs the navy-wordmark version
   const src = variant === "dark-bg"
-    ? "/logo-light-bg.svg"   // light-coloured logo for dark backgrounds
+    ? "/logo-dark-bg.svg"    // white wordmark, for dark backgrounds
     : variant === "icon-only"
     ? "/logo-icon-green.svg"
-    : "/logo-dark-bg.svg"    // dark-coloured logo for light backgrounds
+    : "/logo-light-bg.svg"   // navy wordmark, for light backgrounds
 
   // Preserve aspect ratio based on known SVG dimensions
   const aspectRatios = {

@@ -16,7 +16,7 @@ export default async function AdminUsersPage({ searchParams }: {
 
   const admin = getAdminClient()
   const { data: profile } = await admin.from("profiles").select("name, role").eq("id", user.id).single()
-  if (!["ADMIN", "TEACHER"].includes(profile?.role ?? "")) redirect("/dashboard")
+  if (!["ADMIN"].includes(profile?.role ?? "")) redirect("/dashboard")
 
   const page   = parseInt(searchParams.page ?? "1")
   const limit  = 20

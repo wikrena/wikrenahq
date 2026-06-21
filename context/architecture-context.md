@@ -40,7 +40,7 @@
 - User identity is verified server-side before any mutation or protected data fetch.
 
 **Protected routes** (require active Supabase session):
-`/dashboard`, `/paths`, `/learn`, `/challenges`, `/leaderboard`, `/community`, `/africa-lab`, `/workspace`, `/career`, `/profile`, `/settings`, `/ai-tutor`, `/admin`, `/parent`, `/school`, `/onboarding`, `/placed`
+`/dashboard`, `/paths`, `/learn`, `/challenges`, `/leaderboard`, `/community`, `/africa-lab`, `/workspace`, `/career`, `/profile`, `/settings`, `/ai-tutor`, `/admin`, `/onboarding`, `/placed`
 
 **Public routes:** `/`, `/login`, `/register`, `/forgot-password`, `/reset-password`, `/pricing`, and all marketing pages.
 
@@ -59,7 +59,6 @@ All relational data lives in **PostgreSQL**, managed via Supabase migrations (`s
 - **PortfolioProject** — learner portfolio items.
 - **Certificate** — issued on path completion.
 - **PricingPlan / Subscription** — Paystack-linked payment records.
-- **School / SchoolEnrolment** — bulk school management.
 
 ## AI Architecture (Wren Tutor)
 

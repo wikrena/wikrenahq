@@ -24,7 +24,7 @@ export async function GET() {
     const { data: instructors } = await admin
       .from("profiles")
       .select("id, name, email, avatar, instructor_bio, instructor_title, created_at")
-      .in("role", ["INSTRUCTOR", "ADMIN", "TEACHER"])
+      .in("role", ["INSTRUCTOR", "ADMIN"])
       .order("created_at")
 
     const { data: invitations } = await admin

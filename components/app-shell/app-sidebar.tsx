@@ -199,7 +199,7 @@ export function AppSidebar({ activeSection, userRole, isOpen, onClose }: Props) 
       </nav>
 
       {/* Admin/instructor links */}
-      {userRole && ["ADMIN","INSTRUCTOR","TEACHER"].includes(userRole) && (
+      {userRole && ["ADMIN","INSTRUCTOR"].includes(userRole) && (
         <div className="px-3 pt-2 pb-1 border-t border-[#E5E9F0]">
           <div className="text-[9px] font-bold text-neutral-400 uppercase tracking-widest px-2 mb-1">
             {userRole === "ADMIN" ? "ADMIN" : "INSTRUCTOR"}

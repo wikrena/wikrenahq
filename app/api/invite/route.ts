@@ -18,7 +18,7 @@ import { withAdmin, ok, E }    from "@/lib/api"
 import { sendInvitationEmail } from "@/lib/email"
 import type { UserRole }       from "@/types"
 
-const VALID_ROLES: UserRole[] = ["ADMIN", "INSTRUCTOR", "SCHOOL", "TEACHER"]
+const VALID_ROLES: UserRole[] = ["ADMIN", "INSTRUCTOR"]
 
 export const POST = withAdmin(async (req, { userId, admin }) => {
   const body = await req.json().catch(() => ({}))

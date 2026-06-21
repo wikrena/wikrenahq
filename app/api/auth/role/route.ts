@@ -27,9 +27,6 @@ export async function GET() {
   if (!profile) {
     const metaRaw = (user.user_metadata?.role ?? "student").toLowerCase()
     const dbRole  =
-      metaRaw === "parent"     ? "PARENT"     :
-      metaRaw === "school"     ? "SCHOOL"     :
-      metaRaw === "teacher"    ? "TEACHER"    :
       metaRaw === "instructor" ? "INSTRUCTOR" :
       metaRaw === "admin"      ? "ADMIN"      :
       "STUDENT"
@@ -47,7 +44,7 @@ export async function GET() {
       })
     } catch { /* profile may already exist — non-fatal */ }
 
-    return NextResponse.json({ role: dbRole, onboardingDone: false, hasChildren: false })
+    return NextResponse.json({ role: dbRole, onboardingDone: false })
   }
 
   const role = (profile.role ?? "STUDENT").toUpperCase()

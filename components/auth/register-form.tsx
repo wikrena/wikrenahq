@@ -2,45 +2,12 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { useRouter } from "next/navigation"
-import { Eye, EyeOff, Loader2, ArrowRight, ArrowLeft } from "lucide-react"
+import { Eye, EyeOff, Loader2 } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input, Label } from "@/components/ui/input"
 import { useToast } from "@/hooks/use-toast"
-import { cn } from "@/lib/utils"
-
-type Role = "student" | "parent" | "school" | null
-
-const ROLES = [
-  {
-    id:    "student" as Role,
-    emoji: "🎓",
-    title: "I'm a Student",
-    desc:  "I want to learn data skills and advance my career",
-    color: "border-teal-200 hover:border-teal-400 hover:bg-teal-50",
-    active:"border-teal-500 bg-teal-50",
-  },
-  {
-    id:    "parent" as Role,
-    emoji: "👨‍👩‍👧",
-    title: "I'm a Parent",
-    desc:  "I want to monitor my child's learning progress",
-    color: "border-coral-200 hover:border-coral-400 hover:bg-coral-50",
-    active:"border-coral-500 bg-coral-50",
-  },
-  {
-    id:    "school" as Role,
-    emoji: "🏫",
-    title: "I'm a Teacher / School",
-    desc:  "I want to use Wikrena Academy for my students or organisation",
-    color: "border-navy-200 hover:border-navy-400 hover:bg-navy-50",
-    active:"border-navy-500 bg-navy-50",
-  },
-]
 
 export function RegisterForm() {
-  const [step, setStep]         = useState<"role" | "details">("role")
-  const [role, setRole]         = useState<Role>(null)
   const [name, setName]         = useState("")
   const [email, setEmail]       = useState("")
   const [password, setPassword] = useState("")
@@ -49,11 +16,9 @@ export function RegisterForm() {
   const [gLoading, setGLoading] = useState(false)
   const [done, setDone]         = useState(false)
   const { toast } = useToast()
-  const router   = useRouter()
 
   async function handleRegister(e: React.FormEvent) {
     e.preventDefault()
-    if (!role) return
     if (password.length < 8) {
       toast({ title:"Password too short", description:"At least 8 characters required.", variant:"destructive" })
       return
@@ -64,7 +29,7 @@ export function RegisterForm() {
       const res  = await fetch("/api/auth/register", {
         method:  "POST",
         headers: { "Content-Type": "application/json" },
-        body:    JSON.stringify({ name, email, password, role }),
+        body:    JSON.stringify({ name, email, password, role: "student" }),
       })
       const data = await res.json()
 
@@ -90,15 +55,13 @@ export function RegisterForm() {
   }
 
   async function handleGoogle() {
-    if (!role) return
     setGLoading(true)
-    // Google OAuth — store intended role in state param so callback can use it
     const { createClient } = await import("@/lib/supabase/client")
     const supabase = createClient()
     await supabase.auth.signInWithOAuth({
       provider: "google",
       options: {
-        redirectTo: `${window.location.origin}/api/auth/callback?role=${role}`,
+        redirectTo: `${window.location.origin}/api/auth/callback`,
         queryParams: { access_type: "offline", prompt: "consent" },
       },
     })
@@ -106,59 +69,34 @@ export function RegisterForm() {
 
   // ── Email sent screen ──────────────────────────────────────────────────────
   if (done) {
-    const config = {
-      student: {
-        emoji: "🎓",
-        title: "Check your email",
-        next: "After confirming, you'll choose your learning track and start your first mission.",
-        color: "#2ec4b6",
-        bg: "rgba(46,196,182,0.08)",
-        border: "rgba(46,196,182,0.2)",
-      },
-      parent: {
-        emoji: "👨‍👩‍👧",
-        title: "Check your email",
-        next: "After confirming, you'll access your parent dashboard to monitor your child's progress.",
-        color: "#ff6b3d",
-        bg: "rgba(255,107,61,0.08)",
-        border: "rgba(255,107,61,0.2)",
-      },
-      school: {
-        emoji: "🏫",
-        title: "Check your email",
-        next: "After confirming, you'll access your school dashboard and manage your learners.",
-        color: "#0a192f",
-        bg: "rgba(10,25,47,0.06)",
-        border: "rgba(10,25,47,0.15)",
-      },
-    }
-    const cfg = config[role ?? "student"] ?? config.student
-
     return (
       <div className="flex flex-col items-center text-center w-full">
         {/* Icon */}
         <div className="w-20 h-20 rounded-2xl flex items-center justify-center text-4xl mb-6 mx-auto"
-          style={{ background: cfg.bg, border: `2px solid ${cfg.border}` }}>
-          {cfg.emoji}
+          style={{ background: "rgba(46,196,182,0.08)", border: "2px solid rgba(46,196,182,0.2)" }}>
+          🎓
         </div>
 
         {/* Heading */}
         <h2 className="font-display font-black text-2xl text-navy-800 mb-2 leading-tight">
-          {cfg.title}
+          Check your email
         </h2>
 
         {/* Email */}
         <p className="text-neutral-500 text-sm mb-1 leading-relaxed">
           We sent a confirmation link to
         </p>
-        <p className="font-bold mb-4 text-sm" style={{ color: cfg.color }}>{email}</p>
+        <p className="font-bold mb-4 text-sm text-teal-600">{email}</p>
 
         {/* What happens next */}
         <div className="w-full rounded-2xl p-4 mb-6 text-left"
-          style={{ background: cfg.bg, border: `1px solid ${cfg.border}` }}>
-          <div className="text-[10px] font-black uppercase tracking-widest mb-2"
-            style={{ color: cfg.color }}>What happens next</div>
-          <p className="text-sm text-neutral-600 leading-relaxed">{cfg.next}</p>
+          style={{ background: "rgba(46,196,182,0.08)", border: "1px solid rgba(46,196,182,0.2)" }}>
+          <div className="text-[10px] font-black uppercase tracking-widest mb-2 text-teal-600">
+            What happens next
+          </div>
+          <p className="text-sm text-neutral-600 leading-relaxed">
+            After confirming, you&apos;ll choose your learning track and start your first mission.
+          </p>
         </div>
 
         {/* Tips */}
@@ -181,8 +119,7 @@ export function RegisterForm() {
 
         {/* CTA */}
         <Link href="/login" className="w-full">
-          <button className="w-full py-3.5 rounded-xl font-black text-sm text-white transition-all hover:opacity-90"
-            style={{ background: cfg.color }}>
+          <button className="w-full py-3.5 rounded-xl font-black text-sm text-white transition-all hover:opacity-90 bg-teal-500">
             Back to Sign In
           </button>
         </Link>
@@ -194,75 +131,14 @@ export function RegisterForm() {
     )
   }
 
-  // ── Step 1: Role selection ─────────────────────────────────────────────────
-  if (step === "role") return (
-    <div>
-      <p className="text-neutral-500 text-sm mb-8">Who are you signing up as?</p>
-
-      <div className="space-y-3 mb-8">
-        {ROLES.map(r => (
-          <button key={r.id} onClick={() => setRole(r.id)}
-            className={cn(
-              "w-full flex items-center gap-4 p-4 rounded-2xl border-2 text-left transition-all",
-              role === r.id ? r.active : r.color
-            )}
-          >
-            <span className="text-3xl shrink-0">{r.emoji}</span>
-            <div className="flex-1 min-w-0">
-              <div className="font-display font-bold text-sm text-navy-800">{r.title}</div>
-              <div className="text-xs text-neutral-500 mt-0.5">{r.desc}</div>
-            </div>
-            <div className={cn(
-              "w-5 h-5 rounded-full border-2 shrink-0 flex items-center justify-center transition-all",
-              role === r.id ? "border-current bg-current" : "border-neutral-300"
-            )}>
-              {role === r.id && <div className="w-2 h-2 rounded-full bg-white" />}
-            </div>
-          </button>
-        ))}
-      </div>
-
-      <Button
-        onClick={() => role && setStep("details")}
-        disabled={!role}
-        variant="teal"
-        className="w-full font-bold h-11"
-      >
-        Continue <ArrowRight className="w-4 h-4" />
-      </Button>
-
-    </div>
-  )
-
-  // ── Step 2: Registration details ──────────────────────────────────────────
-  const selectedRole = ROLES.find(r => r.id === role)!
-  const namePlaceholder = role === "school" ? "School / Organisation name" : "Your full name"
-  const nameLabel       = role === "school" ? "School or organisation name" : "Full name"
-
+  // ── Registration details ───────────────────────────────────────────────────
   return (
     <div>
-      <div className="flex items-center gap-3 mb-8">
-        <button onClick={() => setStep("role")} className="w-9 h-9 rounded-xl border border-neutral-200 flex items-center justify-center text-neutral-500 hover:bg-neutral-50 transition-colors">
-          <ArrowLeft className="w-4 h-4" />
-        </button>
-        <div className="flex items-center gap-2 flex-1">
-          <span className="text-2xl">{selectedRole.emoji}</span>
-          <div>
-            <div className="font-display font-bold text-sm text-navy-800">{selectedRole.title}</div>
-            <button onClick={() => setStep("role")} className="text-xs text-teal-600 hover:underline">Change</button>
-          </div>
-        </div>
-      </div>
-
       <h1 className="font-display font-black text-xl text-navy-800 mb-1">
-        {role === "parent"  && "Set up your parent account"}
-        {role === "school"  && "Set up your school account"}
-        {role === "student" && "Create your account"}
+        Create your account
       </h1>
       <p className="text-neutral-500 text-sm mb-7">
-        {role === "parent"  && "You'll access your parent dashboard after verifying your email."}
-        {role === "school"  && "You'll set up your classroom after verifying your email."}
-        {role === "student" && "Start your data career journey today."}
+        Start your data career journey today.
       </p>
 
       {/* Google */}
@@ -284,8 +160,8 @@ export function RegisterForm() {
 
       <form onSubmit={handleRegister} className="space-y-4">
         <div>
-          <Label htmlFor="name">{nameLabel}</Label>
-          <Input id="name" placeholder={namePlaceholder} value={name} onChange={e => setName(e.target.value)} required />
+          <Label htmlFor="name">Full name</Label>
+          <Input id="name" placeholder="Your full name" value={name} onChange={e => setName(e.target.value)} required />
         </div>
         <div>
           <Label htmlFor="email">Email address</Label>
@@ -309,8 +185,6 @@ export function RegisterForm() {
           {loading ? <Loader2 className="w-4 h-4 animate-spin" /> : "Create Account →"}
         </Button>
       </form>
-
-
     </div>
   )
 }

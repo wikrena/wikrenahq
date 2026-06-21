@@ -71,12 +71,7 @@ export async function GET(request: Request) {
 
   // ── 5. Handle Google OAuth — profile may not exist yet ───────────────────
   if (!profile && code) {
-    const dbRole =
-      oauthRole === "parent"     ? "PARENT"     :
-      oauthRole === "school"     ? "SCHOOL"     :
-      oauthRole === "teacher"    ? "TEACHER"    :
-      oauthRole === "instructor" ? "INSTRUCTOR" :
-      "STUDENT"
+    const dbRole = oauthRole === "instructor" ? "INSTRUCTOR" : "STUDENT"
 
     try {
       await admin.from("profiles").insert({
@@ -135,12 +130,6 @@ export async function GET(request: Request) {
 
   } else if (role === "INSTRUCTOR") {
     destination = "/instructor/dashboard"
-
-  } else if (role === "SCHOOL" || role === "TEACHER") {
-    destination = "/school/dashboard"
-
-  } else if (role === "PARENT") {
-    destination = "/dashboard"
 
   } else {
     // STUDENT — honour redirectTo if safe

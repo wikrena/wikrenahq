@@ -13,7 +13,7 @@ export default async function InstructorDashboardPage() {
 
   const admin = getAdminClient()
   const { data: profile } = await admin.from("profiles").select("*").eq("id", user.id).single()
-  if (!["INSTRUCTOR","ADMIN","TEACHER"].includes(profile?.role ?? "")) redirect("/dashboard")
+  if (!["INSTRUCTOR","ADMIN"].includes(profile?.role ?? "")) redirect("/dashboard")
 
   // Get assigned courses
   const { data: assignments } = await admin

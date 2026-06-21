@@ -84,8 +84,6 @@ export function AdminSettings({ profile }: Props) {
             <select value={inviteRole} onChange={e => setInviteRole(e.target.value)}
               className="w-full border border-neutral-200 rounded-xl px-4 py-2.5 text-sm focus:outline-none focus:border-teal-400 focus:ring-2 focus:ring-teal-400/20">
               <option value="INSTRUCTOR">Instructor — can create and publish courses</option>
-              <option value="SCHOOL">School — can manage cohorts and students</option>
-              <option value="TEACHER">Teacher — can manage a school's courses</option>
               <option value="ADMIN">Admin — full platform access</option>
             </select>
           </div>

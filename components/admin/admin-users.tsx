@@ -5,14 +5,11 @@ import { useRouter } from "next/navigation"
 import { Search, Filter, ChevronLeft, ChevronRight, Shield, Ban, CheckCircle } from "lucide-react"
 import { cn } from "@/lib/utils"
 
-const ROLES = ["All", "STUDENT", "PARENT", "SCHOOL", "INSTRUCTOR", "TEACHER", "ADMIN"]
+const ROLES = ["All", "STUDENT", "INSTRUCTOR", "ADMIN"]
 
 const ROLE_STYLES: Record<string, string> = {
   STUDENT:    "bg-teal-50 text-teal-700 border-teal-200",
-  PARENT:     "bg-orange-50 text-orange-700 border-orange-200",
-  SCHOOL:     "bg-blue-50 text-blue-700 border-blue-200",
   INSTRUCTOR: "bg-purple-50 text-purple-700 border-purple-200",
-  TEACHER:    "bg-indigo-50 text-indigo-700 border-indigo-200",
   ADMIN:      "bg-red-50 text-red-700 border-red-200",
 }
 
@@ -153,7 +150,7 @@ export function AdminUsers({ users, total, page, limit, currentRole, search }: P
                         ROLE_STYLES[u.role] ?? "bg-neutral-50 text-neutral-600 border-neutral-200"
                       )}
                     >
-                      {["STUDENT","PARENT","SCHOOL","INSTRUCTOR","TEACHER","ADMIN"].map(r => (
+                      {["STUDENT","INSTRUCTOR","ADMIN"].map(r => (
                         <option key={r} value={r}>{r}</option>
                       ))}
                     </select>

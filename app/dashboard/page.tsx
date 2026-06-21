@@ -27,9 +27,6 @@ export default async function DashboardPage() {
   if (profileError || !profile) {
     const metaRaw     = (user.user_metadata?.role ?? "student").toLowerCase().trim()
     const derivedRole =
-      metaRaw === "parent"     ? "PARENT"     :
-      metaRaw === "school"     ? "SCHOOL"     :
-      metaRaw === "teacher"    ? "TEACHER"    :
       metaRaw === "instructor" ? "INSTRUCTOR" :
       metaRaw === "admin"      ? "ADMIN"      :
       "STUDENT"
@@ -50,15 +47,11 @@ export default async function DashboardPage() {
 
     if (derivedRole === "ADMIN")                               redirect("/admin/dashboard")
     if (derivedRole === "INSTRUCTOR")                          redirect("/instructor/dashboard")
-    if (derivedRole === "SCHOOL" || derivedRole === "TEACHER") redirect("/school/dashboard")
-    if (derivedRole === "PARENT")                              redirect("/dashboard")
     redirect("/onboarding")
   }
 
   // Step 4: role-based routing — each role has its own dashboard
   const role = (profile.role ?? "STUDENT").toUpperCase()
-  if (role === "PARENT")                           redirect("/parent/dashboard")
-  if (role === "SCHOOL" || role === "TEACHER")     redirect("/school/dashboard")
   if (role === "ADMIN")                            redirect("/admin/dashboard")
 
   // Step 5: onboarding gate — must complete onboarding before seeing dashboard

@@ -62,12 +62,10 @@ app/                   Next.js app router — pages and API routes
   learn/               Learning centre (tracks, courses, projects, library)
   leaderboard/         XP leaderboard
   onboarding/          Onboarding flow
-  parent/              Parent dashboard (to be reviewed)
   paths/               Learning paths catalogue
   placed/              Job placement tracker
   practice/            Practice and assessments
   profile/             User profile
-  school/              School admin
   settings/            Account settings
   workspace/           Code notebook / editor
   api/                 API route handlers
@@ -106,7 +104,7 @@ npm run db:seed      # Seed the database (scripts/seed.ts)
 Auth is handled by **Supabase SSR** via cookie-based sessions. The `middleware.ts` file protects routes server-side.
 
 **Protected routes** (require Supabase session):
-`/dashboard`, `/paths`, `/learn`, `/challenges`, `/leaderboard`, `/community`, `/africa-lab`, `/workspace`, `/career`, `/profile`, `/settings`, `/ai-tutor`, `/admin`, `/parent`, `/school`, `/onboarding`, `/placed`
+`/dashboard`, `/paths`, `/learn`, `/challenges`, `/leaderboard`, `/community`, `/africa-lab`, `/workspace`, `/career`, `/profile`, `/settings`, `/ai-tutor`, `/admin`, `/onboarding`, `/placed`
 
 **Public routes:** `/`, `/login`, `/register`, `/forgot-password`, `/reset-password`, `/pricing`, marketing pages
 
@@ -120,7 +118,7 @@ Use `createServerClient` from `@supabase/ssr` in Server Components and API route
 
 All queries go through the Supabase JS client (`@supabase/supabase-js`) — `getAdminClient()` from `lib/supabase/admin.ts` on the server, `createClient()` from `lib/supabase/client.ts` in the browser. There is no ORM. Schema changes are tracked as raw SQL migrations in `supabase/migrations/`.
 
-User roles: `STUDENT`, `PARENT`, `TEACHER`, `INSTRUCTOR`, `ADMIN`, `SCHOOL`
+User roles: `STUDENT`, `INSTRUCTOR`, `ADMIN`
 
 ---
 

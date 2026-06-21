@@ -76,8 +76,6 @@ export default function AuthConfirmPage() {
 
         if (role === "ADMIN")                               router.replace("/admin/dashboard")
         else if (role === "INSTRUCTOR")                     router.replace("/instructor/dashboard")
-        else if (role === "SCHOOL" || role === "TEACHER")   router.replace("/school/dashboard")
-        else if (role === "PARENT")                         router.replace("/dashboard")
         else if (data.onboardingDone)                       router.replace("/dashboard")
         else                                                router.replace("/onboarding")
 

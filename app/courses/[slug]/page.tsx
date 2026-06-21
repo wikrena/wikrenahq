@@ -32,7 +32,7 @@ export default async function CoursePage({ params }: Props) {
     if (!user) redirect(`/login?redirectTo=/courses/${params.slug}`)
     const { data: profile } = await admin
       .from("profiles").select("role").eq("id", user.id).single()
-    if (!["ADMIN","INSTRUCTOR","TEACHER"].includes(profile?.role ?? "")) notFound()
+    if (!["ADMIN","INSTRUCTOR"].includes(profile?.role ?? "")) notFound()
   }
 
   const [chaptersRes, instructorRes, enrollmentRes] = await Promise.all([

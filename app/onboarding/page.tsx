@@ -21,8 +21,6 @@ export default async function OnboardingPage() {
   const role = (profile?.role ?? "STUDENT").toUpperCase()
 
   // Non-student roles should never see onboarding — send them to the right place
-  if (role === "PARENT")                       redirect("/parent/dashboard")
-  if (role === "SCHOOL" || role === "TEACHER") redirect("/school/dashboard")
   if (role === "ADMIN")                        redirect("/admin/dashboard")
   if (role === "INSTRUCTOR")                   redirect("/instructor/dashboard")
 

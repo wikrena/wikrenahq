@@ -10,9 +10,6 @@
 
 export type UserRole =
   | "STUDENT"
-  | "PARENT"
-  | "SCHOOL"
-  | "TEACHER"
   | "INSTRUCTOR"
   | "ADMIN"
 

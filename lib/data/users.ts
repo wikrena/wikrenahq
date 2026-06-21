@@ -69,7 +69,7 @@ export async function getInstructors(): Promise<Profile[]> {
   const { data, error } = await db()
     .from("profiles")
     .select("*")
-    .in("role", ["INSTRUCTOR", "ADMIN", "TEACHER"])
+    .in("role", ["INSTRUCTOR", "ADMIN"])
     .eq("is_active", true)
     .order("name")
   if (error) { console.error("[getInstructors]", error.message); return [] }

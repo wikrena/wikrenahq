@@ -4,7 +4,7 @@ Update this file whenever the current phase, active feature, or implementation s
 
 ## Current Phase
 
-Foundation complete — Junior platform removed, documentation aligned. Ready for feature additions.
+Foundation complete — Junior platform removed (including PARENT/TEACHER/SCHOOL roles), documentation aligned. Ready for feature additions.
 
 ## Current Goal
 
@@ -38,6 +38,16 @@ Review and improve existing LMS features, then begin adding new features as dire
   - All parent redirects updated from `/parent/add-child` to `/dashboard`
   - Junior reference removed from `README.md`, nav, footer, sidebar, topbars
   - `app/parent/dashboard/page.tsx` replaced with redirect to `/dashboard`
+- PARENT, TEACHER, and SCHOOL roles fully removed (they only ever existed to serve the Junior platform's bulk/parental enrolment — not a real adult-platform feature, despite earlier docs describing "School Administration" as in-scope):
+  - `UserRole` collapsed to `STUDENT | INSTRUCTOR | ADMIN` in `types/index.ts`
+  - Migration `006_remove_parent_teacher_school_roles.sql` remaps any existing PARENT/TEACHER/SCHOOL profiles to STUDENT and drops `parent_id`, `is_kid`, `kid_pin`, `kid_track` columns
+  - Signup role picker removed from `register-form.tsx` — registration is student-only now
+  - Role-mapping/redirect branches removed from the auth callback, register, role, confirm, onboarding, and dashboard routes; `middleware.ts` no longer protects `/parent` or `/school`
+  - `app/parent/`, `app/school/`, `app/api/school/` (cohorts + students), `app/admin/schools/`, and `components/admin/admin-schools.tsx` deleted entirely
+  - Admin UI (`admin-users`, `admin-dashboard`, `admin-shell`, `admin-settings`, `instructor-manager`) no longer offers PARENT/SCHOOL/TEACHER as assignable roles
+  - `withAdmin()` in `lib/api.ts` tightened to ADMIN-only — TEACHER previously had admin-route access, which was an unintended privilege escalation
+  - Email verification simplified to a single student template; `verificationParentEmail`, `verificationSchoolEmail`, `schoolInvitationEmail` deleted from `lib/email/templates.ts`
+  - `project-overview.md` and `architecture-context.md` corrected to remove "School Administration" / "Parent Dashboard" as in-scope features
 
 ## Next Up
 
@@ -54,7 +64,6 @@ Review and improve existing LMS features, then begin adding new features as dire
 - Should this app build out `/about`, `/contact`, and legal pages now, or are those staying on a separate marketing site? (Legacy WordPress content suggests they were on `wikrena.com` directly — need to confirm whether this Next.js app is meant to absorb them.)
 - Should marketing pages here link out to Wikrena OS (`os.wikrena.com`) and Wikrena Consulting/AnalyticsHQ, given the three-pillar company structure described in `wikrena-pages/home.md` and `about-us.md`?
 - What new features are planned after the cleanup phase?
-- Should the parent dashboard be rebuilt with adult-platform monitoring features?
 
 ## Architecture Decisions
 
@@ -67,5 +76,5 @@ Review and improve existing LMS features, then begin adding new features as dire
 ## Session Notes
 
 - Context files were previously populated with docs from an unrelated project ("Ghost AI") — all have now been rewritten.
-- The Junior platform has been fully excised. The PARENT role still exists in the system for future adult-platform monitoring features.
+- The Junior platform has been fully excised, including the PARENT, TEACHER, and SCHOOL roles that only existed to serve it. The platform now has exactly three roles: STUDENT, INSTRUCTOR, ADMIN.
 - All "Junior Data Analyst" references in `components/academy/career.tsx` and `career-hub.tsx` are correct professional job titles, not Junior platform artifacts.

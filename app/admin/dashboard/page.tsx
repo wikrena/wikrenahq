@@ -16,13 +16,13 @@ export default async function AdminDashboardPage() {
   const { data: profile } = await admin
     .from("profiles").select("name, role").eq("id", user.id).single()
 
-  if (!["ADMIN", "TEACHER"].includes(profile?.role ?? "")) redirect("/dashboard")
+  if (!["ADMIN"].includes(profile?.role ?? "")) redirect("/dashboard")
 
   const sevenDaysAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString()
 
   const [
     usersRes, recentUsersRes, enrollRes, xpRes,
-    coursesRes, instructorsRes, schoolsRes,
+    coursesRes, instructorsRes,
     weeklyUsersRes, weeklyEnrollRes,
   ] = await Promise.all([
     admin.from("profiles").select("id", { count: "exact", head: true }).eq("is_active", true),
@@ -31,8 +31,7 @@ export default async function AdminDashboardPage() {
     admin.from("course_enrollments").select("id", { count: "exact", head: true }).eq("is_active", true),
     admin.from("xp_transactions").select("amount"),
     admin.from("courses").select("id, title, chapters(id)").eq("is_published", true).order("order"),
-    admin.from("profiles").select("id, name, email, role").in("role", ["INSTRUCTOR", "TEACHER"]).eq("is_active", true),
-    admin.from("profiles").select("id, name, email").eq("role", "SCHOOL").eq("is_active", true),
+    admin.from("profiles").select("id, name, email, role").eq("role", "INSTRUCTOR").eq("is_active", true),
     admin.from("profiles").select("created_at").gte("created_at", sevenDaysAgo).eq("is_active", true),
     admin.from("course_enrollments").select("id", { count: "exact", head: true }).gte("enrolled_at", sevenDaysAgo),
   ])
@@ -89,7 +88,6 @@ export default async function AdminDashboardPage() {
         recentUsers={recentUsersRes.data ?? []}
         topCourses={coursesWithCounts}
         instructors={instructorsWithCounts}
-        schools={schoolsRes.data ?? []}
         registrationChart={chartData}
         passRate={74}
       />

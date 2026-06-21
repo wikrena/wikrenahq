@@ -39,7 +39,7 @@ export async function middleware(request: NextRequest) {
   const protectedPaths = [
     "/dashboard", "/paths", "/learn", "/challenges", "/leaderboard",
     "/community", "/africa-lab", "/workspace", "/career", "/profile",
-    "/settings", "/ai-tutor", "/admin", "/parent", "/school", "/onboarding",
+    "/settings", "/ai-tutor", "/admin", "/onboarding",
     "/placed",
   ]
 

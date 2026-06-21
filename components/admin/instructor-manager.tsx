@@ -3,7 +3,7 @@
 import { useState } from "react"
 import {
   UserPlus, Mail, Trash2, Loader2, Check, X,
-  Clock, Shield, GraduationCap, Crown
+  Clock, GraduationCap, Crown
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 
@@ -21,7 +21,6 @@ interface Props {
 const ROLE_CONFIG: Record<string, { label: string; icon: any; color: string; badge: string }> = {
   ADMIN:      { label:"Admin",      icon: Crown,          color:"text-amber-600",  badge:"bg-amber-100 text-amber-700" },
   INSTRUCTOR: { label:"Instructor", icon: GraduationCap,  color:"text-teal-600",   badge:"bg-teal-100 text-teal-700" },
-  TEACHER:    { label:"Teacher",    icon: Shield,          color:"text-purple-600", badge:"bg-purple-100 text-purple-700" },
 }
 
 export function InstructorManager({ instructors, invitations: initialInvitations, currentUserId }: Props) {
@@ -96,7 +95,7 @@ export function InstructorManager({ instructors, invitations: initialInvitations
             <div>
               <label className="text-xs font-semibold text-neutral-500 mb-1 block">Role</label>
               <div className="flex gap-2">
-                {["INSTRUCTOR","ADMIN","TEACHER"].map(r => (
+                {["INSTRUCTOR","ADMIN"].map(r => (
                   <button key={r} type="button" onClick={() => setRole(r)}
                     className={cn(
                       "flex-1 py-2 rounded-xl text-xs font-bold border-2 transition-all",

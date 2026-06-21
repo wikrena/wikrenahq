@@ -15,17 +15,12 @@ import { getAdminClient } from "@/lib/supabase/admin"
 
 function toDbRole(raw: string): string {
   const r = raw.toLowerCase().trim()
-  if (r === "parent")     return "PARENT"
-  if (r === "school")     return "SCHOOL"
-  if (r === "teacher")    return "TEACHER"
   if (r === "instructor") return "INSTRUCTOR"
   if (r === "admin")      return "ADMIN"
   return "STUDENT"
 }
 
 function getRedirectPath(role: string): string {
-  if (role === "PARENT")                       return "/dashboard"
-  if (role === "SCHOOL" || role === "TEACHER") return "/school/dashboard"
   if (role === "INSTRUCTOR")                   return "/instructor/dashboard"
   if (role === "ADMIN")                        return "/admin/dashboard"
   return "/onboarding"
@@ -132,7 +127,6 @@ export async function POST(req: NextRequest) {
         await sendEmail.verification({
           name:      name.trim(),
           email:     email.toLowerCase().trim(),
-          role:      dbRole,
           verifyUrl: linkData.properties.action_link,
         })
       } catch (emailErr: any) {

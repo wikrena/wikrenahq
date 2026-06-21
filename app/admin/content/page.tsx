@@ -16,7 +16,7 @@ export default async function ContentPage() {
   const { data: profile } = await admin
     .from("profiles").select("role, name").eq("id", user.id).single()
 
-  const allowed = ["ADMIN", "TEACHER", "INSTRUCTOR"]
+  const allowed = ["ADMIN", "INSTRUCTOR"]
   if (!allowed.includes(profile?.role ?? "")) redirect("/dashboard")
 
   const isInstructor = profile?.role === "INSTRUCTOR"

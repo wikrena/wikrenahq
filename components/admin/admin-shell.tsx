@@ -8,7 +8,6 @@ import {
   Users,
   BookOpen,
   GraduationCap,
-  Building2,
   CreditCard,
   BarChart2,
   Settings,
@@ -35,7 +34,6 @@ const NAV = [
   {
     section: "Platform",
     items: [
-      { href: "/admin/schools", icon: Building2, label: "Schools" },
       { href: "/admin/instructors", icon: GraduationCap, label: "Instructors" },
       { href: "/admin/payments", icon: CreditCard, label: "Payments" },
       { href: "/admin/analytics", icon: BarChart2, label: "Analytics" },
@@ -368,12 +366,6 @@ export function AdminShell({ children, adminName, adminEmail }: Props) {
                 >
                   <option value="INSTRUCTOR">
                     Instructor — creates and publishes courses
-                  </option>
-                  <option value="SCHOOL">
-                    School — manages cohorts and students
-                  </option>
-                  <option value="TEACHER">
-                    Teacher — manages a school&apos;s courses
                   </option>
                   <option value="ADMIN">Admin — full platform access</option>
                 </select>

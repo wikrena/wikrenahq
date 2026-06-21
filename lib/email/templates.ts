@@ -368,33 +368,6 @@ export function streakReminderEmail(name: string, streak: number, loginUrl: stri
   `, `Your ${streak}-day streak is at risk!`)
 }
 
-export function schoolInvitationEmail(studentName: string, schoolName: string, cohortName: string, acceptUrl: string): string {
-  return layout(`
-    <div class="hero">
-      <span class="hero-emoji">🏫</span>
-      <div class="hero-title">You've Been Invited to Learn</div>
-      <div class="hero-subtitle">${schoolName} has invited you to join their class on Wikrena.</div>
-    </div>
-    <div class="body">
-      <p class="greeting">Hi ${studentName}!</p>
-      <p class="text">Your school <strong>${schoolName}</strong> has set up a learning class called <strong>"${cohortName}"</strong> on Wikrena Academy. You've been invited to join.</p>
-      <div class="info-box">
-        <div class="info-box-title">What happens when you join</div>
-        <div class="info-box-text">
-          ✦ Access courses assigned by your teacher<br/>
-          ✦ Track your progress alongside classmates<br/>
-          ✦ Earn XP, badges and certificates<br/>
-          ✦ Your teacher can see your progress
-        </div>
-      </div>
-      <div style="text-align:center; margin: 28px 0;">
-        <a href="${acceptUrl}" class="btn">Join My Class →</a>
-      </div>
-      <p class="text" style="font-size:13px;">This invitation expires in 30 days.</p>
-    </div>
-  `, `${schoolName} invited you to their class on Wikrena`)
-}
-
 // ── Verification emails — one per role ────────────────────────────────────────
 
 export function verificationStudentEmail(name: string, verifyUrl: string): string {
@@ -431,65 +404,3 @@ export function verificationStudentEmail(name: string, verifyUrl: string): strin
   `, "Confirm your Wikrena Academy email, ${name}")
 }
 
-export function verificationParentEmail(name: string, verifyUrl: string): string {
-  return layout(`
-    <div class="hero">
-      <div class="hero-icon">👨‍👩‍👧</div>
-      <div class="hero-title">Confirm your parent account</div>
-      <div class="hero-subtitle">Monitor your child's learning progress on Wikrena Academy.</div>
-      <div class="hero-bottom-bar"></div>
-    </div>
-    <div class="body">
-      <p class="greeting">Hi ${name},</p>
-      <p class="text">
-        Thank you for joining Wikrena Academy as a parent. You can monitor your child's
-        learning progress, track their XP, streaks, and course completions.
-      </p>
-      <p class="text">Confirm your email to activate your account:</p>
-      <div class="btn-wrap">
-        <a href="${verifyUrl}" class="btn btn-parent">Confirm My Account →</a>
-      </div>
-      <div class="safe-link">
-        If the button above doesn't work, paste this link into your browser:<br/>
-        <a href="${verifyUrl}">${verifyUrl}</a><br/><br/>
-        This link expires in 24 hours. If you didn't sign up, please ignore this email.
-      </div>
-    </div>
-  `, "Confirm your Wikrena Academy parent account")
-}
-
-export function verificationSchoolEmail(name: string, verifyUrl: string): string {
-  return layout(`
-    <div class="hero">
-      <div class="hero-icon">🏫</div>
-      <div class="hero-title">Confirm your school account</div>
-      <div class="hero-subtitle">Bring world-class data literacy to your students.</div>
-      <div class="hero-bottom-bar"></div>
-    </div>
-    <div class="body">
-      <p class="greeting">Hi ${name},</p>
-      <p class="text">
-        Welcome to Wikrena Academy for Schools. Your institution is joining a growing network
-        of African schools equipping students with real data, coding and AI skills that
-        employers across the continent are actively hiring for right now.
-      </p>
-      <p class="text">Click below to confirm your email and access your school dashboard:</p>
-      <div class="btn-wrap">
-        <a href="${verifyUrl}" class="btn btn-school">Confirm School Account →</a>
-      </div>
-      <div class="info-box">
-        <div class="info-box-title">Your school dashboard gives you:</div>
-        <div class="info-item"><span class="info-check">✓</span> Create and manage student cohorts by class or grade</div>
-        <div class="info-item"><span class="info-check">✓</span> Track progress, XP and streaks across your entire school</div>
-        <div class="info-item"><span class="info-check">✓</span> Assign courses and set learning goals per class</div>
-        <div class="info-item"><span class="info-check">✓</span> Invite students individually or by bulk CSV upload</div>
-        <div class="info-item"><span class="info-check">✓</span> Download detailed progress reports for every student</div>
-      </div>
-      <div class="safe-link">
-        If the button above doesn't work, paste this link into your browser:<br/>
-        <a href="${verifyUrl}">${verifyUrl}</a><br/><br/>
-        This link expires in 24 hours. Questions? Reply to this email — we respond within 2 hours.
-      </div>
-    </div>
-  `, "Confirm your Wikrena Academy school account")
-}

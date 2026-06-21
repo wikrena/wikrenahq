@@ -30,7 +30,7 @@ export default async function CourseLessonPage({ params }: Props) {
   // Check if admin/instructor so we can show unpublished content for preview
   const { data: profileData } = await admin
     .from("profiles").select("role").eq("id", user.id).single()
-  const isAdmin = ["ADMIN", "INSTRUCTOR", "TEACHER"].includes(profileData?.role ?? "")
+  const isAdmin = ["ADMIN", "INSTRUCTOR"].includes(profileData?.role ?? "")
 
   // Get the course
   const { data: course } = await admin

@@ -38,7 +38,6 @@ Cohort sizes, pricing, and start dates vary across legacy pages and should be co
 4. Expose learners to real African datasets through the Africa Data Lab.
 5. Connect learners to job opportunities and support active career development.
 6. Enable instructors to create and manage course content.
-7. Give school administrators tools to manage bulk enrolments and monitor progress.
 
 ## Core User Flows
 
@@ -133,17 +132,7 @@ Cohort sizes, pricing, and start dates vary across legacy pages and should be co
 - Content management.
 - Analytics.
 - Payment and subscription management.
-- School management.
 - Platform settings.
-
-### School Administration
-- Bulk learner enrolment.
-- Teacher progress monitoring.
-- School-level analytics.
-
-### Parent Dashboard
-- Monitor child account progress.
-- Weekly progress reports.
 
 ### Payments
 - Paystack integration.
@@ -156,9 +145,6 @@ Cohort sizes, pricing, and start dates vary across legacy pages and should be co
 |---|---|
 | `STUDENT` | Default learner role |
 | `INSTRUCTOR` | Can create and manage course content |
-| `TEACHER` | Assigned by a school to monitor learners |
-| `PARENT` | Monitors a linked child account |
-| `SCHOOL` | School administrator — manages bulk enrolments |
 | `ADMIN` | Full platform administration |
 
 ## Scope
@@ -177,11 +163,10 @@ Cohort sizes, pricing, and start dates vary across legacy pages and should be co
 - Certificates
 - Instructor content management
 - Admin panel
-- School administration
-- Parent monitoring
 - Paystack payments
 
 ### Out of Scope
 - Kids / junior platform (removed)
+- Parent, Teacher, and School roles and dashboards (removed — were Junior-platform-only; this is an adult professional LMS)
 - Mobile-native applications
 - Third-party LMS integrations
