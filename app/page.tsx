@@ -1,4 +1,6 @@
 import type { Metadata } from "next";
+import { Fragment } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -14,20 +16,24 @@ import {
   RefreshCw,
   BookOpen,
   Landmark,
-  ImageIcon,
+  Quote,
+  Star,
 } from "lucide-react";
 import { MarketingNav } from "@/components/marketing/nav";
 import { MarketingFooter } from "@/components/marketing/footer";
-import { FaqAccordion } from "@/components/marketing/faq-accordion";
+import { FaqTabs } from "@/components/marketing/faq-tabs";
 import { HomeHero } from "@/components/marketing/home-hero";
+import { Reveal } from "@/components/marketing/reveal";
+import { AnimatedCounter } from "@/components/marketing/animated-counter";
+import { ProgramShowcase } from "@/components/marketing/program-showcase";
 
 export const metadata: Metadata = {
-  title: "Wikrena Limited — Building Africa's Data & AI Infrastructure",
+  title: "Wikrena Limited: Building Africa's Data & AI Infrastructure",
   description:
     "Wikrena is a data and AI company built for Africa-focused businesses. We help businesses make smarter decisions with their data, and we train the professionals who make that work happen.",
 };
 
-type Accent = "teal" | "coral" | "purple" | "amber";
+type Accent = "teal" | "coral" | "navy";
 
 const ACCENT: Record<Accent, { iconWrap: string; icon: string }> = {
   teal: {
@@ -38,17 +44,14 @@ const ACCENT: Record<Accent, { iconWrap: string; icon: string }> = {
     iconWrap: "bg-coral-50 border border-coral-200",
     icon: "text-coral-600",
   },
-  purple: {
-    iconWrap: "bg-purple-50 border border-purple-200",
-    icon: "text-purple-600",
-  },
-  amber: {
-    iconWrap: "bg-amber-50 border border-amber-200",
-    icon: "text-amber-600",
+  navy: {
+    iconWrap: "bg-navy-50 border border-navy-200",
+    icon: "text-navy-700",
   },
 };
 
 const ECOSYSTEM: {
+  key: "os" | "academy" | "consulting";
   icon: typeof Settings2;
   title: string;
   tag: string;
@@ -59,26 +62,29 @@ const ECOSYSTEM: {
   accent: Accent;
 }[] = [
   {
+    key: "os",
     icon: Settings2,
     title: "Wikrena OS",
     tag: "For African Service Businesses",
-    desc: "The operating system for African service businesses to run with clarity, structure, and control. Manage clients, protect your scope, get paid on time, and build the track record that takes you to the next level — offline-mode by design.",
+    desc: "The operating system for African service businesses to run with clarity, structure, and control. Manage clients, protect your scope, get paid on time, and build the track record that takes you to the next level, with offline mode built in by design.",
     cta: "Start for free",
     href: "https://os.wikrena.com",
     external: true,
-    accent: "purple",
+    accent: "navy",
   },
   {
+    key: "academy",
     icon: GraduationCap,
     title: "Wikrena Academy",
     tag: "For Professionals",
-    desc: "Practical programs. Real outcomes. Built for Africans who are serious about what comes next for their career. We support you from your first lesson to your first role or promotion — not people who just have a certificate.",
+    desc: "Practical programs. Real outcomes. Built for Africans who are serious about what comes next for their career. We support you from your first lesson to your first role or promotion, not just people who want a certificate.",
     cta: "Explore the Academy",
     href: "/academy",
     external: false,
     accent: "teal",
   },
   {
+    key: "consulting",
     icon: Compass,
     title: "Wikrena Consulting",
     tag: "For Growing Businesses",
@@ -91,6 +97,7 @@ const ECOSYSTEM: {
 ];
 
 const SERVICES: {
+  key: "analysis" | "strategy" | "training";
   icon: typeof Compass;
   title: string;
   desc: string;
@@ -98,6 +105,7 @@ const SERVICES: {
   badge: string | null;
 }[] = [
   {
+    key: "analysis",
     icon: BarChart3,
     title: "Data Analysis & Reporting",
     desc: "We take your raw numbers from spreadsheets, CRM exports, sales data and other sources, and turn them into clear, visual, decision-ready reports your leadership team will actually use.",
@@ -105,6 +113,7 @@ const SERVICES: {
     badge: "Most Requested",
   },
   {
+    key: "strategy",
     icon: Compass,
     title: "Data Strategy & Advisory",
     desc: "Before dashboards or reports, you need to know what questions you're actually trying to answer. We help you define a data strategy tied directly to your growth goals.",
@@ -112,6 +121,7 @@ const SERVICES: {
     badge: null,
   },
   {
+    key: "training",
     icon: GraduationCap,
     title: "Corporate Data Training",
     desc: "Your team has data. They just don't know how to work with it. We bring practical training directly to your organisation, tailored to your industry, tools, and skill level.",
@@ -142,25 +152,25 @@ const WHY_WIKRENA: {
     icon: Package,
     title: "Practical Over Theoretical",
     desc: "Every engagement and every program produces something real: a dashboard, a strategy document, a portfolio project. Not reports that gather dust or certificates without substance.",
-    accent: "purple",
+    accent: "navy",
   },
   {
     icon: GraduationCap,
     title: "Learn. Build. Get Placed.",
     desc: "Our Academy goes beyond teaching. You build real projects, strengthen your profile, and get placement support. The outcome is what matters.",
-    accent: "amber",
+    accent: "coral",
   },
   {
     icon: Target,
     title: "Industry-Specific Focus",
     desc: "Fintech, Healthcare, and Retail tracks built for real job demands in Africa. Not generic data skills that could apply anywhere and therefore apply nowhere.",
-    accent: "teal",
+    accent: "navy",
   },
   {
     icon: RefreshCw,
     title: "End-to-End and Beyond",
     desc: "We handle everything from understanding your data problem to deploying the solution and training your team to maintain it. We do not disappear after delivery.",
-    accent: "coral",
+    accent: "teal",
   },
 ];
 
@@ -191,56 +201,56 @@ const TESTIMONIALS = [
   },
 ];
 
-const FAQS = [
-  {
-    q: "Who is Wikrena for — businesses or professionals?",
-    a: "Both. Wikrena Consulting serves businesses that want to understand and act on their data. Wikrena Academy serves professionals and career changers who want to build practical data skills. The two sides of Wikrena are designed to work together — we train the professionals that businesses need.",
-  },
-  {
-    q: "Do I need a technical background to enroll in a program?",
-    a: "No. Our programs are designed to be accessible from scratch. If you can use a laptop and are willing to show up consistently, you are ready. We build the technical foundation from the ground up.",
-  },
-  {
-    q: "How do I engage Wikrena for data services for my business?",
-    a: "Start with a free 30-minute discovery call. We listen to your situation, understand what you are trying to achieve, and tell you honestly whether and how we can help.",
-  },
-  {
-    q: "Where are you based and do you work outside Nigeria?",
-    a: "We are based in Nigeria but work with clients and students across Africa remotely. If you are building a business on the continent or are an African professional wherever you are, we want to work with you.",
-  },
-  {
-    q: "How is your Academy different from other data training platforms?",
-    a: "Three things. First, we run cohort-based programs with a maximum of 45 students, not self-paced courses with thousands of people and no accountability. Second, every program is built on African business data, not generic global datasets. Third, we do not stop at the certificate — career support and placement assistance are built into every program.",
-  },
-];
 
 export default function HomePage() {
   return (
     <div className="home-rebrand">
-      <MarketingNav />
+      <MarketingNav transparentOnHero />
       <main>
         <HomeHero />
 
         {/* ── WHO WE ARE ───────────────────────────────────────────────────── */}
-        <section className="py-24 bg-neutral-50">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-              {/* Image column — placeholder pending a real photo */}
-              <div className="order-2 lg:order-1">
-                <div className="relative aspect-[4/3] rounded-3xl bg-neutral-100 border border-neutral-200 overflow-hidden flex items-center justify-center">
-                  <div className="flex flex-col items-center gap-3 text-neutral-400">
-                    <ImageIcon className="w-12 h-12" />
-                    <span className="text-xs font-medium">Image placeholder</span>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+              {/* Image column */}
+              <Reveal className="order-2 lg:order-1">
+                <div className="relative">
+                  <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-navy-700 shadow-brand-lg">
+                    <Image
+                      src="/about-us-section.jpg"
+                      alt="The Wikrena team reviewing data together"
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                    />
+                    <div className="absolute inset-0 bg-navy-900/10" />
+                  </div>
+
+                  {/* Floating credibility card */}
+                  <div className="absolute -bottom-6 -right-6 sm:-right-10 w-52 rounded-2xl bg-white border border-neutral-200 shadow-float p-5">
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0">
+                        <GraduationCap className="w-5 h-5 text-teal-600" />
+                      </div>
+                      <div>
+                        <div className="font-display font-bold text-xl text-navy-800 leading-none">
+                          <AnimatedCounter value={147} suffix="+" />
+                        </div>
+                        <div className="text-[11px] text-neutral-500">Professionals Trained</div>
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
+              </Reveal>
 
               {/* Text column */}
-              <div className="order-1 lg:order-2">
-                <h2 className="font-display font-black text-3xl sm:text-4xl text-navy-800 tracking-tight mb-6">
+              <Reveal delay={0.1} className="order-1 lg:order-2">
+                <div className="eyebrow">Who We Are</div>
+                <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-5">
                   We&apos;re Not Your Typical Data Company.
                 </h2>
-                <p className="text-neutral-500 text-base leading-relaxed mb-8">
+                <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-8">
                   Wikrena is a data and AI company with one mission: to build
                   the infrastructure Africa&apos;s next economy needs to grow
                   with intelligence and precision. We work with businesses to
@@ -264,55 +274,104 @@ export default function HomePage() {
                   About Us
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </div>
+              </Reveal>
             </div>
           </div>
         </section>
 
         {/* ── ECOSYSTEM ────────────────────────────────────────────────────── */}
-        <section className="py-24 bg-white" id="ecosystem">
+        <section className="py-16 sm:py-20 lg:py-24 bg-neutral-50" id="ecosystem">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="max-w-2xl mb-16">
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-navy-800 tracking-tight mb-4">
+            <Reveal className="max-w-2xl mb-16">
+              <div className="eyebrow">The Wikrena Ecosystem</div>
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-4">
                 Three Ways We Serve Africa.
               </h2>
-              <p className="text-neutral-500 text-base">
+              <p className="text-neutral-500 text-sm sm:text-base">
                 Every part of Wikrena is designed to feed the others: services,
                 education, and technology working as one. That is not a
                 coincidence. That is how Wikrena is designed.
               </p>
-            </div>
+            </Reveal>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {ECOSYSTEM.map((e) => {
+            <div className="flex flex-col md:flex-row items-stretch md:items-center gap-5">
+              {ECOSYSTEM.map((e, i) => {
                 const a = ACCENT[e.accent];
                 return (
-                  <div
-                    key={e.title}
-                    className={`relative overflow-hidden rounded-3xl p-9 border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 hover:shadow-float hover:-translate-y-1 transition-all duration-300 flex flex-col`}
-                  >
-                    <div
-                      className={`absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-[0.10] ${a.icon} bg-current`}
-                      style={{ filter: "blur(28px)" }}
-                    />
-                    <div className={`relative w-14 h-14 rounded-2xl flex items-center justify-center mb-6 shadow-lift ${a.iconWrap}`}>
-                      <e.icon className={`w-7 h-7 ${a.icon}`} />
-                    </div>
-                    <div className="text-[10px] font-bold tracking-widest uppercase text-neutral-400 mb-2">
-                      {e.tag}
-                    </div>
-                    <h3 className="font-display font-bold text-2xl text-navy-800 mb-3">{e.title}</h3>
-                    <p className="text-sm text-neutral-500 leading-relaxed mb-7 flex-1">{e.desc}</p>
-                    <Link
-                      href={e.href}
-                      target={e.external ? "_blank" : undefined}
-                      rel={e.external ? "noopener noreferrer" : undefined}
-                      className={`relative inline-flex items-center gap-2 font-bold text-sm hover:gap-3 transition-all group ${a.icon}`}
-                    >
-                      {e.cta}
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
+                  <Fragment key={e.title}>
+                    <Reveal delay={i * 0.1} className="flex-1 min-w-0">
+                      <div
+                        className={`group relative overflow-hidden rounded-3xl p-6 sm:p-8 border border-neutral-200 bg-gradient-to-br from-white to-neutral-50 hover:shadow-float hover:-translate-y-1 transition-all duration-300 flex flex-col h-full`}
+                      >
+                        <div
+                          className={`absolute -top-10 -right-10 w-40 h-40 rounded-full opacity-[0.10] ${a.icon} bg-current`}
+                          style={{ filter: "blur(28px)" }}
+                        />
+
+                        {/* Mini product-preview mockup */}
+                        <div className={`relative rounded-2xl p-3.5 sm:p-4 mb-6 ${a.iconWrap}`}>
+                          {e.key === "os" && (
+                            <div className="space-y-1.5">
+                              {["Scope locked", "Invoice paid", "Client onboarded"].map((row) => (
+                                <div key={row} className="flex items-center gap-2 bg-white/70 rounded-lg px-2.5 py-1.5">
+                                  <CheckCircle2 className="w-3 h-3 text-navy-600 shrink-0" />
+                                  <span className="text-[10px] font-mono text-navy-700">{row}</span>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                          {e.key === "academy" && (
+                            <div>
+                              <div className="flex items-center justify-between text-[10px] font-mono text-navy-700 mb-2">
+                                <span>Module 8/12</span>
+                                <span className="text-teal-600 font-bold">+240 XP</span>
+                              </div>
+                              <div className="xp-bar">
+                                <div className="xp-fill" style={{ width: "72%" }} />
+                              </div>
+                            </div>
+                          )}
+                          {e.key === "consulting" && (
+                            <div className="flex items-end gap-1.5 h-12">
+                              {[35, 55, 45, 70, 60, 85].map((h, idx) => (
+                                <div
+                                  key={idx}
+                                  className="flex-1 rounded-t-sm bg-gradient-to-t from-coral-500/30 to-coral-500"
+                                  style={{ height: `${h}%` }}
+                                />
+                              ))}
+                            </div>
+                          )}
+                          <div className={`absolute -bottom-3 -right-1 w-9 h-9 rounded-xl bg-white border border-neutral-200 shadow-lift flex items-center justify-center`}>
+                            <e.icon className={`w-4 h-4 ${a.icon}`} />
+                          </div>
+                        </div>
+
+                        <div className="text-[11px] font-mono tracking-wide text-neutral-400 mb-2">
+                          {e.tag}
+                        </div>
+                        <h3 className="font-display font-bold text-lg sm:text-xl lg:text-2xl text-navy-800 mb-3">{e.title}</h3>
+                        <p className="text-sm text-neutral-500 leading-relaxed mb-7 flex-1">{e.desc}</p>
+                        <Link
+                          href={e.href}
+                          target={e.external ? "_blank" : undefined}
+                          rel={e.external ? "noopener noreferrer" : undefined}
+                          className={`relative inline-flex items-center gap-2 font-bold text-sm hover:gap-3 transition-all group ${a.icon}`}
+                        >
+                          {e.cta}
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        </Link>
+                      </div>
+                    </Reveal>
+
+                    {i < ECOSYSTEM.length - 1 && (
+                      <div className="hidden md:flex items-center justify-center shrink-0">
+                        <div className="w-9 h-9 rounded-full bg-neutral-50 border border-neutral-200 flex items-center justify-center">
+                          <ArrowRight className="w-4 h-4 text-neutral-400" />
+                        </div>
+                      </div>
+                    )}
+                  </Fragment>
                 );
               })}
             </div>
@@ -320,93 +379,134 @@ export default function HomePage() {
         </section>
 
         {/* ── SERVICES ─────────────────────────────────────────────────────── */}
-        <section className="py-24 bg-white" id="services">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white" id="services">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-14">
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-navy-800 tracking-tight mb-4">
+            <Reveal className="text-center mb-14">
+              <div className="eyebrow justify-center">What We Do</div>
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-4">
                 What We Actually Do For Your Business.
               </h2>
-              <p className="text-neutral-500 text-base max-w-xl mx-auto">
+              <p className="text-neutral-500 text-sm sm:text-base max-w-xl mx-auto">
                 Three focused services. No inflated list. No overpromising.
                 Just what we can deliver with excellence right now.
               </p>
-            </div>
+            </Reveal>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
               {SERVICES.map((s, i) => {
                 const featured = i === 0;
                 const Icon = s.icon;
                 return (
-                  <div
-                    key={s.title}
-                    className={
-                      featured
-                        ? "relative overflow-hidden rounded-3xl p-8 bg-navy-800 flex flex-col shadow-brand-lg"
-                        : "relative overflow-hidden rounded-3xl p-8 bg-gradient-to-br from-white to-neutral-50 border border-neutral-200 flex flex-col hover:shadow-float hover:-translate-y-1 transition-all duration-300"
-                    }
-                  >
+                  <Reveal key={s.title} delay={i * 0.1}>
                     <div
                       className={
                         featured
-                          ? "absolute -top-12 -right-12 w-56 h-56 rounded-full opacity-[0.18] bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]"
-                          : "absolute -top-12 -right-12 w-56 h-56 rounded-full opacity-[0.08] bg-[radial-gradient(circle,theme(colors.navy.500),transparent_70%)]"
+                          ? "relative overflow-hidden rounded-3xl p-6 sm:p-8 bg-navy-800 flex flex-col shadow-brand-lg h-full"
+                          : "relative overflow-hidden rounded-3xl p-6 sm:p-8 bg-gradient-to-br from-white to-neutral-50 border border-neutral-200 flex flex-col hover:shadow-float hover:-translate-y-1 transition-all duration-300 h-full"
                       }
-                    />
-                    {s.badge && (
-                      <span
+                    >
+                      <div
                         className={
                           featured
-                            ? "relative inline-flex items-center gap-1.5 bg-teal-500/15 border border-teal-500/30 text-teal-400 text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full self-start mb-6"
-                            : "relative inline-flex items-center gap-1.5 bg-coral-50 border border-coral-200 text-coral-600 text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full self-start mb-6"
+                            ? "absolute -top-12 -right-12 w-56 h-56 rounded-full opacity-[0.18] bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]"
+                            : "absolute -top-12 -right-12 w-56 h-56 rounded-full opacity-[0.08] bg-[radial-gradient(circle,theme(colors.navy.500),transparent_70%)]"
+                        }
+                      />
+                      {s.badge && (
+                        <span
+                          className={
+                            featured
+                              ? "relative inline-flex items-center gap-1.5 bg-teal-500/15 border border-teal-500/30 text-teal-400 text-[11px] font-mono tracking-wide px-3 py-1.5 rounded-full self-start mb-6"
+                              : "relative inline-flex items-center gap-1.5 bg-coral-50 border border-coral-200 text-coral-600 text-[11px] font-mono tracking-wide px-3 py-1.5 rounded-full self-start mb-6"
+                          }
+                        >
+                          <span className={featured ? "w-1.5 h-1.5 rounded-full bg-teal-400" : "w-1.5 h-1.5 rounded-full bg-coral-500"} />
+                          {s.badge}
+                        </span>
+                      )}
+
+                      {/* Deliverable-preview mockup */}
+                      <div className={featured ? "relative rounded-2xl p-4 mb-6 bg-white/[0.06] border border-white/10" : "relative rounded-2xl p-4 mb-6 bg-navy-50 border border-navy-100"}>
+                        {s.key === "analysis" && (
+                          <div>
+                            <div className="flex items-end gap-1.5 h-12 mb-2.5">
+                              {[30, 50, 40, 65, 55, 80, 70].map((h, idx) => (
+                                <div key={idx} className="flex-1 rounded-t-sm bg-gradient-to-t from-teal-500/30 to-teal-400" style={{ height: `${h}%` }} />
+                              ))}
+                            </div>
+                            <div className="flex items-center justify-between text-[10px] font-mono">
+                              <span className="text-teal-400 font-bold">Revenue ↑ 18%</span>
+                              <span className="text-white/40">Churn ↓ 4%</span>
+                            </div>
+                          </div>
+                        )}
+                        {s.key === "strategy" && (
+                          <div className="space-y-1.5">
+                            {["Define the question", "Pick the KPIs", "Set the governance"].map((step, idx) => (
+                              <div key={step} className="flex items-center gap-2 bg-white rounded-lg px-2.5 py-1.5 border border-navy-100">
+                                <span className="w-4 h-4 rounded-full bg-coral-50 border border-coral-200 text-coral-600 text-[9px] font-bold flex items-center justify-center shrink-0">
+                                  {idx + 1}
+                                </span>
+                                <span className="text-[10px] font-mono text-navy-700">{step}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {s.key === "training" && (
+                          <div>
+                            <div className="flex gap-1.5 mb-2.5">
+                              {Array.from({ length: 8 }).map((_, idx) => (
+                                <div
+                                  key={idx}
+                                  className={`w-5 h-5 rounded-full flex items-center justify-center ${idx < 6 ? "bg-teal-500" : "bg-navy-100 border border-navy-200"}`}
+                                >
+                                  {idx < 6 && <CheckCircle2 className="w-3 h-3 text-white" />}
+                                </div>
+                              ))}
+                            </div>
+                            <div className="text-[10px] font-mono text-navy-500">6/8 team members trained</div>
+                          </div>
+                        )}
+                        <div className={featured ? "absolute -bottom-3 -right-1 w-9 h-9 rounded-xl bg-navy-900 border border-white/10 shadow-lift flex items-center justify-center" : "absolute -bottom-3 -right-1 w-9 h-9 rounded-xl bg-white border border-neutral-200 shadow-lift flex items-center justify-center"}>
+                          <Icon className={featured ? "w-4 h-4 text-teal-400" : "w-4 h-4 text-navy-700"} />
+                        </div>
+                      </div>
+
+                      <h3 className={featured ? "relative font-display font-bold text-lg sm:text-xl lg:text-2xl text-white tracking-tight mb-3" : "relative font-display font-bold text-lg sm:text-xl lg:text-2xl text-navy-800 tracking-tight mb-3"}>
+                        {s.title}
+                      </h3>
+                      <p className={featured ? "relative text-white/55 text-sm leading-relaxed mb-6" : "relative text-neutral-500 text-sm leading-relaxed mb-6"}>
+                        {s.desc}
+                      </p>
+                      <ul className="relative space-y-2 mb-7 flex-1">
+                        {s.items.map((item) => (
+                          <li
+                            key={item}
+                            className={featured ? "flex items-start gap-2 text-sm text-white/70" : "flex items-start gap-2 text-sm text-neutral-600"}
+                          >
+                            <CheckCircle2 className={featured ? "w-4 h-4 text-teal-400 shrink-0 mt-0.5" : "w-4 h-4 text-teal-500 shrink-0 mt-0.5"} />
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                      <Link
+                        href="/contact"
+                        className={
+                          featured
+                            ? "relative inline-flex items-center gap-2 text-teal-400 font-bold text-sm hover:text-teal-300 transition-colors group mt-auto"
+                            : "relative inline-flex items-center gap-2 text-navy-800 font-bold text-sm hover:text-teal-600 transition-colors group mt-auto"
                         }
                       >
-                        <span className={featured ? "w-1.5 h-1.5 rounded-full bg-teal-400" : "w-1.5 h-1.5 rounded-full bg-coral-500"} />
-                        {s.badge}
-                      </span>
-                    )}
-                    <div
-                      className={
-                        featured
-                          ? "relative w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-white/10"
-                          : "relative w-14 h-14 rounded-2xl flex items-center justify-center mb-6 bg-navy-50 border border-navy-200 shadow-lift"
-                      }
-                    >
-                      <Icon className={featured ? "w-7 h-7 text-teal-400" : "w-7 h-7 text-navy-700"} />
+                        Talk to Us
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </Link>
                     </div>
-                    <h3 className={featured ? "relative font-display font-bold text-2xl text-white tracking-tight mb-3" : "relative font-display font-bold text-2xl text-navy-800 tracking-tight mb-3"}>
-                      {s.title}
-                    </h3>
-                    <p className={featured ? "relative text-white/55 text-sm leading-relaxed mb-6" : "relative text-neutral-500 text-sm leading-relaxed mb-6"}>
-                      {s.desc}
-                    </p>
-                    <ul className="relative space-y-2 mb-7 flex-1">
-                      {s.items.map((item) => (
-                        <li
-                          key={item}
-                          className={featured ? "flex items-start gap-2 text-sm text-white/70" : "flex items-start gap-2 text-sm text-neutral-600"}
-                        >
-                          <CheckCircle2 className={featured ? "w-4 h-4 text-teal-400 shrink-0 mt-0.5" : "w-4 h-4 text-teal-500 shrink-0 mt-0.5"} />
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                    <Link
-                      href="/contact"
-                      className={
-                        featured
-                          ? "relative inline-flex items-center gap-2 text-teal-400 font-bold text-sm hover:text-teal-300 transition-colors group mt-auto"
-                          : "relative inline-flex items-center gap-2 text-navy-800 font-bold text-sm hover:text-teal-600 transition-colors group mt-auto"
-                      }
-                    >
-                      Talk to Us
-                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                    </Link>
-                  </div>
+                  </Reveal>
                 );
               })}
             </div>
 
-            <div className="text-center">
+            <Reveal className="text-center">
               <Link
                 href="/services"
                 className="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white font-bold text-sm px-7 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
@@ -414,35 +514,47 @@ export default function HomePage() {
                 View Full Services
                 <ArrowRight className="w-4 h-4" />
               </Link>
-            </div>
+            </Reveal>
           </div>
         </section>
 
         {/* ── FOUNDER ──────────────────────────────────────────────────────── */}
-        <section className="py-24 bg-navy-800 relative overflow-hidden">
+        <section className="py-16 sm:py-20 lg:py-24 bg-navy-800 relative overflow-hidden">
           <div className="absolute -top-24 -right-24 w-[400px] h-[400px] rounded-full opacity-[0.12] pointer-events-none bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]" />
           <div className="relative max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.4fr] gap-12 items-center">
-              <div>
-                <div className="w-24 h-24 rounded-3xl bg-gradient-to-br from-teal-500 to-teal-700 flex items-center justify-center text-4xl font-display font-black text-white mb-6 shadow-teal-glow">
-                  CA
+            <div className="grid grid-cols-1 lg:grid-cols-[0.85fr_1.4fr] gap-12 lg:gap-20 items-center">
+              <Reveal>
+                <div className="relative">
+                  <div className="absolute -inset-4 rounded-[2rem] opacity-30 bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)] pointer-events-none" />
+                  <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-brand-xl">
+                    <Image
+                      src="/chris-awoke.jpg"
+                      alt="Chris Awoke, Founder and CEO of Wikrena Limited"
+                      fill
+                      className="object-cover"
+                      sizes="(min-width: 1024px) 380px, 100vw"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-navy-900 via-navy-900/5 to-transparent" />
+                    <div className="absolute bottom-0 left-0 right-0 p-6">
+                      <div className="font-display font-bold text-xl text-white mb-0.5">Chris Awoke</div>
+                      <div className="text-sm text-teal-300">Founder &amp; CEO · Wikrena Limited</div>
+                    </div>
+                  </div>
+                  <div className="relative space-y-2.5 mt-6">
+                    <div className="flex items-center gap-2.5 text-xs text-white/60">
+                      <BookOpen className="w-4 h-4 text-teal-400 shrink-0" /> Author · The Self-Taught Data Analyst
+                    </div>
+                    <div className="flex items-center gap-2.5 text-xs text-white/60">
+                      <Landmark className="w-4 h-4 text-teal-400 shrink-0" /> Building Africa&apos;s Data &amp; AI Infrastructure
+                    </div>
+                    <div className="flex items-center gap-2.5 text-xs text-white/60">
+                      <GraduationCap className="w-4 h-4 text-teal-400 shrink-0" /> 147+ Professionals Trained
+                    </div>
+                  </div>
                 </div>
-                <div className="font-display font-bold text-lg text-white mb-1">Chris Awoke</div>
-                <div className="text-sm text-white/50 mb-5">Founder &amp; CEO · Wikrena Limited</div>
-                <div className="space-y-2.5">
-                  <div className="flex items-center gap-2.5 text-xs text-white/60">
-                    <BookOpen className="w-4 h-4 text-teal-400 shrink-0" /> Author · The Self-Taught Data Analyst
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs text-white/60">
-                    <Landmark className="w-4 h-4 text-teal-400 shrink-0" /> Building Africa&apos;s Data &amp; AI Infrastructure
-                  </div>
-                  <div className="flex items-center gap-2.5 text-xs text-white/60">
-                    <GraduationCap className="w-4 h-4 text-teal-400 shrink-0" /> 147+ Professionals Trained
-                  </div>
-                </div>
-              </div>
-              <div>
-                <h2 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight mb-5 leading-tight">
+              </Reveal>
+              <Reveal delay={0.1}>
+                <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight mb-5 leading-tight">
                   I&apos;m Chris Awoke, Founder of Wikrena.
                 </h2>
                 <p className="text-white/60 text-sm sm:text-base leading-relaxed mb-6">
@@ -451,7 +563,7 @@ export default function HomePage() {
                   guesswork. Every business decision made without data is value
                   left on the table. Every professional who can&apos;t work
                   with data is potential unrealised. I&apos;ve spent over seven
-                  years in this field — as a self-taught data analyst, a
+                  years in this field, as a self-taught data analyst, a
                   front-end engineer, an author, and now a founder building the
                   infrastructure to change how Africa thinks about data. Not
                   just for one company. For the continent. Wikrena is that
@@ -465,33 +577,60 @@ export default function HomePage() {
                   Read Our Full Story
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </div>
+              </Reveal>
             </div>
           </div>
         </section>
 
         {/* ── WHY WIKRENA ──────────────────────────────────────────────────── */}
-        <section className="py-24 bg-neutral-50">
+        <section className="py-16 sm:py-20 lg:py-24 bg-neutral-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-14">
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-navy-800 tracking-tight mb-4">
+            <Reveal className="text-center mb-14">
+              <div className="eyebrow justify-center">Why Wikrena</div>
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-4">
                 Why Businesses and Professionals Choose Us.
               </h2>
-              <p className="text-neutral-500 text-base max-w-xl mx-auto">
+              <p className="text-neutral-500 text-sm sm:text-base max-w-xl mx-auto">
                 Not because of what we say. Because of how we work.
               </p>
-            </div>
-            <div className="max-w-4xl mx-auto divide-y divide-neutral-200 border-t border-neutral-200">
-              {WHY_WIKRENA.map((f) => {
+            </Reveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              {WHY_WIKRENA.map((f, i) => {
                 const a = ACCENT[f.accent];
+                const featured = i === 0 || i === 3;
                 return (
-                  <div key={f.title} className="flex items-start gap-5 py-7">
-                    <f.icon className={`w-6 h-6 shrink-0 mt-0.5 ${a.icon}`} />
-                    <div>
-                      <h3 className="font-display font-bold text-lg text-navy-800 mb-1.5">{f.title}</h3>
-                      <p className="text-sm text-neutral-500 leading-relaxed">{f.desc}</p>
+                  <Reveal
+                    key={f.title}
+                    delay={(i % 4) * 0.08}
+                    className={featured ? "sm:col-span-2 lg:col-span-2" : "lg:col-span-1"}
+                  >
+                    <div
+                      className={`group relative overflow-hidden rounded-3xl border border-neutral-200 bg-white hover:shadow-float hover:-translate-y-1 transition-all duration-300 h-full ${
+                        featured ? "p-6 sm:p-8 flex items-center gap-6" : "p-6 sm:p-7 flex flex-col"
+                      }`}
+                    >
+                      <div
+                        className={`absolute -top-12 -right-12 w-44 h-44 rounded-full opacity-[0.08] ${a.icon} bg-current`}
+                        style={{ filter: "blur(30px)" }}
+                      />
+                      <div
+                        className={`relative shrink-0 rounded-2xl flex items-center justify-center shadow-lift ${a.iconWrap} ${
+                          featured ? "w-14 h-14 sm:w-16 sm:h-16" : "w-11 h-11 sm:w-12 sm:h-12 mb-5"
+                        }`}
+                      >
+                        <f.icon className={`${featured ? "w-7 h-7 sm:w-8 sm:h-8" : "w-5 h-5 sm:w-6 sm:h-6"} ${a.icon}`} />
+                      </div>
+                      <div className="relative">
+                        <h3 className={`font-display font-bold text-navy-800 mb-2 ${featured ? "text-lg sm:text-xl lg:text-2xl" : "text-base sm:text-lg"}`}>
+                          {f.title}
+                        </h3>
+                        <p className="text-neutral-500 leading-relaxed text-sm">
+                          {f.desc}
+                        </p>
+                      </div>
                     </div>
-                  </div>
+                  </Reveal>
                 );
               })}
             </div>
@@ -499,158 +638,153 @@ export default function HomePage() {
         </section>
 
         {/* ── TESTIMONIALS ─────────────────────────────────────────────────── */}
-        <section className="py-24 bg-white">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-14">
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-navy-800 tracking-tight">
+            <Reveal className="text-center mb-14">
+              <div className="eyebrow justify-center">Results</div>
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight">
                 Results That Speak For Themselves.
               </h2>
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              {TESTIMONIALS.map((t) => (
-                <div
-                  key={t.name}
-                  className="bg-neutral-50 border border-neutral-200 rounded-2xl p-7 hover:border-teal-300 hover:shadow-card transition-all"
-                >
-                  <p className="text-neutral-600 text-sm leading-relaxed mb-6">{t.quote}</p>
-                  <div className="flex items-center gap-3">
-                    <div className={`w-10 h-10 rounded-xl ${t.color} flex items-center justify-center text-sm font-bold text-white shrink-0`}>
-                      {t.initials}
+            </Reveal>
+
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+              {/* Featured testimonial */}
+              <Reveal className="lg:col-span-3">
+                <div className="relative h-full overflow-hidden rounded-3xl bg-navy-800 p-6 sm:p-9 flex flex-col">
+                  <Quote className="absolute -top-4 -right-2 w-32 h-32 text-white/[0.04]" />
+                  <div className="absolute -top-16 -left-16 w-56 h-56 rounded-full opacity-[0.12] bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]" />
+                  <div className="relative flex items-center gap-1 mb-5">
+                    {Array.from({ length: 5 }).map((_, idx) => (
+                      <Star key={idx} className="w-4 h-4 text-coral-400" fill="currentColor" />
+                    ))}
+                  </div>
+                  <p className="relative text-white text-base sm:text-lg lg:text-xl leading-relaxed font-medium mb-8 flex-1">
+                    &ldquo;{TESTIMONIALS[0].quote}&rdquo;
+                  </p>
+                  <div className="relative flex items-center gap-3">
+                    <div className={`w-12 h-12 rounded-xl ${TESTIMONIALS[0].color} flex items-center justify-center text-sm font-bold text-white shrink-0`}>
+                      {TESTIMONIALS[0].initials}
                     </div>
                     <div>
-                      <div className="font-semibold text-sm text-navy-800">{t.name}</div>
-                      <div className="text-xs text-neutral-400">{t.role}</div>
+                      <div className="font-semibold text-sm text-white">{TESTIMONIALS[0].name}</div>
+                      <div className="text-xs text-white/40">{TESTIMONIALS[0].role}</div>
                     </div>
                   </div>
                 </div>
-              ))}
+              </Reveal>
+
+              {/* Secondary testimonials */}
+              <div className="lg:col-span-2 flex flex-col gap-6">
+                {TESTIMONIALS.slice(1).map((t, i) => (
+                  <Reveal key={t.name} delay={(i + 1) * 0.1} className="flex-1">
+                    <div className="h-full bg-neutral-50 border border-neutral-200 rounded-2xl p-6 hover:border-teal-300 hover:shadow-card transition-all flex flex-col">
+                      <div className="flex items-center gap-1 mb-3">
+                        {Array.from({ length: 5 }).map((_, idx) => (
+                          <Star key={idx} className="w-3.5 h-3.5 text-coral-400" fill="currentColor" />
+                        ))}
+                      </div>
+                      <p className="text-neutral-600 text-sm leading-relaxed mb-6 flex-1">{t.quote}</p>
+                      <div className="flex items-center gap-3">
+                        <div className={`w-9 h-9 rounded-xl ${t.color} flex items-center justify-center text-xs font-bold text-white shrink-0`}>
+                          {t.initials}
+                        </div>
+                        <div>
+                          <div className="font-semibold text-sm text-navy-800">{t.name}</div>
+                          <div className="text-xs text-neutral-400">{t.role}</div>
+                        </div>
+                      </div>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
         {/* ── FEATURED PROGRAM ─────────────────────────────────────────────── */}
-        <section className="py-24 bg-neutral-50">
+        <section className="py-16 sm:py-20 lg:py-24 bg-neutral-50">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <div className="bg-navy-800 rounded-3xl p-8 sm:p-12 relative overflow-hidden">
-              <div className="absolute -top-16 -right-16 w-64 h-64 rounded-full opacity-[0.15] pointer-events-none bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]" />
-              <div className="relative grid grid-cols-1 lg:grid-cols-[1.3fr_1fr] gap-10 items-center">
-                <div>
-                  <div className="inline-flex items-center gap-1.5 bg-teal-500/15 border border-teal-500/30 text-teal-400 text-[10px] font-bold tracking-widest uppercase px-3 py-1.5 rounded-full mb-5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-teal-400" />
-                    Featured Course
-                  </div>
-                  <h2 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight mb-4">
-                    AI Automation Specialist Program.
-                  </h2>
-                  <p className="text-white/55 text-sm sm:text-base leading-relaxed mb-6">
-                    Learn to use AI tools and automation platforms to eliminate
-                    repetitive work and build smarter workflows — no coding
-                    required. For business owners and professionals who want to
-                    work smarter, immediately.
-                  </p>
-                  <ul className="space-y-2 mb-7">
-                    {[
-                      "Zapier, Make.com and AI workflow tools",
-                      "Build automations on your actual work processes",
-                      "No-code focused and beginner friendly",
-                      "Certificate of completion",
-                    ].map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm text-white/70">
-                        <CheckCircle2 className="w-4 h-4 text-teal-400 shrink-0 mt-0.5" />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                  <Link
-                    href="/paths/ai-automation"
-                    className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
-                  >
-                    Start Learning
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-                <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-6">
-                  <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-4">Program Details</div>
-                  <div className="space-y-3 text-sm">
-                    {[
-                      ["Instructor", "Chris Awoke · Wikrena Academy"],
-                      ["Level", "All Levels"],
-                      ["Format", "Online · Live Sessions"],
-                      ["Category", "AI Automation"],
-                      ["Access", "Lifetime"],
-                    ].map(([k, v]) => (
-                      <div key={k} className="flex items-center justify-between border-b border-white/5 pb-3 last:border-0 last:pb-0">
-                        <span className="text-white/40">{k}</span>
-                        <span className="text-white/80 font-medium text-right">{v}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
+            <Reveal>
+              <ProgramShowcase />
+            </Reveal>
           </div>
         </section>
 
         {/* ── DUAL CTA ─────────────────────────────────────────────────────── */}
-        <section className="py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <section className="relative py-16 sm:py-20 lg:py-24 bg-navy-900 overflow-hidden">
+          <div className="absolute inset-0 opacity-[0.05] pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)", backgroundSize: "32px 32px" }} />
+          <div className="absolute -top-32 -left-32 w-[480px] h-[480px] rounded-full opacity-[0.10] pointer-events-none bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]" />
+          <div className="absolute -bottom-32 -right-32 w-[480px] h-[480px] rounded-full opacity-[0.10] pointer-events-none bg-[radial-gradient(circle,theme(colors.coral.500),transparent_70%)]" />
+
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+            <Reveal className="text-center mb-14 max-w-xl mx-auto">
+              <div className="eyebrow justify-center">Get Started</div>
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight">
+                Whichever Side You&apos;re On, We&apos;re Ready.
+              </h2>
+            </Reveal>
+
             <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-navy-800 rounded-2xl p-8 sm:p-10 text-center sm:text-left">
-                <div className="text-[10px] font-bold tracking-widest uppercase text-teal-400 mb-3">For Businesses</div>
-                <h3 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight mb-4">
-                  Tell Us About Your Data Challenge.
-                </h3>
-                <p className="text-white/55 text-sm leading-relaxed mb-7">
-                  Book a free 30-minute discovery call. No pitch. No pressure.
-                  Just an honest conversation about what your data could be
-                  doing for your business.
-                </p>
-                <Link
-                  href="/contact"
-                  className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
-                >
-                  Book a Discovery Call
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
-              <div className="bg-neutral-50 border border-neutral-200 rounded-2xl p-8 sm:p-10 text-center sm:text-left">
-                <div className="text-[10px] font-bold tracking-widest uppercase text-coral-500 mb-3">For Professionals</div>
-                <h3 className="font-display font-black text-2xl sm:text-3xl text-navy-800 tracking-tight mb-4">
-                  Find the Right Program For You.
-                </h3>
-                <p className="text-neutral-500 text-sm leading-relaxed mb-7">
-                  Two programs. Both practical. Both cohort-based. Both built
-                  for Africans who are serious about what comes next for their
-                  career.
-                </p>
-                <Link
-                  href="/academy"
-                  className="inline-flex items-center gap-2 bg-navy-800 hover:bg-navy-700 text-white font-bold text-sm px-7 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
-                >
-                  Explore the Academy
-                  <ArrowRight className="w-4 h-4" />
-                </Link>
-              </div>
+              <Reveal>
+                <div className="group h-full rounded-3xl bg-white/[0.04] border border-white/10 hover:border-teal-400/40 hover:bg-white/[0.06] transition-all p-6 sm:p-10 text-center sm:text-left">
+                  <div className="text-[11px] font-mono tracking-wide text-teal-400 mb-3">For Businesses</div>
+                  <h3 className="font-display font-black text-xl sm:text-2xl lg:text-3xl text-white tracking-tight mb-4">
+                    Tell Us About Your Data Challenge.
+                  </h3>
+                  <p className="text-white/55 text-sm leading-relaxed mb-7">
+                    Book a free 30-minute discovery call. No pitch. No pressure.
+                    Just an honest conversation about what your data could be
+                    doing for your business.
+                  </p>
+                  <Link
+                    href="/contact"
+                    className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
+                  >
+                    Book a Discovery Call
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <div className="group h-full rounded-3xl bg-white/[0.04] border border-white/10 hover:border-coral-400/40 hover:bg-white/[0.06] transition-all p-6 sm:p-10 text-center sm:text-left">
+                  <div className="text-[11px] font-mono tracking-wide text-coral-400 mb-3">For Professionals</div>
+                  <h3 className="font-display font-black text-xl sm:text-2xl lg:text-3xl text-white tracking-tight mb-4">
+                    Find the Right Program For You.
+                  </h3>
+                  <p className="text-white/55 text-sm leading-relaxed mb-7">
+                    Three programs. All practical. All cohort-based or
+                    self-paced. All built for Africans who are serious about
+                    what comes next for their career.
+                  </p>
+                  <Link
+                    href="/academy"
+                    className="inline-flex items-center gap-2 bg-white text-navy-900 hover:bg-white/90 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
+                  >
+                    Explore the Academy
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </Reveal>
             </div>
           </div>
         </section>
 
         {/* ── FAQ ──────────────────────────────────────────────────────────── */}
-        <section className="py-24 bg-neutral-50">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6">
-            <div className="text-center mb-12">
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-navy-800 tracking-tight mb-4">
+        <section className="py-16 sm:py-20 lg:py-24 bg-white">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6">
+            <Reveal className="text-center mb-12 max-w-xl mx-auto">
+              <div className="eyebrow justify-center">Questions</div>
+              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-4">
                 Frequently Asked Questions.
               </h2>
-              <p className="text-neutral-500 text-base">
-                Can&apos;t find your answer here? Email us at{" "}
-                <a href="mailto:hello@wikrena.com" className="text-teal-600 font-semibold hover:text-teal-700">
-                  hello@wikrena.com
-                </a>{" "}
-                and we will get back to you within 24 hours.
+              <p className="text-neutral-500 text-sm sm:text-base">
+                Different questions for businesses and for professionals.
+                Pick the side that&apos;s you.
               </p>
-            </div>
-            <FaqAccordion items={FAQS} />
+            </Reveal>
+            <Reveal delay={0.1}>
+              <FaqTabs />
+            </Reveal>
           </div>
         </section>
       </main>

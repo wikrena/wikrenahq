@@ -3,6 +3,9 @@ node_modules/
 .pnp
 .pnp.js
 
+# Local scratch scripts (screenshot/test helpers, not part of the app)
+.scratch/
+
 # Next.js build output
 .next/
 out/

@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next"
-import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Bricolage_Grotesque, Work_Sans } from "next/font/google"
+import { Inter, Plus_Jakarta_Sans, JetBrains_Mono, Work_Sans } from "next/font/google"
 import "@/styles/globals.css"
 import { validateEnv } from "@/lib/env"
 
@@ -32,13 +32,6 @@ const jetbrainsMono = JetBrains_Mono({
   weight: ["400","500"],
 })
 
-const bricolage = Bricolage_Grotesque({
-  subsets: ["latin"],
-  variable: "--font-bricolage",
-  display: "swap",
-  weight: ["400","500","600","700","800"],
-})
-
 const workSans = Work_Sans({
   subsets: ["latin"],
   variable: "--font-worksans",
@@ -56,12 +49,9 @@ export const metadata: Metadata = {
   authors: [{ name: "Wikrena Limited" }],
   creator: "Wikrena Limited",
   icons: {
-    icon: [
-      { url: "/favicon.ico", sizes: "32x32", type: "image/x-icon" },
-      { url: "/favicon.svg", type: "image/svg+xml" },
-    ],
-    shortcut: "/favicon.ico",
-    apple: "/favicon.svg",
+    icon: [{ url: "/favicon.png", type: "image/png" }],
+    shortcut: "/favicon.png",
+    apple: "/favicon.png",
   },
 }
 
@@ -73,7 +63,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${jakarta.variable} ${inter.variable} ${jetbrainsMono.variable} ${bricolage.variable} ${workSans.variable}`}>
+    <html lang="en" className={`${jakarta.variable} ${inter.variable} ${jetbrainsMono.variable} ${workSans.variable}`}>
       <body className="min-h-screen bg-[#F6F8FA] text-navy-800 antialiased font-body">
         {children}
         <Toaster />

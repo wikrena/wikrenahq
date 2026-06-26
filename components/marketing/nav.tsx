@@ -22,12 +22,19 @@ const MOBILE_FEATURES = [
   { icon: Star, label: "Land your first data role in 90 days", color: "text-coral-400" },
 ];
 
-export function MarketingNav() {
+interface MarketingNavProps {
+  /** Starts transparent/dark-glass over a dark hero, then crossfades to the solid white pill on scroll. */
+  transparentOnHero?: boolean;
+}
+
+export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const pathname = usePathname();
+
+  const transparent = transparentOnHero && !scrolled;
 
   useEffect(() => {
     const supabase = createClient();
@@ -59,6 +66,7 @@ export function MarketingNav() {
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 16);
+    fn();
     window.addEventListener("scroll", fn, { passive: true });
     return () => window.removeEventListener("scroll", fn);
   }, []);
@@ -78,11 +86,10 @@ export function MarketingNav() {
 
   const linkClass = (active: boolean) =>
     cn(
-      "relative px-3.5 py-2 text-sm font-medium transition-colors",
-      "after:content-[''] after:absolute after:left-3.5 after:right-3.5 after:-bottom-0.5 after:h-px after:bg-teal-500 after:origin-center after:transition-transform after:duration-300",
-      active
-        ? "text-navy-800 after:scale-x-100"
-        : "text-neutral-500 hover:text-navy-800 after:scale-x-0 hover:after:scale-x-100",
+      "relative px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200",
+      transparent
+        ? active ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/[0.08]"
+        : active ? "text-navy-800 bg-neutral-100" : "text-neutral-500 hover:text-navy-800 hover:bg-neutral-100",
     );
 
   return (
@@ -91,26 +98,29 @@ export function MarketingNav() {
       <div className="hidden md:block fixed top-0 left-0 right-0 z-50 pointer-events-none">
         <div
           className={cn(
-            "mx-auto transition-[max-width,padding] duration-500 ease-out",
-            scrolled ? "max-w-3xl pt-3" : "max-w-5xl pt-5",
+            "mx-auto max-w-7xl px-4 sm:px-6 transition-[padding] duration-500 ease-out",
+            scrolled ? "pt-3" : "pt-5",
           )}
         >
           <nav
             className={cn(
-              "relative pointer-events-auto flex items-center justify-between gap-6 rounded-2xl bg-white border border-neutral-200 transition-all duration-300",
-              scrolled ? "shadow-card px-4 py-2.5" : "shadow-surface px-6 py-3.5",
+              "relative pointer-events-auto flex items-center justify-between gap-6 rounded-2xl border transition-all duration-300",
+              transparent
+                ? "bg-white/[0.06] backdrop-blur-md border-white/10 px-7 py-4"
+                : "bg-white border-neutral-200",
+              !transparent && (scrolled ? "shadow-card px-5 py-3" : "shadow-surface px-7 py-4"),
             )}
           >
-            {/* Gradient accent line — visible on scroll */}
+            {/* Gradient accent line: visible on scroll */}
             <div
               aria-hidden
               className={cn(
                 "absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-teal-400 to-transparent transition-opacity duration-300",
-                scrolled ? "opacity-60" : "opacity-0",
+                scrolled && !transparent ? "opacity-60" : "opacity-0",
               )}
             />
 
-            <WikrenaLogo variant="light-bg" href="/" height={24} />
+            <WikrenaLogo variant={transparent ? "dark-bg" : "light-bg"} href="/" height={30} />
 
             <div className="flex items-center gap-1">
               {NAV_LINKS.map((link) => {
@@ -121,13 +131,32 @@ export function MarketingNav() {
                   </Link>
                 );
               })}
-              {userRole && (
+
+              {userRole ? (
                 <Link
                   href={getDashboardUrl(userRole)}
-                  className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-white bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
+                  className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
                 >
                   Dashboard <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
+              ) : (
+                <>
+                  <Link
+                    href="/login"
+                    className={cn(
+                      "ml-1 px-4 py-2 rounded-xl text-sm font-semibold transition-colors duration-200",
+                      transparent ? "text-white/60 hover:text-white hover:bg-white/[0.08]" : "text-neutral-500 hover:text-navy-800 hover:bg-neutral-100",
+                    )}
+                  >
+                    Log in
+                  </Link>
+                  <Link
+                    href="/register"
+                    className="ml-1 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
+                  >
+                    Get Started <ArrowRight className="w-3.5 h-3.5" />
+                  </Link>
+                </>
               )}
             </div>
           </nav>
@@ -137,24 +166,31 @@ export function MarketingNav() {
       {/* ── MOBILE NAV ───────────────────────────────────────────────────── */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 md:hidden bg-white transition-all duration-300",
-          scrolled ? "shadow-[0_1px_0_0_rgb(0,0,0,0.08)] border-b border-neutral-200/80" : "border-b border-neutral-100",
+          "fixed top-0 left-0 right-0 z-50 md:hidden transition-all duration-300",
+          transparent
+            ? "bg-navy-900/40 backdrop-blur-md border-b border-white/10"
+            : cn("bg-white", scrolled ? "shadow-[0_1px_0_0_rgb(0,0,0,0.08)] border-b border-neutral-200/80" : "border-b border-neutral-100"),
         )}
       >
         <nav className="px-4 sm:px-6 h-16 flex items-center justify-between gap-6">
-          <WikrenaLogo variant="light-bg" href="/" height={28} />
+          <WikrenaLogo variant={transparent ? "dark-bg" : "light-bg"} href="/" height={32} />
 
           {userRole ? (
             <Link
               href={getDashboardUrl(userRole)}
-              className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-white bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
             >
               Dashboard <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           ) : (
             <button
               onClick={() => setMobileOpen(true)}
-              className="w-9 h-9 flex items-center justify-center rounded-xl text-neutral-600 hover:bg-neutral-100 transition-colors"
+              className={cn(
+                "w-10 h-10 flex items-center justify-center rounded-xl border transition-colors",
+                transparent
+                  ? "text-white bg-white/10 border-white/10 hover:bg-white/20"
+                  : "text-neutral-600 bg-neutral-50 border-neutral-200 hover:bg-neutral-100",
+              )}
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5" />
@@ -225,7 +261,7 @@ export function MarketingNav() {
             <div className="mx-4 my-2 border-t border-white/[0.06]" />
 
             <div className="px-4 py-3 space-y-3">
-              <div className="text-[10px] font-bold text-white/25 uppercase tracking-widest px-1 mb-3">
+              <div className="text-[11px] font-mono text-white/25 tracking-wide px-1 mb-3">
                 Why Wikrena
               </div>
               {MOBILE_FEATURES.map((f) => (
@@ -238,6 +274,25 @@ export function MarketingNav() {
               ))}
             </div>
           </div>
+
+          {!userRole && (
+            <div className="px-5 py-5 border-t border-white/[0.08] shrink-0 space-y-2.5">
+              <Link
+                href="/register"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center gap-2 w-full px-4 py-3.5 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-colors"
+              >
+                Get Started <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+              <Link
+                href="/login"
+                onClick={() => setMobileOpen(false)}
+                className="flex items-center justify-center w-full px-4 py-3 text-sm font-semibold text-white/60 hover:text-white transition-colors"
+              >
+                Log in
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </>

@@ -58,13 +58,16 @@
   .font-body    { font-family: var(--font-inter), system-ui, sans-serif !important; }
   .font-code    { font-family: var(--font-mono), monospace !important; }
 
-  /* Company homepage font scope — Bricolage Grotesque + Work Sans.
-     Overrides the shared --font-jakarta/--font-inter variables for this
-     subtree only, so .font-display/.font-body inherit the new fonts here
-     without changing any other page. */
+  /* Company homepage font scope — Work Sans for body copy.
+     Setting the variable alone does nothing for inherited text: font-family
+     is only re-evaluated on elements that reference var(--font-inter)
+     themselves, and most body text here has no explicit font class, so it
+     was inheriting Inter from <body> instead. Applying font-family directly
+     on this wrapper makes Work Sans cascade to everything beneath it.
+     Headings still win via their own explicit font-display (--font-jakarta). */
   .home-rebrand {
-    --font-jakarta: var(--font-bricolage);
     --font-inter: var(--font-worksans);
+    font-family: var(--font-worksans), system-ui, sans-serif;
   }
 
   /* Text gradients */
@@ -87,15 +90,14 @@
     background-clip: text;
   }
 
-  /* Section eyebrow */
+  /* Section eyebrow — proper case, not uppercase, kept deliberately small at every breakpoint */
   .eyebrow {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     font-size: 11px;
     font-family: var(--font-mono), monospace;
-    text-transform: uppercase;
-    letter-spacing: 0.10em;
+    letter-spacing: 0.04em;
     color: #2ec4b6;
     margin-bottom: 12px;
     font-weight: 500;

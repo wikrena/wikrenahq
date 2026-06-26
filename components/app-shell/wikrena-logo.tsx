@@ -15,14 +15,14 @@ export function WikrenaLogo({ variant = "light-bg", href = "/dashboard", classNa
   const src = variant === "dark-bg"
     ? "/logo-dark-bg.svg"    // white wordmark, for dark backgrounds
     : variant === "icon-only"
-    ? "/logo-icon-green.svg"
+    ? "/favicon.png"
     : "/logo-light-bg.svg"   // navy wordmark, for light backgrounds
 
   // Preserve aspect ratio based on known SVG dimensions
   const aspectRatios = {
     "light-bg":  3264 / 1011,  // ~3.23
     "dark-bg":   3264 / 1116,  // ~2.92
-    "icon-only": 990  / 1116,  // ~0.89
+    "icon-only": 1,            // square
   }
 
   const width = Math.round(height * aspectRatios[variant])
@@ -51,7 +51,7 @@ export function WikrenaLogo({ variant = "light-bg", href = "/dashboard", classNa
 export function WikrenaIcon({ size = 28, href, className }: { size?: number; href?: string; className?: string }) {
   const img = (
     <Image
-      src="/logo-icon-green.svg"
+      src="/favicon.png"
       alt="W"
       width={size}
       height={size}
