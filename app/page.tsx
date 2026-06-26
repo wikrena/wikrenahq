@@ -15,12 +15,11 @@ import {
   BookOpen,
   Landmark,
   ImageIcon,
-  TrendingUp,
-  Quote,
 } from "lucide-react";
 import { MarketingNav } from "@/components/marketing/nav";
 import { MarketingFooter } from "@/components/marketing/footer";
 import { FaqAccordion } from "@/components/marketing/faq-accordion";
+import { HomeHero } from "@/components/marketing/home-hero";
 
 export const metadata: Metadata = {
   title: "Wikrena Limited — Building Africa's Data & AI Infrastructure",
@@ -48,13 +47,6 @@ const ACCENT: Record<Accent, { iconWrap: string; icon: string }> = {
     icon: "text-amber-600",
   },
 };
-
-const PROOFS = [
-  { value: "5+", label: "Years in Data & AI" },
-  { value: "3", label: "Core Service Lines" },
-  { value: "147+", label: "Professionals Trained" },
-  { value: "100%", label: "Africa-First" },
-];
 
 const ECOSYSTEM: {
   icon: typeof Settings2;
@@ -227,105 +219,7 @@ export default function HomePage() {
     <div className="home-rebrand">
       <MarketingNav />
       <main>
-        {/* ── HERO ─────────────────────────────────────────────────────────── */}
-        <section className="relative pt-28 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-white">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
-            <div
-              className="absolute inset-0 opacity-[0.28] bg-[radial-gradient(circle,theme(colors.neutral.300)_1px,transparent_1px)]"
-              style={{ backgroundSize: "32px 32px" }}
-            />
-            <div className="absolute -top-32 -right-32 w-[500px] h-[500px] rounded-full opacity-[0.07] bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]" />
-            <div className="absolute -bottom-20 -left-20 w-[400px] h-[400px] rounded-full opacity-[0.05] bg-[radial-gradient(circle,theme(colors.coral.500),transparent_70%)]" />
-          </div>
-
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-16 lg:gap-10 items-center">
-              {/* Text column — left-aligned */}
-              <div>
-                <h1 className="font-display font-black tracking-tight leading-[1.05] mb-6 text-navy-800 text-4xl sm:text-5xl md:text-[3.4rem]">
-                  We Work With Businesses.
-                  <br />
-                  We Train <span className="text-gradient-teal">the People</span> Who Run Them.
-                </h1>
-
-                <p className="text-base sm:text-lg text-neutral-500 max-w-lg mb-10 leading-relaxed">
-                  Wikrena is a data and AI company built for Africa-focused
-                  businesses. We help businesses make smarter decisions with
-                  their data. And we train the professionals who make that
-                  work happen.
-                </p>
-
-                <div className="flex flex-col sm:flex-row items-start gap-4 mb-14">
-                  <Link
-                    href="/services"
-                    className="inline-flex items-center gap-3 bg-navy-800 hover:bg-navy-700 text-white font-bold text-base px-8 py-4 rounded-2xl transition-all shadow-brand-sm hover:shadow-brand-md hover:-translate-y-0.5 active:translate-y-0"
-                  >
-                    Work with Us
-                    <ArrowRight className="w-5 h-5" />
-                  </Link>
-                  <Link
-                    href="/academy"
-                    className="inline-flex items-center gap-3 bg-white text-navy-800 font-bold text-base px-8 py-4 rounded-2xl border-2 border-neutral-200 hover:border-teal-300 transition-all hover:-translate-y-0.5"
-                  >
-                    Explore the Academy
-                    <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-
-                {/* Proof strip */}
-                <div className="grid grid-cols-2 sm:grid-cols-4 gap-x-8 gap-y-5 max-w-xl">
-                  {PROOFS.map((p) => (
-                    <div key={p.label}>
-                      <div className="font-display font-black text-2xl text-navy-800 tracking-tight">{p.value}</div>
-                      <div className="text-xs text-neutral-500 mt-0.5">{p.label}</div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Visual column — floating stat cards */}
-              <div className="relative hidden lg:block h-[420px]">
-                <div className="absolute top-6 right-0 w-64 rounded-3xl bg-navy-800 p-6 shadow-brand-xl -rotate-3">
-                  <div className="text-[10px] font-mono text-white/40 uppercase tracking-widest mb-4">
-                    Wikrena Consulting
-                  </div>
-                  <div className="flex items-end gap-2 h-20 mb-4">
-                    {[40, 65, 50, 80, 60, 95].map((h, i) => (
-                      <div
-                        key={i}
-                        className="flex-1 rounded-t-md bg-gradient-to-t from-teal-500/30 to-teal-400"
-                        style={{ height: `${h}%` }}
-                      />
-                    ))}
-                  </div>
-                  <div className="flex items-center gap-1.5 text-teal-400 text-xs font-bold">
-                    <TrendingUp className="w-3.5 h-3.5" />
-                    Decision-ready in days
-                  </div>
-                </div>
-
-                <div className="absolute bottom-2 left-0 w-72 rounded-3xl bg-white border border-neutral-200 p-6 shadow-brand-xl rotate-2">
-                  <div className="flex items-center gap-3 mb-4">
-                    <div className="w-11 h-11 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center">
-                      <GraduationCap className="w-5 h-5 text-teal-600" />
-                    </div>
-                    <div>
-                      <div className="font-display font-black text-2xl text-navy-800 leading-none">147+</div>
-                      <div className="text-xs text-neutral-500">Professionals Trained</div>
-                    </div>
-                  </div>
-                  <div className="border-t border-neutral-100 pt-4 flex items-start gap-2">
-                    <Quote className="w-4 h-4 text-coral-400 shrink-0 mt-0.5" />
-                    <p className="text-xs text-neutral-500 leading-relaxed">
-                      &ldquo;Chris and the team treat you like a professional
-                      in training.&rdquo;
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+        <HomeHero />
 
         {/* ── WHO WE ARE ───────────────────────────────────────────────────── */}
         <section className="py-24 bg-neutral-50">
