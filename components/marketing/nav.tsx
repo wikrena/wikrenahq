@@ -132,31 +132,13 @@ export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
                 );
               })}
 
-              {userRole ? (
+              {userRole && (
                 <Link
                   href={getDashboardUrl(userRole)}
                   className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
                 >
                   Dashboard <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
-              ) : (
-                <>
-                  <Link
-                    href="/login"
-                    className={cn(
-                      "ml-1 px-4 py-2 rounded-xl text-sm font-semibold transition-colors duration-200",
-                      transparent ? "text-white/60 hover:text-white hover:bg-white/[0.08]" : "text-neutral-500 hover:text-navy-800 hover:bg-neutral-100",
-                    )}
-                  >
-                    Log in
-                  </Link>
-                  <Link
-                    href="/register"
-                    className="ml-1 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
-                  >
-                    Get Started <ArrowRight className="w-3.5 h-3.5" />
-                  </Link>
-                </>
               )}
             </div>
           </nav>
@@ -275,24 +257,6 @@ export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
             </div>
           </div>
 
-          {!userRole && (
-            <div className="px-5 py-5 border-t border-white/[0.08] shrink-0 space-y-2.5">
-              <Link
-                href="/register"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center gap-2 w-full px-4 py-3.5 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-colors"
-              >
-                Get Started <ArrowRight className="w-3.5 h-3.5" />
-              </Link>
-              <Link
-                href="/login"
-                onClick={() => setMobileOpen(false)}
-                className="flex items-center justify-center w-full px-4 py-3 text-sm font-semibold text-white/60 hover:text-white transition-colors"
-              >
-                Log in
-              </Link>
-            </div>
-          )}
         </div>
       </div>
     </>

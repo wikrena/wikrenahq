@@ -16,6 +16,7 @@ import {
   RefreshCw,
   BookOpen,
   Landmark,
+  Database,
   Quote,
   Star,
 } from "lucide-react";
@@ -560,6 +561,9 @@ export default function HomePage() {
                       <BookOpen className="w-4 h-4 text-teal-400 shrink-0" /> Author · The Self-Taught Data Analyst
                     </div>
                     <div className="flex items-center gap-2.5 text-xs text-white/60">
+                      <Database className="w-4 h-4 text-teal-400 shrink-0" /> Analytics Data Engineer
+                    </div>
+                    <div className="flex items-center gap-2.5 text-xs text-white/60">
                       <Landmark className="w-4 h-4 text-teal-400 shrink-0" /> Building Africa&apos;s Data &amp; AI Infrastructure
                     </div>
                     <div className="flex items-center gap-2.5 text-xs text-white/60">
@@ -572,18 +576,19 @@ export default function HomePage() {
                 <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight mb-5 leading-tight">
                   I&apos;m Chris Awoke, Founder of Wikrena.
                 </h2>
-                <p className="text-white/60 text-sm sm:text-base leading-relaxed mb-6">
+                <p className="text-white/60 text-sm sm:text-base leading-relaxed mb-4">
                   I built this company because I believe Africa&apos;s next
                   economic chapter cannot be written on gut feeling and
-                  guesswork. Every business decision made without data is value
-                  left on the table. Every professional who can&apos;t work
-                  with data is potential unrealised. I&apos;ve spent over seven
-                  years in this field, as a self-taught data analyst, a
-                  front-end engineer, an analytics data engineer, an author,
-                  and now a founder building the
-                  infrastructure to change how Africa thinks about data. Not
-                  just for one company. For the continent. Wikrena is that
-                  infrastructure, and we&apos;re building it one business, one
+                  guesswork. Every business decision made without data is
+                  value left on the table. Every professional who can&apos;t
+                  work with data and AI is potential unrealised.
+                </p>
+                <p className="text-white/60 text-sm sm:text-base leading-relaxed mb-6">
+                  Over the past years, I&apos;ve built these skills and taught
+                  them to others long enough to see what actually changes
+                  outcomes. Wikrena is what that experience became:
+                  infrastructure built for the continent, not just one
+                  company. We&apos;re building it one business, one
                   professional, and one cohort at a time.
                 </p>
                 <Link
