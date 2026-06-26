@@ -250,14 +250,16 @@ export default function HomePage() {
                 <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-5">
                   We&apos;re Not Your Typical Data Company.
                 </h2>
-                <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-8">
+                <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-4">
                   Wikrena is a data and AI company with one mission: to build
                   the infrastructure Africa&apos;s next economy needs to grow
                   with intelligence and precision. We work with businesses to
                   transform how they use data, and we train the professionals
                   who will power that transformation across the continent.
                   Everything we do is hands-on, Africa-specific, and built to
-                  produce real outcomes.{" "}
+                  produce real outcomes.
+                </p>
+                <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-8">
                   <span className="text-navy-800 font-semibold">
                     Not reports that gather dust. Not certificates with
                     nothing behind them.
@@ -269,7 +271,7 @@ export default function HomePage() {
                 </p>
                 <Link
                   href="/about-us"
-                  className="inline-flex items-center gap-2 text-teal-600 font-bold text-sm hover:text-teal-700 transition-colors group"
+                  className="group inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5"
                 >
                   About Us
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -381,12 +383,12 @@ export default function HomePage() {
         {/* ── SERVICES ─────────────────────────────────────────────────────── */}
         <section className="py-16 sm:py-20 lg:py-24 bg-white" id="services">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <Reveal className="text-center mb-14">
-              <div className="eyebrow justify-center">What We Do</div>
+            <Reveal className="max-w-2xl mb-14">
+              <div className="eyebrow">What We Do</div>
               <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-4">
                 What We Actually Do For Your Business.
               </h2>
-              <p className="text-neutral-500 text-sm sm:text-base max-w-xl mx-auto">
+              <p className="text-neutral-500 text-sm sm:text-base">
                 Three focused services. No inflated list. No overpromising.
                 Just what we can deliver with excellence right now.
               </p>
@@ -585,12 +587,12 @@ export default function HomePage() {
         {/* ── WHY WIKRENA ──────────────────────────────────────────────────── */}
         <section className="py-16 sm:py-20 lg:py-24 bg-neutral-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <Reveal className="text-center mb-14">
-              <div className="eyebrow justify-center">Why Wikrena</div>
+            <Reveal className="max-w-2xl mb-14">
+              <div className="eyebrow">Why Wikrena</div>
               <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-4">
                 Why Businesses and Professionals Choose Us.
               </h2>
-              <p className="text-neutral-500 text-sm sm:text-base max-w-xl mx-auto">
+              <p className="text-neutral-500 text-sm sm:text-base">
                 Not because of what we say. Because of how we work.
               </p>
             </Reveal>
@@ -606,22 +608,18 @@ export default function HomePage() {
                     className={featured ? "sm:col-span-2 lg:col-span-2" : "lg:col-span-1"}
                   >
                     <div
-                      className={`group relative overflow-hidden rounded-3xl border border-neutral-200 bg-white hover:shadow-float hover:-translate-y-1 transition-all duration-300 h-full ${
-                        featured ? "p-6 sm:p-8 flex items-center gap-6" : "p-6 sm:p-7 flex flex-col"
+                      className={`h-full ${
+                        featured ? "flex items-center gap-6" : "flex flex-col"
                       }`}
                     >
                       <div
-                        className={`absolute -top-12 -right-12 w-44 h-44 rounded-full opacity-[0.08] ${a.icon} bg-current`}
-                        style={{ filter: "blur(30px)" }}
-                      />
-                      <div
-                        className={`relative shrink-0 rounded-2xl flex items-center justify-center shadow-lift ${a.iconWrap} ${
+                        className={`shrink-0 rounded-2xl flex items-center justify-center shadow-lift ${a.iconWrap} ${
                           featured ? "w-14 h-14 sm:w-16 sm:h-16" : "w-11 h-11 sm:w-12 sm:h-12 mb-5"
                         }`}
                       >
                         <f.icon className={`${featured ? "w-7 h-7 sm:w-8 sm:h-8" : "w-5 h-5 sm:w-6 sm:h-6"} ${a.icon}`} />
                       </div>
-                      <div className="relative">
+                      <div>
                         <h3 className={`font-display font-bold text-navy-800 mb-2 ${featured ? "text-lg sm:text-xl lg:text-2xl" : "text-base sm:text-lg"}`}>
                           {f.title}
                         </h3>
@@ -640,25 +638,24 @@ export default function HomePage() {
         {/* ── TESTIMONIALS ─────────────────────────────────────────────────── */}
         <section className="py-16 sm:py-20 lg:py-24 bg-white">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <Reveal className="text-center mb-14">
-              <div className="eyebrow justify-center">Results</div>
+            <Reveal className="max-w-2xl mb-14">
+              <div className="eyebrow">Results</div>
               <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight">
                 Results That Speak For Themselves.
               </h2>
             </Reveal>
 
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-6">
+            <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
               {/* Featured testimonial */}
               <Reveal className="lg:col-span-3">
-                <div className="relative h-full overflow-hidden rounded-3xl bg-navy-800 p-6 sm:p-9 flex flex-col">
-                  <Quote className="absolute -top-4 -right-2 w-32 h-32 text-white/[0.04]" />
-                  <div className="absolute -top-16 -left-16 w-56 h-56 rounded-full opacity-[0.12] bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]" />
+                <div className="relative h-full flex flex-col pl-6 sm:pl-8 border-l-4 border-teal-500">
+                  <Quote className="absolute -top-2 right-0 w-16 h-16 text-teal-500/10" />
                   <div className="relative flex items-center gap-1 mb-5">
                     {Array.from({ length: 5 }).map((_, idx) => (
                       <Star key={idx} className="w-4 h-4 text-coral-400" fill="currentColor" />
                     ))}
                   </div>
-                  <p className="relative text-white text-base sm:text-lg lg:text-xl leading-relaxed font-medium mb-8 flex-1">
+                  <p className="relative text-navy-800 text-base sm:text-lg lg:text-xl leading-relaxed font-medium mb-8 flex-1">
                     &ldquo;{TESTIMONIALS[0].quote}&rdquo;
                   </p>
                   <div className="relative flex items-center gap-3">
@@ -666,18 +663,18 @@ export default function HomePage() {
                       {TESTIMONIALS[0].initials}
                     </div>
                     <div>
-                      <div className="font-semibold text-sm text-white">{TESTIMONIALS[0].name}</div>
-                      <div className="text-xs text-white/40">{TESTIMONIALS[0].role}</div>
+                      <div className="font-semibold text-sm text-navy-800">{TESTIMONIALS[0].name}</div>
+                      <div className="text-xs text-neutral-400">{TESTIMONIALS[0].role}</div>
                     </div>
                   </div>
                 </div>
               </Reveal>
 
               {/* Secondary testimonials */}
-              <div className="lg:col-span-2 flex flex-col gap-6">
+              <div className="lg:col-span-2 flex flex-col gap-8">
                 {TESTIMONIALS.slice(1).map((t, i) => (
                   <Reveal key={t.name} delay={(i + 1) * 0.1} className="flex-1">
-                    <div className="h-full bg-neutral-50 border border-neutral-200 rounded-2xl p-6 hover:border-teal-300 hover:shadow-card transition-all flex flex-col">
+                    <div className="h-full flex flex-col pl-5 border-l-2 border-neutral-200 hover:border-teal-300 transition-colors">
                       <div className="flex items-center gap-1 mb-3">
                         {Array.from({ length: 5 }).map((_, idx) => (
                           <Star key={idx} className="w-3.5 h-3.5 text-coral-400" fill="currentColor" />
@@ -717,8 +714,8 @@ export default function HomePage() {
           <div className="absolute -bottom-32 -right-32 w-[480px] h-[480px] rounded-full opacity-[0.10] pointer-events-none bg-[radial-gradient(circle,theme(colors.coral.500),transparent_70%)]" />
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-            <Reveal className="text-center mb-14 max-w-xl mx-auto">
-              <div className="eyebrow justify-center">Get Started</div>
+            <Reveal className="max-w-2xl mb-14">
+              <div className="eyebrow">Get Started</div>
               <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight">
                 Whichever Side You&apos;re On, We&apos;re Ready.
               </h2>
@@ -772,8 +769,8 @@ export default function HomePage() {
         {/* ── FAQ ──────────────────────────────────────────────────────────── */}
         <section className="py-16 sm:py-20 lg:py-24 bg-white">
           <div className="max-w-5xl mx-auto px-4 sm:px-6">
-            <Reveal className="text-center mb-12 max-w-xl mx-auto">
-              <div className="eyebrow justify-center">Questions</div>
+            <Reveal className="max-w-2xl mb-12">
+              <div className="eyebrow">Questions</div>
               <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-4">
                 Frequently Asked Questions.
               </h2>

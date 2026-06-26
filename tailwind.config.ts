@@ -48,8 +48,8 @@ const config: Config = {
         mono:    ["var(--font-mono)", "monospace"],
       },
       borderRadius: {
-        sm:"0.375rem", DEFAULT:"0.5rem", md:"0.5rem",
-        lg:"0.625rem", xl:"0.875rem", "2xl":"1rem", "3xl":"1.5rem",
+        sm:"4px", DEFAULT:"5px", md:"5px",
+        lg:"5px", xl:"5px", "2xl":"6px", "3xl":"6px",
       },
       boxShadow: {
         "surface":    "0 1px 3px rgba(10,25,47,0.06), 0 1px 8px rgba(10,25,47,0.03)",
