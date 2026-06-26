@@ -54,7 +54,7 @@ export function FaqTabs() {
   const current = TABS.find((t) => t.id === active)!;
 
   return (
-    <div className="grid grid-cols-1 lg:grid-cols-[1fr_300px] gap-10">
+    <div className="grid grid-cols-1 lg:grid-cols-[1fr_360px] gap-10 lg:gap-16">
       <div>
         <div className="inline-flex p-1 rounded-2xl bg-white border border-neutral-200 mb-8">
           {TABS.map((t) => (
@@ -73,12 +73,12 @@ export function FaqTabs() {
         <FaqAccordion key={current.id} items={current.items} />
       </div>
 
-      <div className="lg:sticky lg:top-28 h-fit rounded-3xl bg-navy-800 p-7 text-center lg:text-left">
-        <h3 className="font-display font-bold text-lg text-white mb-2">Still have questions?</h3>
-        <p className="text-white/55 text-sm leading-relaxed mb-6">
+      <div className="lg:sticky lg:top-28 h-fit rounded-3xl bg-navy-800 p-9 text-center lg:text-left">
+        <h3 className="font-display font-bold text-xl text-white mb-3">Still have questions?</h3>
+        <p className="text-white/55 text-sm leading-relaxed mb-8">
           We respond within 24 hours, every time.
         </p>
-        <div className="space-y-3">
+        <div className="space-y-4">
           <Link
             href="mailto:hello@wikrena.com"
             className="flex items-center justify-center lg:justify-start gap-2.5 text-sm font-semibold text-white/80 hover:text-white transition-colors"
@@ -88,7 +88,7 @@ export function FaqTabs() {
           </Link>
           <Link
             href="/contact"
-            className="flex items-center justify-center lg:justify-start gap-2.5 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl px-4 py-3 transition-colors mt-2"
+            className="flex items-center justify-center lg:justify-start gap-2.5 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl px-5 py-3.5 transition-colors mt-3"
           >
             <PhoneCall className="w-4 h-4 shrink-0" />
             Book a Discovery Call

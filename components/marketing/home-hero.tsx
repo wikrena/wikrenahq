@@ -106,17 +106,17 @@ export function HomeHero() {
               work happen.
             </motion.p>
 
-            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-start gap-4 mb-14">
+            <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-12 sm:mb-14">
               <Link
                 href="/services"
-                className="group inline-flex items-center gap-3 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-base px-8 py-4 rounded-2xl transition-all shadow-teal-glow hover:-translate-y-0.5 active:translate-y-0"
+                className="group inline-flex items-center gap-2.5 sm:gap-3 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-2xl transition-all shadow-teal-glow hover:-translate-y-0.5 active:translate-y-0"
               >
                 Work with Us
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/academy"
-                className="group inline-flex items-center gap-3 bg-white/5 text-white font-bold text-base px-8 py-4 rounded-2xl border border-white/15 hover:border-teal-400/50 hover:bg-white/10 transition-all hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 sm:gap-3 bg-white/5 text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border border-white/15 hover:border-teal-400/50 hover:bg-white/10 transition-all hover:-translate-y-0.5"
               >
                 Explore the Academy
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -124,13 +124,13 @@ export function HomeHero() {
             </motion.div>
 
             {/* Proof strip */}
-            <motion.div variants={fadeUp} className="grid grid-cols-3 gap-x-8 gap-y-5 max-w-xl">
+            <motion.div variants={fadeUp} className="grid grid-cols-3 gap-x-4 sm:gap-x-8 gap-y-5 max-w-xl">
               {PROOFS.map((p) => (
                 <div key={p.label}>
-                  <div className="font-display font-black text-2xl text-white tracking-tight">
+                  <div className="font-display font-black text-xl sm:text-2xl text-white tracking-tight">
                     <AnimatedCounter value={p.value} suffix={p.suffix} />
                   </div>
-                  <div className="text-xs text-white/45 mt-0.5">{p.label}</div>
+                  <div className="text-[11px] sm:text-xs text-white/45 mt-0.5">{p.label}</div>
                 </div>
               ))}
             </motion.div>

@@ -98,16 +98,16 @@ export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
       <div className="hidden md:block fixed top-0 left-0 right-0 z-50 pointer-events-none">
         <div
           className={cn(
-            "mx-auto max-w-7xl px-4 sm:px-6 transition-[padding] duration-500 ease-out",
-            scrolled ? "pt-3" : "pt-5",
+            "mx-auto px-4 sm:px-6 transition-[max-width,padding] duration-500 ease-out",
+            scrolled ? "max-w-5xl pt-3" : "max-w-7xl pt-5",
           )}
         >
           <nav
             className={cn(
-              "relative pointer-events-auto flex items-center justify-between gap-6 rounded-2xl border transition-all duration-300",
+              "relative pointer-events-auto flex items-center justify-between gap-6 rounded-2xl transition-all duration-300",
               transparent
-                ? "bg-white/[0.06] backdrop-blur-md border-white/10 px-7 py-4"
-                : "bg-white border-neutral-200",
+                ? "bg-white/[0.06] backdrop-blur-md px-7 py-4"
+                : "bg-white",
               !transparent && (scrolled ? "shadow-card px-5 py-3" : "shadow-surface px-7 py-4"),
             )}
           >

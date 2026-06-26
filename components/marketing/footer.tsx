@@ -5,7 +5,7 @@ import { WikrenaLogo, WikrenaIcon } from "@/components/app-shell/wikrena-logo";
 const CONTACT = [
   { icon: Mail, value: "hello@wikrena.com", href: "mailto:hello@wikrena.com" },
   { icon: Phone, value: "+234 905 959 3334", href: "tel:+2349059593334" },
-  { icon: MapPin, value: "12 Achi Street, Enugu, Nigeria", href: undefined },
+  { icon: MapPin, value: "12 Achi Street, Independence Layout, Enugu, Nigeria", href: undefined },
 ];
 
 const COLUMNS = [

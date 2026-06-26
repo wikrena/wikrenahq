@@ -216,9 +216,11 @@ export default function HomePage() {
               {/* Image column */}
               <Reveal className="order-2 lg:order-1">
                 <div className="relative">
-                  <div className="absolute -bottom-5 -left-5 w-2/3 h-2/3 rounded-2xl bg-gradient-to-br from-teal-500/20 to-teal-500/0 pointer-events-none" />
-                  <div className="absolute -top-5 -right-5 w-1/2 h-1/2 rounded-2xl border-2 border-coral-500/25 pointer-events-none" />
-                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-navy-700 shadow-brand-lg">
+                  <div className="absolute inset-0 rounded-2xl bg-teal-500 pointer-events-none" />
+                  <div
+                    className="relative aspect-[4/3] overflow-hidden border border-navy-700 shadow-brand-lg"
+                    style={{ clipPath: "polygon(0 0, calc(100% - 56px) 0%, 100% 56px, 100% 100%, 0% 100%)" }}
+                  >
                     <Image
                       src="/about-us-section.jpg"
                       alt="The Wikrena team reviewing data together"
@@ -577,7 +579,8 @@ export default function HomePage() {
                   left on the table. Every professional who can&apos;t work
                   with data is potential unrealised. I&apos;ve spent over seven
                   years in this field, as a self-taught data analyst, a
-                  front-end engineer, an author, and now a founder building the
+                  front-end engineer, an analytics data engineer, an author,
+                  and now a founder building the
                   infrastructure to change how Africa thinks about data. Not
                   just for one company. For the continent. Wikrena is that
                   infrastructure, and we&apos;re building it one business, one
@@ -596,7 +599,7 @@ export default function HomePage() {
         </section>
 
         {/* ── WHY WIKRENA ──────────────────────────────────────────────────── */}
-        <section className="py-16 sm:py-20 lg:py-24 bg-neutral-50">
+        <section className="py-16 sm:py-20 lg:py-24 bg-neutral-100">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
             <Reveal className="max-w-2xl mb-14">
               <div className="eyebrow">Why Wikrena</div>
@@ -608,36 +611,21 @@ export default function HomePage() {
               </p>
             </Reveal>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
               {WHY_WIKRENA.map((f, i) => {
                 const a = ACCENT[f.accent];
-                const featured = i === 0 || i === 3;
                 return (
-                  <Reveal
-                    key={f.title}
-                    delay={(i % 4) * 0.08}
-                    className={featured ? "sm:col-span-2 lg:col-span-2" : "lg:col-span-1"}
-                  >
-                    <div
-                      className={`h-full ${
-                        featured ? "flex items-center gap-6" : "flex flex-col"
-                      }`}
-                    >
-                      <div
-                        className={`shrink-0 rounded-2xl flex items-center justify-center shadow-lift ${a.iconWrap} ${
-                          featured ? "w-14 h-14 sm:w-16 sm:h-16" : "w-11 h-11 sm:w-12 sm:h-12 mb-5"
-                        }`}
-                      >
-                        <f.icon className={`${featured ? "w-7 h-7 sm:w-8 sm:h-8" : "w-5 h-5 sm:w-6 sm:h-6"} ${a.icon}`} />
+                  <Reveal key={f.title} delay={(i % 3) * 0.08}>
+                    <div className="group relative h-full overflow-hidden rounded-2xl border border-neutral-200 bg-white hover:shadow-float hover:-translate-y-1 transition-all duration-300 flex flex-col p-7">
+                      <div className={`shrink-0 w-12 h-12 rounded-2xl flex items-center justify-center mb-5 ${a.iconWrap}`}>
+                        <f.icon className={`w-6 h-6 ${a.icon}`} />
                       </div>
-                      <div>
-                        <h3 className={`font-display font-bold text-navy-800 mb-2 ${featured ? "text-lg sm:text-xl lg:text-2xl" : "text-base sm:text-lg"}`}>
-                          {f.title}
-                        </h3>
-                        <p className="text-neutral-500 leading-relaxed text-sm">
-                          {f.desc}
-                        </p>
-                      </div>
+                      <h3 className="font-display font-bold text-lg text-navy-800 mb-2">
+                        {f.title}
+                      </h3>
+                      <p className="text-neutral-500 leading-relaxed text-sm">
+                        {f.desc}
+                      </p>
                     </div>
                   </Reveal>
                 );
