@@ -35,7 +35,7 @@ const PROGRAMS: Program[] = [
       ["Instructor", "Chris Awoke · Wikrena Academy"],
       ["Level", "Beginner to Advanced"],
       ["Format", "Cohort-based · Live Sessions"],
-      ["Duration", "12 to 15 weeks"],
+      ["Duration", "12-15 weeks"],
     ],
   },
   {

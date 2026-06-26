@@ -216,7 +216,9 @@ export default function HomePage() {
               {/* Image column */}
               <Reveal className="order-2 lg:order-1">
                 <div className="relative">
-                  <div className="relative aspect-[4/3] rounded-3xl overflow-hidden border border-navy-700 shadow-brand-lg">
+                  <div className="absolute -bottom-5 -left-5 w-2/3 h-2/3 rounded-2xl bg-gradient-to-br from-teal-500/20 to-teal-500/0 pointer-events-none" />
+                  <div className="absolute -top-5 -right-5 w-1/2 h-1/2 rounded-2xl border-2 border-coral-500/25 pointer-events-none" />
+                  <div className="relative aspect-[4/3] rounded-2xl overflow-hidden border border-navy-700 shadow-brand-lg">
                     <Image
                       src="/about-us-section.jpg"
                       alt="The Wikrena team reviewing data together"
@@ -311,15 +313,24 @@ export default function HomePage() {
                         />
 
                         {/* Mini product-preview mockup */}
-                        <div className={`relative rounded-2xl p-3.5 sm:p-4 mb-6 ${a.iconWrap}`}>
+                        <div className={`relative rounded-2xl p-3.5 sm:p-4 mb-6 ${e.key === "os" ? "bg-navy-800" : a.iconWrap}`}>
                           {e.key === "os" && (
-                            <div className="space-y-1.5">
-                              {["Scope locked", "Invoice paid", "Client onboarded"].map((row) => (
-                                <div key={row} className="flex items-center gap-2 bg-white/70 rounded-lg px-2.5 py-1.5">
-                                  <CheckCircle2 className="w-3 h-3 text-navy-600 shrink-0" />
-                                  <span className="text-[10px] font-mono text-navy-700">{row}</span>
-                                </div>
-                              ))}
+                            <div>
+                              <div className="flex items-center justify-between text-[10px] font-mono text-white/40 mb-3">
+                                <span>Scope</span>
+                                <span>Invoice</span>
+                                <span>Paid</span>
+                              </div>
+                              <div className="flex items-center">
+                                {[0, 1, 2].map((idx) => (
+                                  <Fragment key={idx}>
+                                    <div className="w-5 h-5 rounded-full bg-teal-500 flex items-center justify-center shrink-0">
+                                      <CheckCircle2 className="w-3 h-3 text-navy-900" />
+                                    </div>
+                                    {idx < 2 && <div className="flex-1 h-0.5 bg-teal-500/40" />}
+                                  </Fragment>
+                                ))}
+                              </div>
                             </div>
                           )}
                           {e.key === "academy" && (
@@ -645,44 +656,28 @@ export default function HomePage() {
               </h2>
             </Reveal>
 
-            <div className="grid grid-cols-1 lg:grid-cols-5 gap-10">
-              {/* Featured testimonial */}
-              <Reveal className="lg:col-span-3">
-                <div className="relative h-full flex flex-col pl-6 sm:pl-8 border-l-4 border-teal-500">
-                  <Quote className="absolute -top-2 right-0 w-16 h-16 text-teal-500/10" />
-                  <div className="relative flex items-center gap-1 mb-5">
-                    {Array.from({ length: 5 }).map((_, idx) => (
-                      <Star key={idx} className="w-4 h-4 text-coral-400" fill="currentColor" />
-                    ))}
-                  </div>
-                  <p className="relative text-navy-800 text-base sm:text-lg lg:text-xl leading-relaxed font-medium mb-8 flex-1">
-                    &ldquo;{TESTIMONIALS[0].quote}&rdquo;
-                  </p>
-                  <div className="relative flex items-center gap-3">
-                    <div className={`w-12 h-12 rounded-xl ${TESTIMONIALS[0].color} flex items-center justify-center text-sm font-bold text-white shrink-0`}>
-                      {TESTIMONIALS[0].initials}
-                    </div>
-                    <div>
-                      <div className="font-semibold text-sm text-navy-800">{TESTIMONIALS[0].name}</div>
-                      <div className="text-xs text-neutral-400">{TESTIMONIALS[0].role}</div>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
-
-              {/* Secondary testimonials */}
-              <div className="lg:col-span-2 flex flex-col gap-8">
-                {TESTIMONIALS.slice(1).map((t, i) => (
-                  <Reveal key={t.name} delay={(i + 1) * 0.1} className="flex-1">
-                    <div className="h-full flex flex-col pl-5 border-l-2 border-neutral-200 hover:border-teal-300 transition-colors">
-                      <div className="flex items-center gap-1 mb-3">
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-6">
+              {TESTIMONIALS.map((t, i) => {
+                const bar = [
+                  { stripe: "bg-teal-500", tint: "text-teal-500/[0.07]" },
+                  { stripe: "bg-coral-500", tint: "text-coral-500/[0.07]" },
+                  { stripe: "bg-navy-700", tint: "text-navy-700/[0.07]" },
+                ][i % 3];
+                return (
+                  <Reveal key={t.name} delay={i * 0.1}>
+                    <div className="group relative h-full overflow-hidden rounded-2xl border border-neutral-200 bg-white hover:shadow-float hover:-translate-y-1 transition-all duration-300 flex flex-col p-7">
+                      <div className={`absolute top-0 left-0 right-0 h-1 ${bar.stripe}`} />
+                      <Quote className={`absolute -top-3 -right-3 w-20 h-20 ${bar.tint}`} />
+                      <div className="relative flex items-center gap-1 mb-4">
                         {Array.from({ length: 5 }).map((_, idx) => (
                           <Star key={idx} className="w-3.5 h-3.5 text-coral-400" fill="currentColor" />
                         ))}
                       </div>
-                      <p className="text-neutral-600 text-sm leading-relaxed mb-6 flex-1">{t.quote}</p>
-                      <div className="flex items-center gap-3">
-                        <div className={`w-9 h-9 rounded-xl ${t.color} flex items-center justify-center text-xs font-bold text-white shrink-0`}>
+                      <p className="relative text-neutral-600 text-sm leading-relaxed mb-6 flex-1">
+                        &ldquo;{t.quote}&rdquo;
+                      </p>
+                      <div className="relative flex items-center gap-3 pt-5 border-t border-neutral-100">
+                        <div className={`w-10 h-10 rounded-xl ${t.color} flex items-center justify-center text-xs font-bold text-white shrink-0`}>
                           {t.initials}
                         </div>
                         <div>
@@ -692,8 +687,8 @@ export default function HomePage() {
                       </div>
                     </div>
                   </Reveal>
-                ))}
-              </div>
+                );
+              })}
             </div>
           </div>
         </section>

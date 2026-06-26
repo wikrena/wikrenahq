@@ -92,23 +92,13 @@
 
   /* Section eyebrow — proper case, not uppercase, kept deliberately small at every breakpoint */
   .eyebrow {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
+    display: inline-block;
     font-size: 11px;
     font-family: var(--font-mono), monospace;
     letter-spacing: 0.04em;
     color: #2ec4b6;
     margin-bottom: 12px;
     font-weight: 500;
-  }
-  .eyebrow::before {
-    content: "";
-    width: 18px;
-    height: 2px;
-    background: linear-gradient(90deg, #2ec4b6, #178d82);
-    border-radius: 999px;
-    flex-shrink: 0;
   }
 
   /* Auth divider */

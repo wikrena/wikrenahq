@@ -137,7 +137,7 @@ Use the Tailwind colour utilities (`navy-800`, `teal-500`, `coral-500`, etc.). D
 - Body / UI text: `font-body` / `font-sans` → Inter (`--font-inter`)
 - Code: `font-mono` / `font-code` → monospace (`--font-mono`)
 
-**Border radius scale:** deliberately sharp, not the soft/rounded look the class names might suggest — `tailwind.config.ts` overrides the underlying pixel values, so use the same class names as before, they just render much sharper now (sm/DEFAULT/md/lg/xl ≈ 4–5px, 2xl/3xl ≈ 6px):
+**Border radius scale:** deliberately sharp, not the soft/rounded look the class names might suggest — `tailwind.config.ts` overrides the underlying pixel values to a flat 10px across every step of the scale, so use the same class names as before, they just render sharper now:
 - Small elements / inputs: `rounded-xl`
 - Cards / panels: `rounded-2xl`
 - Modals / overlays: `rounded-3xl`
