@@ -25,8 +25,10 @@ import { MarketingFooter } from "@/components/marketing/footer";
 import { FaqTabs } from "@/components/marketing/faq-tabs";
 import { HomeHero } from "@/components/marketing/home-hero";
 import { Reveal } from "@/components/marketing/reveal";
+import { Parallax } from "@/components/marketing/parallax";
 import { AnimatedCounter } from "@/components/marketing/animated-counter";
 import { ProgramShowcase } from "@/components/marketing/program-showcase";
+import { cn } from "@/lib/utils";
 
 export const metadata: Metadata = {
   title: "Wikrena Limited: Building Africa's Data & AI Infrastructure",
@@ -206,7 +208,7 @@ const TESTIMONIALS = [
 export default function HomePage() {
   return (
     <div className="home-rebrand">
-      <MarketingNav transparentOnHero />
+      <MarketingNav />
       <main>
         <HomeHero />
 
@@ -218,19 +220,21 @@ export default function HomePage() {
               <Reveal className="order-2 lg:order-1">
                 <div className="relative">
                   <div className="absolute inset-0 rounded-2xl bg-teal-500 pointer-events-none" />
-                  <div
-                    className="relative aspect-[4/3] overflow-hidden border border-navy-700 shadow-brand-lg"
-                    style={{ clipPath: "polygon(0 0, calc(100% - 56px) 0%, 100% 56px, 100% 100%, 0% 100%)" }}
-                  >
-                    <Image
-                      src="/about-us-section.jpg"
-                      alt="The Wikrena team reviewing data together"
-                      fill
-                      className="object-cover"
-                      sizes="(min-width: 1024px) 50vw, 100vw"
-                    />
-                    <div className="absolute inset-0 bg-navy-900/10" />
-                  </div>
+                  <Parallax offset={16}>
+                    <div
+                      className="relative aspect-[4/3] overflow-hidden border border-navy-700 shadow-brand-lg"
+                      style={{ clipPath: "polygon(0 0, calc(100% - 56px) 0%, 100% 56px, 100% 100%, 0% 100%)" }}
+                    >
+                      <Image
+                        src="/about-us-section.jpg"
+                        alt="The Wikrena team reviewing data together"
+                        fill
+                        className="object-cover"
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                      />
+                      <div className="absolute inset-0 bg-navy-900/10" />
+                    </div>
+                  </Parallax>
 
                   {/* Floating credibility card */}
                   <div className="absolute -bottom-6 -right-6 sm:-right-10 w-52 rounded-2xl bg-white border border-neutral-200 shadow-float p-5">
@@ -276,10 +280,10 @@ export default function HomePage() {
                 </p>
                 <Link
                   href="/about-us"
-                  className="group inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-6 py-3 rounded-xl transition-all hover:-translate-y-0.5"
+                  className="btn-shine group inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-6 py-3 rounded-xl transition-all duration-300 ease-brand hover:-translate-y-0.5 hover:scale-[1.02]"
                 >
                   About Us
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
                 </Link>
               </Reveal>
             </div>
@@ -375,7 +379,7 @@ export default function HomePage() {
                           className={`relative inline-flex items-center gap-2 font-bold text-sm hover:gap-3 transition-all group ${a.icon}`}
                         >
                           {e.cta}
-                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                          <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
                         </Link>
                       </div>
                     </Reveal>
@@ -442,7 +446,14 @@ export default function HomePage() {
                       )}
 
                       {/* Deliverable-preview mockup */}
-                      <div className={featured ? "relative rounded-2xl p-4 mb-6 bg-white/[0.06] border border-white/10" : "relative rounded-2xl p-4 mb-6 bg-navy-50 border border-navy-100"}>
+                      <div
+                        className={cn(
+                          "relative rounded-2xl p-4 mb-6",
+                          s.key === "analysis" && "bg-white/[0.06] border border-white/10",
+                          s.key === "strategy" && "bg-gradient-to-br from-coral-400 to-coral-500",
+                          s.key === "training" && "bg-gradient-to-br from-teal-500 to-teal-600",
+                        )}
+                      >
                         {s.key === "analysis" && (
                           <div>
                             <div className="flex items-end gap-1.5 h-12 mb-2.5">
@@ -459,7 +470,7 @@ export default function HomePage() {
                         {s.key === "strategy" && (
                           <div className="space-y-1.5">
                             {["Define the question", "Pick the KPIs", "Set the governance"].map((step, idx) => (
-                              <div key={step} className="flex items-center gap-2 bg-white rounded-lg px-2.5 py-1.5 border border-navy-100">
+                              <div key={step} className="flex items-center gap-2 bg-white rounded-lg px-2.5 py-1.5 shadow-sm">
                                 <span className="w-4 h-4 rounded-full bg-coral-50 border border-coral-200 text-coral-600 text-[9px] font-bold flex items-center justify-center shrink-0">
                                   {idx + 1}
                                 </span>
@@ -474,13 +485,13 @@ export default function HomePage() {
                               {Array.from({ length: 8 }).map((_, idx) => (
                                 <div
                                   key={idx}
-                                  className={`w-5 h-5 rounded-full flex items-center justify-center ${idx < 6 ? "bg-teal-500" : "bg-navy-100 border border-navy-200"}`}
+                                  className={`w-5 h-5 rounded-full flex items-center justify-center ${idx < 6 ? "bg-white" : "bg-white/20"}`}
                                 >
-                                  {idx < 6 && <CheckCircle2 className="w-3 h-3 text-white" />}
+                                  {idx < 6 && <CheckCircle2 className="w-3 h-3 text-teal-600" />}
                                 </div>
                               ))}
                             </div>
-                            <div className="text-[10px] font-mono text-navy-500">6/8 team members trained</div>
+                            <div className="text-[10px] font-mono text-white/85">6/8 team members trained</div>
                           </div>
                         )}
                         <div className={featured ? "absolute -bottom-3 -right-1 w-9 h-9 rounded-xl bg-navy-900 border border-white/10 shadow-lift flex items-center justify-center" : "absolute -bottom-3 -right-1 w-9 h-9 rounded-xl bg-white border border-neutral-200 shadow-lift flex items-center justify-center"}>
@@ -514,7 +525,7 @@ export default function HomePage() {
                         }
                       >
                         Talk to Us
-                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
                       </Link>
                     </div>
                   </Reveal>
@@ -542,7 +553,7 @@ export default function HomePage() {
               <Reveal>
                 <div className="relative">
                   <div className="absolute -inset-4 rounded-[2rem] opacity-30 bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)] pointer-events-none" />
-                  <div className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-brand-xl">
+                  <Parallax offset={16} className="relative aspect-[4/5] rounded-3xl overflow-hidden border border-white/10 shadow-brand-xl">
                     <Image
                       src="/chris-awoke.jpg"
                       alt="Chris Awoke, Founder and CEO of Wikrena Limited"
@@ -555,7 +566,7 @@ export default function HomePage() {
                       <div className="font-display font-bold text-xl text-white mb-0.5">Chris Awoke</div>
                       <div className="text-sm text-teal-300">Founder &amp; CEO · Wikrena Limited</div>
                     </div>
-                  </div>
+                  </Parallax>
                   <div className="relative space-y-2.5 mt-6">
                     <div className="flex items-center gap-2.5 text-xs text-white/60">
                       <BookOpen className="w-4 h-4 text-teal-400 shrink-0" /> Author · The Self-Taught Data Analyst
@@ -596,7 +607,7 @@ export default function HomePage() {
                   className="inline-flex items-center gap-2 text-teal-400 font-bold text-sm hover:text-teal-300 transition-colors group"
                 >
                   Read Our Full Story
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
                 </Link>
               </Reveal>
             </div>
@@ -723,10 +734,10 @@ export default function HomePage() {
                   </p>
                   <Link
                     href="/contact"
-                    className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
+                    className="btn-shine inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all duration-300 ease-brand hover:-translate-y-0.5 hover:scale-[1.02]"
                   >
                     Book a Discovery Call
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
                   </Link>
                 </div>
               </Reveal>
@@ -743,10 +754,10 @@ export default function HomePage() {
                   </p>
                   <Link
                     href="/academy"
-                    className="inline-flex items-center gap-2 bg-white text-navy-900 hover:bg-white/90 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
+                    className="btn-shine inline-flex items-center gap-2 bg-white text-navy-900 hover:bg-white/90 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all duration-300 ease-brand hover:-translate-y-0.5 hover:scale-[1.02]"
                   >
                     Explore the Academy
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
                   </Link>
                 </div>
               </Reveal>

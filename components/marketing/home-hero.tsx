@@ -109,17 +109,17 @@ export function HomeHero() {
             <motion.div variants={fadeUp} className="flex flex-col sm:flex-row items-start gap-3 sm:gap-4 mb-12 sm:mb-14">
               <Link
                 href="/services"
-                className="group inline-flex items-center gap-2.5 sm:gap-3 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-2xl transition-all shadow-teal-glow hover:-translate-y-0.5 active:translate-y-0"
+                className="btn-shine group inline-flex items-center gap-2.5 sm:gap-3 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-2xl transition-all duration-300 ease-brand shadow-teal-glow hover:-translate-y-0.5 hover:scale-[1.02] active:translate-y-0 active:scale-100"
               >
                 Work with Us
-                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 sm:w-5 sm:h-5 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
               </Link>
               <Link
                 href="/academy"
-                className="group inline-flex items-center gap-2.5 sm:gap-3 bg-white/5 text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border border-white/15 hover:border-teal-400/50 hover:bg-white/10 transition-all hover:-translate-y-0.5"
+                className="group inline-flex items-center gap-2.5 sm:gap-3 bg-white/5 text-white font-bold text-sm sm:text-base px-6 sm:px-8 py-3 sm:py-4 rounded-2xl border border-white/15 hover:border-teal-400/50 hover:bg-white/10 transition-all duration-300 ease-brand hover:-translate-y-0.5 hover:scale-[1.02]"
               >
                 Explore the Academy
-                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
               </Link>
             </motion.div>
 

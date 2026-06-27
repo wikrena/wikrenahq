@@ -88,7 +88,7 @@ export function FaqTabs() {
           </Link>
           <Link
             href="/contact"
-            className="flex items-center justify-center lg:justify-start gap-2.5 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl px-5 py-3.5 transition-colors mt-3"
+            className="btn-shine flex items-center justify-center lg:justify-start gap-2.5 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl px-5 py-3.5 transition-all duration-300 ease-brand hover:scale-[1.02] mt-3"
           >
             <PhoneCall className="w-4 h-4 shrink-0" />
             Book a Discovery Call

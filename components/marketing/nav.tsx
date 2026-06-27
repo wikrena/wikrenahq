@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import { motion, useScroll, useSpring } from "framer-motion";
 import { Menu, X, ArrowRight, BookOpen, Zap, Users, Star, ChevronRight } from "lucide-react";
 import { WikrenaLogo } from "@/components/app-shell/wikrena-logo";
 import { createClient } from "@/lib/supabase/client";
@@ -22,19 +23,15 @@ const MOBILE_FEATURES = [
   { icon: Star, label: "Land your first data role in 90 days", color: "text-coral-400" },
 ];
 
-interface MarketingNavProps {
-  /** Starts transparent/dark-glass over a dark hero, then crossfades to the solid white pill on scroll. */
-  transparentOnHero?: boolean;
-}
-
-export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
+export function MarketingNav() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [userRole, setUserRole] = useState<string | null>(null);
   const [userName, setUserName] = useState<string | null>(null);
   const pathname = usePathname();
 
-  const transparent = transparentOnHero && !scrolled;
+  const { scrollYProgress } = useScroll();
+  const progress = useSpring(scrollYProgress, { stiffness: 200, damping: 30, mass: 0.2 });
 
   useEffect(() => {
     const supabase = createClient();
@@ -87,13 +84,17 @@ export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
   const linkClass = (active: boolean) =>
     cn(
       "relative px-4 py-2 rounded-xl text-sm font-medium transition-colors duration-200",
-      transparent
-        ? active ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/[0.08]"
-        : active ? "text-navy-800 bg-neutral-100" : "text-neutral-500 hover:text-navy-800 hover:bg-neutral-100",
+      active ? "text-white bg-white/10" : "text-white/60 hover:text-white hover:bg-white/[0.08]",
     );
 
   return (
     <>
+      {/* ── SCROLL PROGRESS ──────────────────────────────────────────────── */}
+      <motion.div
+        className="fixed top-0 left-0 right-0 z-[60] h-[2px] bg-teal-400 origin-left"
+        style={{ scaleX: progress }}
+      />
+
       {/* ── DESKTOP: floating pill nav ───────────────────────────────────── */}
       <div className="hidden md:block fixed top-0 left-0 right-0 z-50 pointer-events-none">
         <div
@@ -104,11 +105,8 @@ export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
         >
           <nav
             className={cn(
-              "relative pointer-events-auto flex items-center justify-between gap-6 rounded-2xl transition-all duration-300",
-              transparent
-                ? "bg-white/[0.06] backdrop-blur-md px-7 py-4"
-                : "bg-white",
-              !transparent && (scrolled ? "shadow-card px-5 py-3" : "shadow-surface px-7 py-4"),
+              "relative pointer-events-auto flex items-center justify-between gap-6 rounded-2xl ring-1 ring-inset ring-white/[0.08] backdrop-blur-xl transition-all duration-300",
+              scrolled ? "bg-navy-900/75 shadow-lift px-5 py-3" : "bg-navy-900/40 shadow-surface px-7 py-4",
             )}
           >
             {/* Gradient accent line: visible on scroll */}
@@ -116,11 +114,11 @@ export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
               aria-hidden
               className={cn(
                 "absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-teal-400 to-transparent transition-opacity duration-300",
-                scrolled && !transparent ? "opacity-60" : "opacity-0",
+                scrolled ? "opacity-60" : "opacity-0",
               )}
             />
 
-            <WikrenaLogo variant={transparent ? "dark-bg" : "light-bg"} href="/" height={30} />
+            <WikrenaLogo variant="dark-bg" href="/" height={30} />
 
             <div className="flex items-center gap-1">
               {NAV_LINKS.map((link) => {
@@ -135,7 +133,7 @@ export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
               {userRole && (
                 <Link
                   href={getDashboardUrl(userRole)}
-                  className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
+                  className="ml-2 inline-flex items-center gap-1.5 px-4 py-2 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-all duration-300 ease-brand"
                 >
                   Dashboard <ArrowRight className="w-3.5 h-3.5" />
                 </Link>
@@ -148,31 +146,24 @@ export function MarketingNav({ transparentOnHero = false }: MarketingNavProps) {
       {/* ── MOBILE NAV ───────────────────────────────────────────────────── */}
       <header
         className={cn(
-          "fixed top-0 left-0 right-0 z-50 md:hidden transition-all duration-300",
-          transparent
-            ? "bg-navy-900/40 backdrop-blur-md border-b border-white/10"
-            : cn("bg-white", scrolled ? "shadow-[0_1px_0_0_rgb(0,0,0,0.08)] border-b border-neutral-200/80" : "border-b border-neutral-100"),
+          "fixed top-0 left-0 right-0 z-50 md:hidden backdrop-blur-xl transition-all duration-300",
+          scrolled ? "bg-navy-900/80 shadow-[0_1px_16px_rgba(0,0,0,0.25)]" : "bg-navy-900/40",
         )}
       >
         <nav className="px-4 sm:px-6 h-16 flex items-center justify-between gap-6">
-          <WikrenaLogo variant={transparent ? "dark-bg" : "light-bg"} href="/" height={32} />
+          <WikrenaLogo variant="dark-bg" href="/" height={32} />
 
           {userRole ? (
             <Link
               href={getDashboardUrl(userRole)}
-              className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-all"
+              className="flex items-center gap-2 px-4 py-2.5 text-sm font-bold text-navy-900 bg-teal-500 hover:bg-teal-400 rounded-xl transition-all duration-300 ease-brand"
             >
               Dashboard <ArrowRight className="w-3.5 h-3.5" />
             </Link>
           ) : (
             <button
               onClick={() => setMobileOpen(true)}
-              className={cn(
-                "w-10 h-10 flex items-center justify-center rounded-xl border transition-colors",
-                transparent
-                  ? "text-white bg-white/10 border-white/10 hover:bg-white/20"
-                  : "text-neutral-600 bg-neutral-50 border-neutral-200 hover:bg-neutral-100",
-              )}
+              className="w-10 h-10 flex items-center justify-center rounded-xl ring-1 ring-inset ring-white/10 text-white bg-white/10 hover:bg-white/20 transition-colors"
               aria-label="Open menu"
             >
               <Menu className="w-5 h-5" />

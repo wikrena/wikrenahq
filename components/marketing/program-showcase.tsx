@@ -134,10 +134,10 @@ export function ProgramShowcase() {
             </ul>
             <Link
               href={program.href}
-              className="inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all hover:-translate-y-0.5"
+              className="btn-shine group inline-flex items-center gap-2 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm px-7 py-3.5 rounded-2xl transition-all duration-300 ease-brand hover:-translate-y-0.5 hover:scale-[1.02]"
             >
               Start Learning
-              <ArrowRight className="w-4 h-4" />
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
             </Link>
           </div>
           <div className="bg-white/[0.04] border border-white/10 rounded-2xl p-6">

@@ -90,6 +90,27 @@
     background-clip: text;
   }
 
+  /* Diagonal light sweep on hover, for primary CTA buttons */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shine::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: -75%;
+    width: 50%;
+    height: 100%;
+    background: linear-gradient(115deg, transparent, rgba(255, 255, 255, 0.45), transparent);
+    transform: skewX(-20deg);
+    transition: left 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+    pointer-events: none;
+  }
+  .btn-shine:hover::after {
+    left: 125%;
+  }
+
   /* Section eyebrow — proper case, not uppercase, kept deliberately small at every breakpoint */
   .eyebrow {
     display: inline-block;

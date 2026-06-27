@@ -75,6 +75,9 @@ const config: Config = {
         pulseDot:     { "0%,100%":{opacity:"1",transform:"scale(1)"},"50%":{opacity:"0.5",transform:"scale(0.7)"} },
         shimmer:      { from:{backgroundPosition:"200% 0"},to:{backgroundPosition:"-200% 0"} },
       },
+      transitionTimingFunction: {
+        brand: "cubic-bezier(0.22, 1, 0.36, 1)",
+      },
       animation: {
         "accordion-down":  "accordion-down 0.2s ease-out",
         "accordion-up":    "accordion-up 0.2s ease-out",
