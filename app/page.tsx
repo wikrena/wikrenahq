@@ -226,8 +226,8 @@ export default function HomePage() {
                       style={{ clipPath: "polygon(0 0, calc(100% - 56px) 0%, 100% 56px, 100% 100%, 0% 100%)" }}
                     >
                       <Image
-                        src="/about-us-section.jpg"
-                        alt="The Wikrena team reviewing data together"
+                        src="/about/about-team.jpg"
+                        alt="The Wikrena team in a strategy session together"
                         fill
                         className="object-cover"
                         sizes="(min-width: 1024px) 50vw, 100vw"
@@ -236,8 +236,30 @@ export default function HomePage() {
                     </div>
                   </Parallax>
 
+                  {/* Accent layer: a warmer team moment, overlapping the bottom-left */}
+                  <div className="absolute -bottom-5 -left-4 sm:-bottom-8 sm:-left-10 w-32 sm:w-48 aspect-[4/3] rounded-2xl overflow-hidden border-4 border-white shadow-float z-20">
+                    <Image
+                      src="/about/about-team-warm.jpg"
+                      alt="Team members sharing a lighter moment over a laptop"
+                      fill
+                      className="object-cover"
+                      sizes="200px"
+                    />
+                  </div>
+
+                  {/* Accent layer: a data detail, smallest, top-right */}
+                  <div className="absolute -top-4 -right-3 sm:-top-6 sm:-right-6 w-16 sm:w-24 aspect-square rounded-xl overflow-hidden border-4 border-white shadow-lift z-30 rotate-3">
+                    <Image
+                      src="/about/about-data-detail.jpg"
+                      alt="A closer look at the data we work with"
+                      fill
+                      className="object-cover"
+                      sizes="100px"
+                    />
+                  </div>
+
                   {/* Floating credibility card */}
-                  <div className="absolute -bottom-6 -right-6 sm:-right-10 w-52 rounded-2xl bg-white border border-neutral-200 shadow-float p-5">
+                  <div className="absolute -bottom-6 -right-6 sm:-right-10 w-52 rounded-2xl bg-white border border-neutral-200 shadow-float p-5 z-20">
                     <div className="flex items-center gap-3">
                       <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-200 flex items-center justify-center shrink-0">
                         <GraduationCap className="w-5 h-5 text-teal-600" />

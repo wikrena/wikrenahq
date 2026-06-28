@@ -12,7 +12,7 @@ const SLIDES = [
   { src: "/hero/hero-5-placement.jpg", alt: "Handshake after a successful placement" },
 ];
 
-const INTERVAL_MS = 6000;
+const INTERVAL_MS = 6500;
 
 export function HeroImageCarousel() {
   const [index, setIndex] = useState(0);
@@ -28,13 +28,13 @@ export function HeroImageCarousel() {
 
   return (
     <div className="absolute inset-0 overflow-hidden">
-      <AnimatePresence>
+      <AnimatePresence initial={false}>
         <motion.div
           key={index}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 1.4, ease: [0.22, 1, 0.36, 1] }}
+          initial={{ x: "100%" }}
+          animate={{ x: "0%" }}
+          exit={{ x: "-100%" }}
+          transition={{ duration: 1.1, ease: [0.65, 0, 0.35, 1] }}
           className="absolute inset-0"
         >
           <Image
