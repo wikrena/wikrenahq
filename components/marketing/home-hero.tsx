@@ -12,6 +12,7 @@ import {
   useTransform,
 } from "framer-motion";
 import { AnimatedCounter } from "@/components/marketing/animated-counter";
+import { HeroImageCarousel } from "@/components/marketing/hero-image-carousel";
 
 const PROOFS = [
   { value: 3, suffix: "", label: "Core Service Lines" },
@@ -61,6 +62,9 @@ export function HomeHero() {
       onMouseMove={handleMouseMove}
       className="relative pt-32 pb-24 md:pt-44 md:pb-32 overflow-hidden bg-navy-900"
     >
+      {/* Rotating background photography */}
+      <HeroImageCarousel />
+
       {/* Static texture + glows */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div
