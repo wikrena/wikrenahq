@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 import { RegisterForm } from "@/components/auth/register-form"
 import { WikrenaLogo } from "@/components/app-shell/wikrena-logo"
 import Link from "next/link"
@@ -8,9 +8,9 @@ export const metadata: Metadata = { title: "Create Account — Wikrena Academy" 
 
 const PROOF_POINTS = [
   { icon: "🌍", text: "Real datasets from MTN, Flutterwave, Paystack and Access Bank" },
-  { icon: "🤖", text: "Wren AI tutor powered by Claude — explains with African context"  },
-  { icon: "🎯", text: "90-day placement promise — we stay with you until you land"       },
-  { icon: "👥", text: "Max 30 students per cohort — real attention, not just a number"  },
+  { icon: "🤖", text: "Wren AI tutor powered by Claude, with African context built in"  },
+  { icon: "🎯", text: "90-day placement promise. We stay with you until you land."       },
+  { icon: "👥", text: "Max 30 students per cohort. Real attention, not just a number."  },
 ]
 
 const ALUMNI = [

@@ -1,4 +1,4 @@
-import type { Metadata } from "next"
+﻿import type { Metadata } from "next"
 import { createClient } from "@/lib/supabase/server"
 import { MarketingNav } from "@/components/marketing/nav"
 import { MarketingFooter } from "@/components/marketing/footer"
@@ -30,7 +30,7 @@ export default async function PlacementWallPage() {
               Real Africans. Real jobs.
             </h1>
             <p className="text-neutral-500 text-lg max-w-xl mx-auto">
-              Every person here enrolled, learned, and got placed. This is not marketing — these are our students.
+              Every person here enrolled, learned, and got placed. This is not marketing. These are our students.
             </p>
           </div>
 

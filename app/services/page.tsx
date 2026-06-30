@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -69,7 +69,7 @@ const WHO = [
   {
     icon: Users,
     title: "SMEs and Growing Businesses",
-    desc: "You have revenue, you have customers, and you are making decisions mostly by gut feel. That needs to change — and we know how to change it.",
+    desc: "You have revenue, you have customers, and you are making decisions mostly by gut feel. That needs to change. We know how to change it.",
   },
   {
     icon: BarChart3,
@@ -94,7 +94,7 @@ const SERVICES = [
     icon: Compass,
     badge: null,
     title: "Data Strategy and Advisory",
-    desc: "Most businesses do not have a data problem. They have a clarity problem. They do not know what data they have, what it means, or what to do with it first. This engagement gives you the full picture and a prioritised roadmap to act on it. We audit your current data landscape, identify the gaps, and map out a practical plan that fits your business size, budget, and goals — including where AI can start working for you immediately.",
+    desc: "Most businesses do not have a data problem. They have a clarity problem. They do not know what data they have, what it means, or what to do with it first. This engagement gives you the full picture and a prioritised roadmap to act on it. We audit your current data landscape, identify the gaps, and map out a practical plan that fits your business size, budget, and goals, including where AI can start working for you immediately.",
     deliverables: [
       "Current state audit: what data you have, where it lives, and what condition it is in",
       "Gap analysis: what is missing and why it matters for your decisions",
@@ -108,7 +108,7 @@ const SERVICES = [
     icon: BarChart3,
     badge: "Most Requested",
     title: "Data Analysis and Reporting",
-    desc: "We take your raw numbers — spreadsheets, CRM exports, sales data, whatever you have — and turn them into clear, visual, decision-ready reports your team will actually use. Every analysis includes plain-language interpretation. We do not hand you a chart and leave you to figure out what it means.",
+    desc: "We take your raw numbers (spreadsheets, CRM exports, sales data, whatever you have) and turn them into clear, visual, decision-ready reports your team will actually use. Every analysis includes plain-language interpretation. We do not hand you a chart and leave you to figure out what it means.",
     deliverables: [
       "Full data cleaning and preparation from your existing sources",
       "In-depth analysis report with findings and recommendations",
@@ -122,11 +122,11 @@ const SERVICES = [
     icon: GraduationCap,
     badge: null,
     title: "Corporate Data and AI Training",
-    desc: "Your team has data. They just do not know how to work with it — or how AI can amplify what they are already doing. We bring practical data and AI training directly to your organisation, tailored to your industry, your tools, and your people's actual skill level. This is not a generic course. It is built around your business.",
+    desc: "Your team has data. They just do not know how to work with it, or how AI can amplify what they are already doing. We bring practical data and AI training directly to your organisation, tailored to your industry, your tools, and your people's actual skill level. This is not a generic course. It is built around your business.",
     deliverables: [
       "Skills assessment to understand where your team is starting from",
       "Custom training curriculum built around your business context and tools",
-      "Live workshops — in-person or virtual, your choice",
+      "Live workshops, in-person or virtual, your choice",
       "Hands-on exercises using your actual business data",
       "Post-training support pack and 30-day follow-up session",
     ],
@@ -298,7 +298,7 @@ export default function ServicesPage() {
             </div>
             <Reveal delay={0.2}>
               <p className="mt-8 text-neutral-500 text-sm">
-                We work with you to find the answers — and more importantly, what to do with them.
+                We work with you to find the answers, and more importantly, what to do with them.
               </p>
             </Reveal>
           </div>

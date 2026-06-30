@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import {
@@ -254,7 +254,7 @@ export function DashboardHome({ profile, enrollments, totalXp, badges, userEmail
           <div className="flex-1 min-w-0">
             <p className="font-display font-bold text-white text-base mb-1">Ask Wren anything</p>
             <p className="text-white/50 text-sm leading-relaxed">
-              Your AI tutor powered by Claude — explains with real African business examples. Available 24/7.
+              Your AI tutor powered by Claude. Explains with real African business examples. Available 24/7.
             </p>
           </div>
           <div className="flex gap-2 flex-wrap w-full sm:w-auto">

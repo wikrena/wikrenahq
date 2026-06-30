@@ -1,4 +1,4 @@
-"use client"
+﻿"use client"
 
 import Link from "next/link"
 import { useState } from "react"
@@ -122,7 +122,7 @@ const SKILL_TRACKS = [
   { id:"powerbi",  icon:"📈", title:"Power BI",             desc:"Build professional dashboards and reports. From data model to insight.", courses:2, hours:24, level:"Beginner", color:"border-yellow-200",  tags:["Power BI","DAX","Dashboards"] },
   { id:"stats",    icon:"📐", title:"Statistics for Data",  desc:"Descriptive stats, probability, hypothesis testing and A/B testing.", courses:2, hours:20, level:"Beginner → Intermediate", color:"border-purple-200", tags:["Statistics","Probability","A/B Testing"] },
   { id:"dbt",      icon:"🔧", title:"dbt & Data Modelling", desc:"Modern data transformation. Build a production dbt project on African data.", courses:2, hours:24, level:"Intermediate", color:"border-navy-200",  tags:["dbt","SQL","Data Modelling"] },
-  { id:"ml-basics",icon:"🤖", title:"ML Foundations",       desc:"Core machine learning concepts — supervised, unsupervised, model evaluation.", courses:2, hours:28, level:"Intermediate", color:"border-coral-200", tags:["Machine Learning","Scikit-learn","Python"] },
+  { id:"ml-basics",icon:"🤖", title:"ML Foundations",       desc:"Core machine learning concepts: supervised, unsupervised, model evaluation.", courses:2, hours:28, level:"Intermediate", color:"border-coral-200", tags:["Machine Learning","Scikit-learn","Python"] },
 ]
 
 // ── CAREER TRACKS PAGE ──────────────────────────────────────────────────────
@@ -154,7 +154,7 @@ export function CareerTracksPage({ enrollments, userId }: TrackProps) {
         <CheckCircle2 className="w-4 h-4 text-teal-600 mt-0.5 shrink-0" />
         <div>
           <span className="font-semibold text-teal-700 text-sm">Shared Skill Architecture</span>
-          <span className="text-teal-600 text-sm ml-1">— Complete SQL Fundamentals once and it counts in every track that requires it. Your progress belongs to you, not any single track.</span>
+          <span className="text-teal-600 text-sm ml-1">. Complete SQL Fundamentals once and it counts in every track that requires it. Your progress belongs to you, not any single track.</span>
         </div>
       </div>
 
@@ -260,7 +260,7 @@ export function SkillTracksPage({ enrollments, userId }: TrackProps) {
         </div>
         <h1 className="font-display font-black text-2xl sm:text-3xl text-navy-800 mb-2">Skill Tracks</h1>
         <p className="text-neutral-500 text-sm max-w-xl">
-          Focused bundles for a single skill. Shorter than Career Tracks — 2 to 6 weeks. Perfect for upskilling in a specific area or filling a gap.
+          Focused bundles for a single skill. Shorter than Career Tracks, typically 2 to 6 weeks. Perfect for upskilling in a specific area or filling a gap.
         </p>
       </div>
 

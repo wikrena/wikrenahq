@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+﻿import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -34,7 +34,7 @@ const HERO_STATS = [
 ];
 
 const ABOUT_BULLETS = [
-  "Small, capped cohorts — real attention, not a number",
+  "Small, capped cohorts: real attention, not a number",
   "Live weekly sessions with your instructor, not pre-recorded lectures",
   "Capstone project built on real African industry data",
   "90-day post-graduation career support",
@@ -53,7 +53,7 @@ const HOW_IT_WORKS = [
     n: "01",
     icon: BookOpen,
     title: "Learn",
-    desc: "Build the technical foundation — tools, concepts, and thinking that employers actually need. Live sessions, real datasets, no-fluff curriculum.",
+    desc: "Build the technical foundation: tools, concepts, and thinking that employers actually need. Live sessions, real datasets, no-fluff curriculum.",
   },
   {
     n: "02",
@@ -103,11 +103,11 @@ const FAQS = [
   },
   {
     q: "What's the difference between the three programs?",
-    a: "The Data Analytics Professional Program is a 12-15 week deep-dive into data analysis — SQL, Python, Power BI, Excel and a full industry capstone. It's for people who want to become data analysts or seriously upskill. The AI Automation Specialist Program is shorter and focused on using AI tools and no-code platforms like Zapier and Make.com to automate workflows, for business owners and professionals who want to work smarter without becoming analysts. The SPSS Program is a self-paced, 7-week track built for researchers and postgraduate students who need to analyse and report on survey or research data.",
+    a: "The Data Analytics Professional Program is a 12-15 week deep-dive into data analysis: SQL, Python, Power BI, Excel and a full industry capstone. It's for people who want to become data analysts or seriously upskill. The AI Automation Specialist Program is shorter and focused on using AI tools and no-code platforms like Zapier and Make.com to automate workflows, for business owners and professionals who want to work smarter without becoming analysts. The SPSS Program is a self-paced, 7-week track built for researchers and postgraduate students who need to analyse and report on survey or research data.",
   },
   {
     q: "Are the sessions live or pre-recorded?",
-    a: "Live, for the cohort-based programs. Every cohort runs on a live model with weekly sessions, direct instructor access, and peer interaction — we don't believe pre-recorded videos alone build the kind of skills and accountability that lead to real outcomes. The SPSS Program is the exception: it's self-paced by design, for learners who need flexibility.",
+    a: "Live, for the cohort-based programs. Every cohort runs on a live model with weekly sessions, direct instructor access, and peer interaction. We don't believe pre-recorded videos alone build the kind of skills and accountability that lead to real outcomes. The SPSS Program is the exception: it's self-paced by design, for learners who need flexibility.",
   },
   {
     q: "What happens if I miss a session?",
@@ -115,7 +115,7 @@ const FAQS = [
   },
   {
     q: "What happens after I graduate?",
-    a: "You get 90 days of career support — CV review, LinkedIn optimisation, mock interviews, and warm introductions to hiring partners where possible. You also join the Wikrena alumni network for life. If you've completed all program requirements and haven't landed within 90 days, we extend support at no cost.",
+    a: "You get 90 days of career support: CV review, LinkedIn optimisation, mock interviews, and warm introductions to hiring partners where possible. You also join the Wikrena alumni network for life. If you've completed all program requirements and haven't landed within 90 days, we extend support at no cost.",
   },
 ];
 
