@@ -382,7 +382,7 @@ export default function AcademyPage() {
                 Ready to Start
               </div>
               <h2 className="font-display font-black tracking-tight text-white text-3xl sm:text-4xl md:text-5xl mb-6">
-                The Next Cohort Starts July 7, 2026.
+                The Next Cohort Starts August 17, 2026.
               </h2>
               <p className="text-white/55 text-base sm:text-lg mb-10 max-w-lg mx-auto leading-relaxed">
                 Spots are limited each cohort. Once they&apos;re gone, the next opening is months away.
