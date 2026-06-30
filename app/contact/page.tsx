@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 import {
   Mail,
   MapPin,
@@ -13,8 +12,6 @@ import { MarketingNav } from "@/components/marketing/nav";
 import { MarketingFooter } from "@/components/marketing/footer";
 import { Reveal } from "@/components/marketing/reveal";
 import { ContactForm } from "@/components/marketing/contact-form";
-
-export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
   title: "Contact Us — Wikrena",
@@ -187,13 +184,9 @@ export default function ContactPage() {
                       is always a free 30-minute discovery call. No pitch. Just an honest
                       conversation about your situation.
                     </p>
-                    <Link
-                      href="#"
-                      onClick={(e) => e.preventDefault()}
-                      className="inline-flex items-center gap-1.5 text-teal-600 text-sm font-semibold hover:text-teal-500 transition-colors"
-                    >
-                      Use the form above to get started
-                    </Link>
+                    <span className="text-teal-600 text-sm font-semibold">
+                      Use the form on this page to get started.
+                    </span>
                   </div>
                 </Reveal>
 
