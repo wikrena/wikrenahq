@@ -71,7 +71,7 @@ const ECOSYSTEM: {
     tag: "For African Service Businesses",
     desc: "The operating system for African service businesses to run with clarity, structure, and control. Manage clients, protect your scope, get paid on time, and build the track record that takes you to the next level, with offline mode built in by design.",
     cta: "Start for free",
-    href: "https://os.wikrena.com",
+    href: "https://www.wikrenaos.com",
     external: true,
     accent: "navy",
   },

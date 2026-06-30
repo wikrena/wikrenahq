@@ -21,7 +21,7 @@
 
 ## System Boundaries
 
-- This repo is the **Wikrena Academy** product only. Wikrena Limited also operates **Wikrena OS** (`os.wikrena.com`, a separate SaaS for African service businesses) and **Wikrena Consulting** / "AnalyticsHQ" (B2B data services) — neither has code in this repo. Marketing pages here may link out to them, but no shared codebase, database, or auth session should be assumed between this app and those products.
+- This repo is the **Wikrena Academy** product only. Wikrena Limited also operates **Wikrena OS** (`www.wikrenaos.com`, a separate SaaS for African service businesses) and **Wikrena Consulting** / "AnalyticsHQ" (B2B data services) — neither has code in this repo. Marketing pages here may link out to them, but no shared codebase, database, or auth session should be assumed between this app and those products.
 - `app/` — Next.js pages (RSC by default) and API route handlers (`app/api/`). Route handlers handle input validation, auth checks, and persistence. No long-running work inside route handlers.
 - `lib/` — Shared infrastructure: Supabase clients (`lib/supabase/`), utility functions, data access helpers.
 - `components/` — UI composition only. No business logic in components.

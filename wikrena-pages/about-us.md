@@ -36,7 +36,7 @@ WHO WE ARE
 
   The operating system for African service businesses to run with clarity, structure, and control. Manage clients, protect your scope, get paid on time, and build the track record that takes you to the next level, all in one platform
 
-  [Start for Free →](https://os.wikrena.com)
+  [Start for Free →](https://www.wikrenaos.com)
 					02 — EDUCATION
 
 ### Wikrena Academy

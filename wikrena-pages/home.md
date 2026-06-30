@@ -59,7 +59,7 @@ We Train the People Who Run Them.
 
       The operating system for African service businesses to run with clarity, structure, and control. Manage clients, protect your scope, get paid on time, and build the track record that takes you to the next level, all in one platform, offline-mode by design.
 
-    [Start for free →](https://os.wikrena.com)
+    [Start for free →](https://www.wikrenaos.com)
 
   🎓
 

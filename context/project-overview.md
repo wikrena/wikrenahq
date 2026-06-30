@@ -12,7 +12,7 @@ Wikrena Limited was founded by **Chris Awoke**, a self-taught data analyst and f
 
 Wikrena operates **three pillars**, of which this app is only one:
 
-1. **Wikrena OS** — operating system SaaS for African service businesses (`os.wikrena.com`). Not part of this codebase.
+1. **Wikrena OS** — operating system SaaS for African service businesses (`www.wikrenaos.com`). Not part of this codebase.
 2. **Wikrena Academy** — cohort-based data/AI training for professionals. **This app.**
 3. **Wikrena Consulting** ("AnalyticsHQ") — B2B data strategy, analysis & reporting, and corporate data training. Not part of this codebase, but Academy marketing pages should link to it.
 

@@ -12,7 +12,7 @@ Wikrena Limited operates three pillars. This repo is **only** the Academy:
 
 | Pillar | What it is | In this repo? |
 |---|---|---|
-| **Wikrena OS** | SaaS for African service businesses (clients, scope, payments) at `os.wikrena.com` | No — separate product |
+| **Wikrena OS** | SaaS for African service businesses (clients, scope, payments) at `www.wikrenaos.com` | No — separate product |
 | **Wikrena Academy** | Cohort-based data/AI training for professionals | **Yes — this app** |
 | **Wikrena Consulting** ("AnalyticsHQ") | B2B data strategy, analysis, and corporate training | No — but Academy marketing pages link out to it |
 
