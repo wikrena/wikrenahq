@@ -1,4 +1,4 @@
-﻿import type { Metadata } from "next";
+import type { Metadata } from "next";
 import Link from "next/link";
 import {
   ArrowRight,
@@ -7,7 +7,6 @@ import {
   Compass,
   BarChart3,
   GraduationCap,
-  Search,
   FileText,
   Presentation,
   Target,
@@ -21,6 +20,8 @@ import {
   RefreshCw,
   Hexagon,
   ChevronRight,
+  TrendingUp,
+  Zap,
 } from "lucide-react";
 import { MarketingNav } from "@/components/marketing/nav";
 import { MarketingFooter } from "@/components/marketing/footer";
@@ -33,12 +34,6 @@ export const metadata: Metadata = {
   description:
     "Data strategy, analysis, AI workflow implementation, and corporate training for Africa-focused businesses. We close the gap between your data and the decisions that grow your business.",
 };
-
-const HERO_STATS = [
-  { value: 5, suffix: "+", label: "Years delivering" },
-  { value: 3, suffix: "", label: "Core services" },
-  { value: 100, suffix: "%", label: "Outcome-focused" },
-];
 
 const QUESTIONS = [
   "Why is our revenue dropping even though sales are up?",
@@ -94,6 +89,7 @@ const SERVICES = [
     icon: Compass,
     badge: null,
     title: "Data Strategy and Advisory",
+    tagline: "Start with clarity, not chaos.",
     desc: "Most businesses do not have a data problem. They have a clarity problem. They do not know what data they have, what it means, or what to do with it first. This engagement gives you the full picture and a prioritised roadmap to act on it. We audit your current data landscape, identify the gaps, and map out a practical plan that fits your business size, budget, and goals, including where AI can start working for you immediately.",
     deliverables: [
       "Current state audit: what data you have, where it lives, and what condition it is in",
@@ -102,12 +98,14 @@ const SERVICES = [
       "Tool and platform recommendations suited to your budget and technical capacity",
       "90-minute executive debrief and recommendations session",
     ],
+    accent: "teal",
   },
   {
     n: "02",
     icon: BarChart3,
     badge: "Most Requested",
     title: "Data Analysis and Reporting",
+    tagline: "Turn your numbers into decisions.",
     desc: "We take your raw numbers (spreadsheets, CRM exports, sales data, whatever you have) and turn them into clear, visual, decision-ready reports your team will actually use. Every analysis includes plain-language interpretation. We do not hand you a chart and leave you to figure out what it means.",
     deliverables: [
       "Full data cleaning and preparation from your existing sources",
@@ -116,12 +114,14 @@ const SERVICES = [
       "Plain-language narrative: what the data says and what to do about it",
       "Presentation of findings to your leadership team",
     ],
+    accent: "coral",
   },
   {
     n: "03",
     icon: GraduationCap,
     badge: null,
     title: "Corporate Data and AI Training",
+    tagline: "Build a team that understands its data.",
     desc: "Your team has data. They just do not know how to work with it, or how AI can amplify what they are already doing. We bring practical data and AI training directly to your organisation, tailored to your industry, your tools, and your people's actual skill level. This is not a generic course. It is built around your business.",
     deliverables: [
       "Skills assessment to understand where your team is starting from",
@@ -130,33 +130,34 @@ const SERVICES = [
       "Hands-on exercises using your actual business data",
       "Post-training support pack and 30-day follow-up session",
     ],
+    accent: "teal",
   },
 ];
 
 const HOW = [
   {
-    n: "1",
+    n: "01",
     icon: Phone,
     title: "Discovery Call",
-    desc: "We spend 30 minutes understanding your business, your data situation, and what you are trying to solve. This is not a sales call. It is a diagnostic. At the end, we tell you honestly whether we can help and which service fits. If we are not the right fit, we say so.",
+    desc: "30 minutes to understand your business and what you are trying to solve. Not a sales call. A diagnostic. We will tell you honestly if we can help.",
   },
   {
-    n: "2",
+    n: "02",
     icon: FileCheck,
     title: "Proposal and Scope",
-    desc: "Within 48 hours of the discovery call, you receive a written proposal with the exact scope of work, what we will deliver, the timeline, and the investment. No vague estimates. No hidden fees. You know exactly what you are agreeing to before you sign anything.",
+    desc: "Within 48 hours you receive a written proposal: exact scope, what we deliver, timeline, and investment. No hidden fees. No surprises.",
   },
   {
-    n: "3",
+    n: "03",
     icon: Presentation,
     title: "Engagement and Delivery",
-    desc: "We do the work. You are involved at key checkpoints but you are not expected to manage us. We communicate proactively and flag anything that needs your input before it becomes a delay. Deliverables arrive on the agreed schedule.",
+    desc: "We do the work. You are involved at key checkpoints. Deliverables arrive on the agreed schedule.",
   },
   {
-    n: "4",
+    n: "04",
     icon: Package,
     title: "Handover and Follow-up",
-    desc: "Every engagement ends with a proper handover. We do not deliver and disappear. You receive a walkthrough of everything we built, documentation where relevant, and a 30-day window to ask questions. Ongoing clients move to a retainer structure that keeps them supported without unnecessary cost.",
+    desc: "A proper handover, documentation, and a 30-day window for questions. We build for your independence, not ongoing dependency.",
   },
 ];
 
@@ -174,12 +175,12 @@ const DIFF = [
   {
     icon: FileText,
     title: "Real Deliverables",
-    desc: "Every engagement ends with something tangible: a dashboard, a report, a strategy document, a trained team. Not a presentation deck that gathers dust.",
+    desc: "Every engagement ends with something tangible: a dashboard, a report, a strategy document, a trained team. Not slides that gather dust.",
   },
   {
     icon: RefreshCw,
     title: "Lasting Impact",
-    desc: "Every deliverable is documented and handed over properly so you or your team can continue where we stopped. We build for independence, not dependency.",
+    desc: "Every deliverable is documented and handed over properly so your team can continue where we stopped. We build for independence.",
   },
 ];
 
@@ -217,358 +218,465 @@ export default function ServicesPage() {
       <main>
 
         {/* ── HERO ─────────────────────────────────────────────────────────── */}
-        <section className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-navy-900">
-          <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <section className="relative bg-navy-900 overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
             <div
-              className="absolute inset-0 opacity-[0.05]"
+              className="absolute inset-0 opacity-[0.04]"
               style={{
                 backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
                 backgroundSize: "32px 32px",
               }}
             />
-            <div className="absolute -top-40 -right-40 w-[500px] h-[500px] rounded-full opacity-[0.12] bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]" />
-            <div className="absolute -bottom-32 -left-32 w-[400px] h-[400px] rounded-full opacity-[0.08] bg-[radial-gradient(circle,theme(colors.coral.500),transparent_70%)]" />
           </div>
 
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
-            <Reveal>
-              <div className="inline-flex items-center gap-2 mb-6 text-[11px] font-mono text-white/40">
-                <Hexagon className="w-3.5 h-3.5 text-teal-400" strokeWidth={1.75} />
-                Wikrena Consulting
-              </div>
-              <h1 className="font-display font-black tracking-tight leading-[1.05] text-white text-4xl sm:text-5xl md:text-[3.25rem] max-w-3xl mb-6">
-                Your business has answers{" "}
-                <span className="text-gradient-teal">hidden in its data.</span>{" "}
-                We help you find them.
-              </h1>
-              <p className="text-white/55 text-base sm:text-lg max-w-xl leading-relaxed mb-10">
-                We work directly with Africa-focused businesses on data strategy,
-                analysis, reporting, and AI workflow implementation. Every engagement
-                ends with clarity you can act on, not a report that sits on a shelf.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 mb-16">
-                <Link
-                  href="/contact"
-                  className="btn-shine group inline-flex items-center gap-2.5 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm sm:text-base px-7 py-3.5 rounded-2xl transition-all duration-300 ease-brand shadow-teal-glow hover:-translate-y-0.5"
-                >
-                  Start a Conversation
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
-                </Link>
-                <a
-                  href="#services"
-                  className="group inline-flex items-center gap-2.5 bg-white/5 text-white font-bold text-sm sm:text-base px-7 py-3.5 rounded-2xl border border-white/15 hover:border-teal-400/50 hover:bg-white/10 transition-all duration-300 ease-brand hover:-translate-y-0.5"
-                >
-                  See Our Services
-                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
-                </a>
-              </div>
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_420px] min-h-[100svh] lg:min-h-0">
 
-              <div className="grid grid-cols-3 gap-6 max-w-sm border-t border-white/10 pt-8">
-                {HERO_STATS.map((s) => (
-                  <div key={s.label}>
-                    <div className="font-display font-black text-2xl text-white tracking-tight">
-                      <AnimatedCounter value={s.value} suffix={s.suffix} />
-                    </div>
-                    <div className="text-[11px] text-white/40 mt-0.5">{s.label}</div>
+              {/* Left: copy */}
+              <div className="flex flex-col justify-center pt-36 pb-20 lg:pt-40 lg:pb-28 pr-0 lg:pr-16">
+                <Reveal>
+                  <div className="inline-flex items-center gap-2 mb-7 text-[11px] font-mono text-white/35">
+                    <Hexagon className="w-3.5 h-3.5 text-teal-400" strokeWidth={1.75} />
+                    Wikrena Consulting
                   </div>
-                ))}
-              </div>
-            </Reveal>
-          </div>
-        </section>
+                  <h1 className="font-display font-black tracking-tight leading-[1.05] text-white text-4xl sm:text-5xl md:text-[3.25rem] mb-7">
+                    Your business has answers{" "}
+                    <span className="text-gradient-teal">hidden in its data.</span>{" "}
+                    We help you find them.
+                  </h1>
+                  <p className="text-white/50 text-base sm:text-lg leading-relaxed mb-10 max-w-lg">
+                    We work directly with Africa-focused businesses on data strategy,
+                    analysis, reporting, and AI workflow implementation. Every engagement
+                    ends with clarity you can act on.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-3 mb-14">
+                    <Link
+                      href="/contact"
+                      className="btn-shine group inline-flex items-center gap-2.5 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-sm sm:text-base px-7 py-3.5 rounded-2xl transition-all duration-300 ease-brand shadow-teal-glow hover:-translate-y-0.5"
+                    >
+                      Book a Free Discovery Call
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
+                    </Link>
+                    <a
+                      href="#services"
+                      className="group inline-flex items-center gap-2.5 bg-white/5 text-white font-bold text-sm sm:text-base px-7 py-3.5 rounded-2xl border border-white/15 hover:border-teal-400/40 hover:bg-white/10 transition-all duration-300 ease-brand"
+                    >
+                      See Our Services
+                      <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
+                    </a>
+                  </div>
 
-        {/* ── DIAGNOSTIC QUESTIONS ─────────────────────────────────────────── */}
-        <section className="py-16 sm:py-20 bg-neutral-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <Reveal>
-              <div className="eyebrow mb-4">The kind of questions we answer</div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl text-navy-800 tracking-tight mb-10 max-w-xl">
-                If you are asking any of these, you are in the right place.
-              </h2>
-            </Reveal>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-              {QUESTIONS.map((q, i) => (
-                <Reveal key={i} delay={i * 0.05}>
-                  <div className="flex items-start gap-3 bg-white border border-neutral-200 rounded-2xl p-5 shadow-surface hover:shadow-lift transition-shadow duration-300">
-                    <span className="text-teal-500 text-lg font-bold shrink-0 mt-0.5">?</span>
-                    <p className="text-navy-700 text-sm font-medium leading-relaxed">{q}</p>
+                  <div className="flex items-center gap-8 border-t border-white/10 pt-8">
+                    {[
+                      { value: 5, suffix: "+", label: "Years delivering" },
+                      { value: 3, suffix: "", label: "Core services" },
+                      { value: 100, suffix: "%", label: "Outcome-focused" },
+                    ].map((s) => (
+                      <div key={s.label}>
+                        <div className="font-display font-black text-2xl text-white tracking-tight">
+                          <AnimatedCounter value={s.value} suffix={s.suffix} />
+                        </div>
+                        <div className="text-[11px] text-white/35 mt-0.5">{s.label}</div>
+                      </div>
+                    ))}
                   </div>
                 </Reveal>
-              ))}
+              </div>
+
+              {/* Right: visual panel */}
+              <div className="hidden lg:flex flex-col justify-center py-16 pl-10 border-l border-white/[0.06]">
+                <Reveal delay={0.15}>
+                  <div className="space-y-4">
+                    <div className="text-[11px] font-mono text-white/25 tracking-widest uppercase mb-6">
+                      What we solve
+                    </div>
+                    {QUESTIONS.map((q, i) => (
+                      <div
+                        key={i}
+                        className="flex items-start gap-3 group"
+                        style={{ opacity: 1 - i * 0.1 }}
+                      >
+                        <span className="text-teal-500 text-sm font-bold shrink-0 mt-0.5 group-hover:text-teal-300 transition-colors">
+                          {String(i + 1).padStart(2, "0")}
+                        </span>
+                        <p className="text-white/40 text-sm leading-relaxed group-hover:text-white/70 transition-colors">
+                          {q}
+                        </p>
+                      </div>
+                    ))}
+                  </div>
+                </Reveal>
+              </div>
+
             </div>
-            <Reveal delay={0.2}>
-              <p className="mt-8 text-neutral-500 text-sm">
-                We work with you to find the answers, and more importantly, what to do with them.
+          </div>
+        </section>
+
+        {/* ── TENSION BANNER ───────────────────────────────────────────────── */}
+        <section className="py-14 bg-teal-500 overflow-hidden">
+          <div className="max-w-5xl mx-auto px-4 sm:px-6 text-center">
+            <Reveal>
+              <p className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-900 tracking-tight leading-tight">
+                The problem is never the data.{" "}
+                <span className="text-navy-900/60">
+                  It is the gap between your data and the decisions that grow your business.
+                </span>
               </p>
             </Reveal>
           </div>
         </section>
 
-        {/* ── PROBLEM / SOLUTION ───────────────────────────────────────────── */}
-        <section className="py-16 sm:py-20 bg-white overflow-hidden">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <Reveal>
-              <div className="eyebrow mb-4">The problem</div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-4 max-w-2xl">
-                Data without direction is just noise.
-              </h2>
-              <p className="text-neutral-600 text-sm sm:text-base leading-relaxed max-w-2xl mb-12">
-                Most growing African businesses have more data than they know what to do with.
-                Sales spreadsheets nobody reads. Reports that take a week to produce and get ignored
-                in a meeting. Dashboards that show numbers but answer no questions.
-                The problem is never the data. It is the gap between the data and the decision.
-                Wikrena Consulting closes that gap with data expertise and AI tools working together.
-              </p>
-            </Reveal>
+        {/* ── BEFORE / AFTER ───────────────────────────────────────────────── */}
+        <section className="py-0 bg-white overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-2">
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <Reveal delay={0.05}>
-                <div className="rounded-2xl border border-red-100 bg-red-50/60 p-7">
-                  <div className="text-[11px] font-mono font-bold text-red-400 tracking-widest uppercase mb-5">
+              {/* Without */}
+              <Reveal>
+                <div className="px-8 sm:px-14 py-16 sm:py-20 bg-neutral-50 border-b md:border-b-0 md:border-r border-neutral-200">
+                  <div className="inline-flex items-center gap-2 mb-8 text-[11px] font-mono font-bold text-red-400 tracking-widest uppercase">
+                    <XCircle className="w-3.5 h-3.5" />
                     Without Wikrena
                   </div>
-                  <ul className="space-y-3.5">
+                  <ul className="space-y-5">
                     {WITHOUT.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <XCircle className="w-4 h-4 text-red-400 mt-0.5 shrink-0" />
-                        <span className="text-neutral-600 text-sm">{item}</span>
+                      <li key={i} className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-red-100 border border-red-200 flex items-center justify-center shrink-0 mt-0.5">
+                          <XCircle className="w-3.5 h-3.5 text-red-400" />
+                        </div>
+                        <span className="text-neutral-500 text-sm sm:text-base leading-relaxed">{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </Reveal>
+
+              {/* With */}
               <Reveal delay={0.1}>
-                <div className="rounded-2xl border border-teal-200 bg-teal-50/60 p-7">
-                  <div className="text-[11px] font-mono font-bold text-teal-600 tracking-widest uppercase mb-5">
+                <div className="px-8 sm:px-14 py-16 sm:py-20 bg-navy-900">
+                  <div className="inline-flex items-center gap-2 mb-8 text-[11px] font-mono font-bold text-teal-400 tracking-widest uppercase">
+                    <CheckCircle2 className="w-3.5 h-3.5" />
                     With Wikrena
                   </div>
-                  <ul className="space-y-3.5">
+                  <ul className="space-y-5">
                     {WITH.map((item, i) => (
-                      <li key={i} className="flex items-start gap-3">
-                        <CheckCircle2 className="w-4 h-4 text-teal-500 mt-0.5 shrink-0" />
-                        <span className="text-navy-700 text-sm font-medium">{item}</span>
+                      <li key={i} className="flex items-start gap-4">
+                        <div className="w-6 h-6 rounded-full bg-teal-500/15 border border-teal-500/25 flex items-center justify-center shrink-0 mt-0.5">
+                          <CheckCircle2 className="w-3.5 h-3.5 text-teal-400" />
+                        </div>
+                        <span className="text-white/75 text-sm sm:text-base leading-relaxed font-medium">{item}</span>
                       </li>
                     ))}
                   </ul>
                 </div>
               </Reveal>
+
             </div>
           </div>
         </section>
 
         {/* ── WHO WE WORK WITH ─────────────────────────────────────────────── */}
-        <section className="py-16 sm:py-20 bg-neutral-100">
+        <section className="py-20 sm:py-24 bg-neutral-50">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <Reveal>
-              <div className="eyebrow mb-4">Who we work with</div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-3">
-                We work best with businesses that are ready.
-              </h2>
-              <p className="text-neutral-500 text-sm sm:text-base max-w-xl mb-10">
-                Not every business is ready for a data and AI engagement. We want to work with the ones that are.
-              </p>
-            </Reveal>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {WHO.map((w, i) => (
-                <Reveal key={i} delay={i * 0.07}>
-                  <div className="bg-white rounded-2xl border border-neutral-200 shadow-surface p-6 h-full">
-                    <div className="w-10 h-10 rounded-xl bg-teal-50 border border-teal-100 flex items-center justify-center mb-4">
-                      <w.icon className="w-5 h-5 text-teal-600" />
+            <div className="grid grid-cols-1 lg:grid-cols-[280px_1fr] gap-12 lg:gap-20 items-start">
+
+              <Reveal>
+                <div className="lg:sticky lg:top-28">
+                  <div className="eyebrow mb-4">Who we work with</div>
+                  <h2 className="font-display font-black text-2xl sm:text-3xl text-navy-800 tracking-tight mb-4 leading-tight">
+                    We work best with businesses that are ready.
+                  </h2>
+                  <p className="text-neutral-500 text-sm leading-relaxed">
+                    Not every business is ready for a data and AI engagement. We want to work with the ones that are.
+                  </p>
+                </div>
+              </Reveal>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                {WHO.map((w, i) => (
+                  <Reveal key={i} delay={i * 0.07}>
+                    <div className="bg-white rounded-2xl border border-neutral-200 shadow-surface hover:shadow-lift transition-all duration-300 hover:-translate-y-0.5 p-7 h-full">
+                      <div className="w-11 h-11 rounded-2xl bg-navy-900 flex items-center justify-center mb-5">
+                        <w.icon className="w-5 h-5 text-teal-400" />
+                      </div>
+                      <h3 className="font-display font-bold text-navy-800 text-base mb-2.5">{w.title}</h3>
+                      <p className="text-neutral-500 text-sm leading-relaxed">{w.desc}</p>
                     </div>
-                    <h3 className="font-display font-bold text-navy-800 text-base mb-2">{w.title}</h3>
-                    <p className="text-neutral-500 text-sm leading-relaxed">{w.desc}</p>
-                  </div>
-                </Reveal>
-              ))}
+                  </Reveal>
+                ))}
+              </div>
+
             </div>
           </div>
         </section>
 
         {/* ── THREE SERVICES ───────────────────────────────────────────────── */}
-        <section id="services" className="py-16 sm:py-20 lg:py-24 bg-white">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        <section id="services" className="bg-white">
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-20 sm:pt-24 pb-10">
             <Reveal>
               <div className="eyebrow mb-4">Our services</div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-3">
+              <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-navy-800 tracking-tight mb-4 max-w-2xl leading-tight">
                 Three ways we work with you.
               </h2>
-              <p className="text-neutral-500 text-sm sm:text-base max-w-xl mb-12">
-                Every engagement starts with a discovery call where we understand your situation before
-                recommending a path. You will never be sold a service that does not fit your actual problem.
-              </p>
-            </Reveal>
-
-            <div className="space-y-8">
-              {SERVICES.map((svc, i) => (
-                <Reveal key={i} delay={i * 0.07}>
-                  <div className="relative rounded-3xl border border-neutral-200 bg-white shadow-surface hover:shadow-lift transition-shadow duration-300 p-7 sm:p-9">
-                    {svc.badge && (
-                      <div className="absolute top-6 right-6 sm:top-8 sm:right-8 text-[10px] font-bold font-mono tracking-widest text-teal-600 bg-teal-50 border border-teal-200 rounded-full px-3 py-1 uppercase">
-                        {svc.badge}
-                      </div>
-                    )}
-                    <div className="flex items-start gap-5 mb-5">
-                      <div className="w-12 h-12 rounded-2xl bg-navy-900 flex items-center justify-center shrink-0">
-                        <svc.icon className="w-5 h-5 text-teal-400" />
-                      </div>
-                      <div>
-                        <div className="text-[11px] font-mono text-neutral-400 mb-0.5">Service {svc.n}</div>
-                        <h3 className="font-display font-black text-navy-800 text-xl sm:text-2xl tracking-tight">
-                          {svc.title}
-                        </h3>
-                      </div>
-                    </div>
-                    <p className="text-neutral-600 text-sm sm:text-base leading-relaxed mb-6 max-w-3xl">
-                      {svc.desc}
-                    </p>
-                    <div>
-                      <div className="text-[11px] font-mono font-bold text-neutral-400 tracking-widest uppercase mb-3">
-                        What you get
-                      </div>
-                      <ul className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-                        {svc.deliverables.map((d, j) => (
-                          <li key={j} className="flex items-start gap-2.5">
-                            <ChevronRight className="w-3.5 h-3.5 text-teal-500 mt-0.5 shrink-0" />
-                            <span className="text-neutral-600 text-sm">{d}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </Reveal>
-              ))}
-            </div>
-
-            <Reveal delay={0.2}>
-              <p className="mt-8 text-neutral-500 text-sm text-center">
-                Not sure which service fits your situation?{" "}
-                <Link href="/contact" className="text-teal-600 font-semibold hover:text-teal-500 transition-colors">
-                  Tell us about your business
-                </Link>{" "}
-                and we will recommend the right path.
+              <p className="text-neutral-500 text-base max-w-xl">
+                Every engagement starts with a discovery call. You will never be sold a service
+                that does not fit your actual problem.
               </p>
             </Reveal>
           </div>
+
+          {SERVICES.map((svc, i) => {
+            const isEven = i % 2 === 1;
+            const accentClasses = svc.accent === "coral"
+              ? { bg: "bg-coral-500", text: "text-coral-500", badge: "bg-coral-50 text-coral-600 border-coral-200", glow: "shadow-coral-glow" }
+              : { bg: "bg-teal-500", text: "text-teal-500", badge: "bg-teal-50 text-teal-600 border-teal-200", glow: "shadow-teal-glow" };
+
+            return (
+              <Reveal key={i} delay={0.05}>
+                <div className={`border-t border-neutral-100 ${i === SERVICES.length - 1 ? "border-b" : ""}`}>
+                  <div className="max-w-7xl mx-auto">
+                    <div className={`grid grid-cols-1 lg:grid-cols-2 ${isEven ? "lg:flex-row-reverse" : ""}`}>
+
+                      {/* Number + icon panel */}
+                      <div className={`${isEven ? "lg:order-2" : ""} bg-navy-900 px-8 sm:px-14 py-14 sm:py-20 flex flex-col justify-between relative overflow-hidden`}>
+                        <div className="absolute -bottom-8 -right-8 text-[140px] font-black text-white/[0.04] leading-none select-none">
+                          {svc.n}
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-3 mb-10">
+                            <div className={`w-11 h-11 rounded-2xl ${svc.accent === "coral" ? "bg-coral-500/15" : "bg-teal-500/15"} border ${svc.accent === "coral" ? "border-coral-500/25" : "border-teal-500/25"} flex items-center justify-center`}>
+                              <svc.icon className={`w-5 h-5 ${svc.accent === "coral" ? "text-coral-400" : "text-teal-400"}`} />
+                            </div>
+                            {svc.badge && (
+                              <span className={`text-[10px] font-bold font-mono tracking-widest uppercase px-3 py-1 rounded-full border ${accentClasses.badge}`}>
+                                {svc.badge}
+                              </span>
+                            )}
+                          </div>
+                          <div className="text-[11px] font-mono text-white/25 mb-3">Service {svc.n}</div>
+                          <h3 className="font-display font-black text-white text-2xl sm:text-3xl tracking-tight mb-3 leading-tight">
+                            {svc.title}
+                          </h3>
+                          <p className={`text-base font-semibold ${svc.accent === "coral" ? "text-coral-400" : "text-teal-400"} mb-7`}>
+                            {svc.tagline}
+                          </p>
+                          <p className="text-white/45 text-sm sm:text-base leading-relaxed">
+                            {svc.desc}
+                          </p>
+                        </div>
+                      </div>
+
+                      {/* Deliverables panel */}
+                      <div className={`${isEven ? "lg:order-1" : ""} bg-white px-8 sm:px-14 py-14 sm:py-20 flex flex-col justify-center`}>
+                        <div className="text-[11px] font-mono font-bold text-neutral-400 tracking-widest uppercase mb-7">
+                          What you get
+                        </div>
+                        <ul className="space-y-5">
+                          {svc.deliverables.map((d, j) => (
+                            <li key={j} className="flex items-start gap-4">
+                              <div className={`w-6 h-6 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${svc.accent === "coral" ? "bg-coral-50 border border-coral-200" : "bg-teal-50 border border-teal-200"}`}>
+                                <ChevronRight className={`w-3 h-3 ${svc.accent === "coral" ? "text-coral-500" : "text-teal-500"}`} />
+                              </div>
+                              <span className="text-navy-700 text-sm sm:text-base leading-relaxed">{d}</span>
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="mt-10 pt-8 border-t border-neutral-100">
+                          <Link
+                            href="/contact"
+                            className={`group inline-flex items-center gap-2.5 font-bold text-sm transition-colors duration-200 ${svc.accent === "coral" ? "text-coral-600 hover:text-coral-500" : "text-teal-600 hover:text-teal-500"}`}
+                          >
+                            Enquire about this service
+                            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200" />
+                          </Link>
+                        </div>
+                      </div>
+
+                    </div>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
         </section>
 
         {/* ── HOW IT WORKS ─────────────────────────────────────────────────── */}
-        <section className="py-16 sm:py-20 lg:py-24 bg-navy-900 overflow-hidden">
+        <section className="py-20 sm:py-28 bg-neutral-50 overflow-hidden">
           <div className="max-w-7xl mx-auto px-4 sm:px-6">
+
             <Reveal>
-              <div className="eyebrow-light mb-4">How we work</div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-white tracking-tight mb-3">
-                How a Wikrena engagement works.
-              </h2>
-              <p className="text-white/50 text-sm sm:text-base max-w-xl mb-12">
-                Every engagement follows the same four steps regardless of which service you choose.
-                No scope creep. No invoice you did not expect.
-              </p>
+              <div className="text-center mb-16">
+                <div className="eyebrow mb-4">How we work</div>
+                <h2 className="font-display font-black text-3xl sm:text-4xl text-navy-800 tracking-tight mb-3">
+                  Four steps. No surprises.
+                </h2>
+                <p className="text-neutral-500 text-base max-w-lg mx-auto">
+                  Every engagement follows the same four steps regardless of which service you choose.
+                </p>
+              </div>
             </Reveal>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {HOW.map((step, i) => (
-                <Reveal key={i} delay={i * 0.07}>
-                  <div className="relative bg-white/[0.04] border border-white/10 rounded-2xl p-6 h-full">
-                    <div className="text-[11px] font-mono text-white/25 mb-4">Step {step.n}</div>
-                    <div className="w-10 h-10 rounded-xl bg-teal-500/10 border border-teal-500/20 flex items-center justify-center mb-4">
-                      <step.icon className="w-5 h-5 text-teal-400" />
+
+            {/* Stepper */}
+            <div className="relative">
+              {/* Connecting line (desktop) */}
+              <div className="hidden lg:block absolute top-[42px] left-[calc(12.5%+24px)] right-[calc(12.5%+24px)] h-px bg-neutral-200 z-0" />
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 relative z-10">
+                {HOW.map((step, i) => (
+                  <Reveal key={i} delay={i * 0.09}>
+                    <div className="flex flex-col items-center lg:items-start text-center lg:text-left">
+                      {/* Step circle */}
+                      <div className="w-[52px] h-[52px] rounded-full bg-navy-900 border-4 border-neutral-50 flex items-center justify-center mb-5 shrink-0 shadow-lift">
+                        <step.icon className="w-5 h-5 text-teal-400" />
+                      </div>
+                      <div className="text-[11px] font-mono text-neutral-400 mb-1">Step {step.n}</div>
+                      <h3 className="font-display font-bold text-navy-800 text-base mb-2">{step.title}</h3>
+                      <p className="text-neutral-500 text-sm leading-relaxed">{step.desc}</p>
                     </div>
-                    <h3 className="font-display font-bold text-white text-base mb-2">{step.title}</h3>
-                    <p className="text-white/45 text-sm leading-relaxed">{step.desc}</p>
-                  </div>
-                </Reveal>
-              ))}
+                  </Reveal>
+                ))}
+              </div>
             </div>
+
           </div>
         </section>
 
         {/* ── DIFFERENTIATORS ──────────────────────────────────────────────── */}
-        <section className="py-16 sm:py-20 bg-neutral-50">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6">
-            <Reveal>
-              <div className="eyebrow mb-4">What makes us different</div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl lg:text-4xl text-navy-800 tracking-tight mb-10">
-                Built for African businesses. Delivered by experts.
-              </h2>
-            </Reveal>
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
-              {DIFF.map((d, i) => (
-                <Reveal key={i} delay={i * 0.07}>
-                  <div className="bg-white rounded-2xl border border-neutral-200 shadow-surface p-6 h-full">
-                    <div className="w-10 h-10 rounded-xl bg-navy-900 flex items-center justify-center mb-4">
-                      <d.icon className="w-5 h-5 text-teal-400" />
-                    </div>
-                    <h3 className="font-display font-bold text-navy-800 text-base mb-2">{d.title}</h3>
-                    <p className="text-neutral-500 text-sm leading-relaxed">{d.desc}</p>
-                  </div>
+        <section className="py-0 bg-navy-900 overflow-hidden">
+          <div className="max-w-7xl mx-auto">
+            <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr]">
+
+              {/* Left label */}
+              <div className="px-8 sm:px-14 py-16 sm:py-20 border-b lg:border-b-0 lg:border-r border-white/[0.06] flex flex-col justify-center">
+                <Reveal>
+                  <div className="eyebrow-light mb-4">What makes us different</div>
+                  <h2 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight leading-tight mb-4">
+                    Built for African businesses. Delivered by experts.
+                  </h2>
+                  <p className="text-white/40 text-sm leading-relaxed">
+                    We are a data and AI consultancy that understands the market it operates in.
+                    That changes everything about how we work.
+                  </p>
                 </Reveal>
-              ))}
+              </div>
+
+              {/* Right grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2">
+                {DIFF.map((d, i) => (
+                  <Reveal key={i} delay={i * 0.07}>
+                    <div className={`px-8 sm:px-10 py-10 sm:py-12 border-white/[0.06] ${i < 2 ? "border-b" : ""} ${i % 2 === 0 ? "sm:border-r" : ""}`}>
+                      <div className="w-10 h-10 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center mb-5">
+                        <d.icon className="w-5 h-5 text-teal-400" />
+                      </div>
+                      <h3 className="font-display font-bold text-white text-base mb-2">{d.title}</h3>
+                      <p className="text-white/40 text-sm leading-relaxed">{d.desc}</p>
+                    </div>
+                  </Reveal>
+                ))}
+              </div>
+
             </div>
           </div>
         </section>
 
         {/* ── FAQs ─────────────────────────────────────────────────────────── */}
-        <section className="py-16 sm:py-20 bg-white">
-          <div className="max-w-3xl mx-auto px-4 sm:px-6">
-            <Reveal>
-              <div className="eyebrow mb-4">Questions</div>
-              <h2 className="font-display font-black text-2xl sm:text-3xl text-navy-800 tracking-tight mb-2">
-                Frequently asked questions.
-              </h2>
-              <p className="text-neutral-500 text-sm mb-10">
-                Have a question not answered here? Email{" "}
-                <a href="mailto:hello@wikrena.com" className="text-teal-600 hover:text-teal-500 transition-colors">
-                  hello@wikrena.com
-                </a>{" "}
-                and we respond within 24 hours.
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <FaqAccordion items={FAQS} />
-            </Reveal>
+        <section className="py-20 sm:py-28 bg-white">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-[320px_1fr] gap-12 lg:gap-20 items-start">
+              <Reveal>
+                <div className="lg:sticky lg:top-28">
+                  <div className="eyebrow mb-4">Questions</div>
+                  <h2 className="font-display font-black text-2xl sm:text-3xl text-navy-800 tracking-tight mb-4 leading-tight">
+                    Frequently asked questions.
+                  </h2>
+                  <p className="text-neutral-500 text-sm leading-relaxed mb-5">
+                    Have a question not answered here?
+                  </p>
+                  <a
+                    href="mailto:hello@wikrena.com"
+                    className="inline-flex items-center gap-2 text-teal-600 font-semibold text-sm hover:text-teal-500 transition-colors"
+                  >
+                    hello@wikrena.com
+                    <ArrowRight className="w-3.5 h-3.5" />
+                  </a>
+                </div>
+              </Reveal>
+              <Reveal delay={0.1}>
+                <FaqAccordion items={FAQS} />
+              </Reveal>
+            </div>
           </div>
         </section>
 
         {/* ── CTA ──────────────────────────────────────────────────────────── */}
-        <section className="py-16 sm:py-20 lg:py-24 bg-navy-900 overflow-hidden relative">
-          <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full opacity-[0.10] bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]" />
+        <section className="relative bg-navy-900 overflow-hidden">
+          <div className="absolute inset-0 pointer-events-none">
+            <div className="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full opacity-[0.12] bg-[radial-gradient(circle,theme(colors.teal.500),transparent_70%)]" />
+            <div
+              className="absolute inset-0 opacity-[0.04]"
+              style={{
+                backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)",
+                backgroundSize: "32px 32px",
+              }}
+            />
           </div>
-          <div className="relative max-w-3xl mx-auto px-4 sm:px-6 text-center">
-            <Reveal>
-              <div className="eyebrow-light mb-4">Let&apos;s talk</div>
-              <h2 className="font-display font-black text-3xl sm:text-4xl text-white tracking-tight mb-4">
-                Your data should be working for you.
-              </h2>
-              <p className="text-white/50 text-sm sm:text-base leading-relaxed mb-10 max-w-xl mx-auto">
-                Book a free 30-minute discovery call. No pitch. No pressure. Just an honest
-                conversation about your data, your AI opportunities, and what we can build together.
-              </p>
 
-              <Link
-                href="/contact"
-                className="btn-shine group inline-flex items-center gap-2.5 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-base px-8 py-4 rounded-2xl transition-all duration-300 ease-brand shadow-teal-glow hover:-translate-y-0.5 mb-12"
-              >
-                Book a Free Discovery Call
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
-              </Link>
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-10 border-t border-white/10">
-                {[
-                  { icon: Phone, label: "Free discovery call", sub: "30 minutes, no obligation" },
-                  { icon: FileCheck, label: "Clear proposal", sub: "Scope and cost upfront" },
-                  { icon: Handshake, label: "Founder-led", sub: "Chris on every engagement" },
-                  { icon: Target, label: "Africa-first", sub: "Built for this market" },
-                ].map((item, i) => (
-                  <div key={i} className="flex flex-col items-center gap-2 text-center">
-                    <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center">
-                      <item.icon className="w-4 h-4 text-teal-400" />
-                    </div>
-                    <div className="text-white text-xs font-semibold">{item.label}</div>
-                    <div className="text-white/35 text-[11px]">{item.sub}</div>
+              {/* Left: statement */}
+              <div className="py-20 sm:py-28 lg:pr-16 lg:border-r border-white/[0.06]">
+                <Reveal>
+                  <div className="flex items-center gap-2 mb-8 text-[11px] font-mono text-white/30">
+                    <Zap className="w-3.5 h-3.5 text-teal-400" />
+                    Let&apos;s talk
                   </div>
-                ))}
+                  <h2 className="font-display font-black text-3xl sm:text-4xl lg:text-5xl text-white tracking-tight mb-6 leading-tight">
+                    Your data should be working for you.{" "}
+                    <span className="text-white/30">Every day.</span>
+                  </h2>
+                  <p className="text-white/45 text-base sm:text-lg leading-relaxed max-w-lg">
+                    Book a free 30-minute discovery call. No pitch. No pressure.
+                    Just an honest conversation about your data, your AI opportunities,
+                    and what we can build together.
+                  </p>
+                </Reveal>
               </div>
-            </Reveal>
+
+              {/* Right: action + assurances */}
+              <div className="py-20 sm:py-28 lg:pl-16 flex flex-col justify-center">
+                <Reveal delay={0.1}>
+                  <Link
+                    href="/contact"
+                    className="btn-shine group inline-flex items-center gap-3 bg-teal-500 hover:bg-teal-400 text-navy-900 font-bold text-base px-8 py-4 rounded-2xl transition-all duration-300 ease-brand shadow-teal-glow hover:-translate-y-0.5 mb-10 self-start"
+                  >
+                    Book a Free Discovery Call
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300 ease-brand" />
+                  </Link>
+
+                  <div className="space-y-5">
+                    {[
+                      { icon: Phone, label: "Free discovery call", sub: "30 minutes, no obligation" },
+                      { icon: FileCheck, label: "Clear proposal within 48 hours", sub: "Scope and cost upfront, no surprises" },
+                      { icon: Handshake, label: "Founder-led delivery", sub: "Chris on every engagement" },
+                      { icon: TrendingUp, label: "Africa-first approach", sub: "Built specifically for this market" },
+                    ].map((item, i) => (
+                      <div key={i} className="flex items-center gap-4">
+                        <div className="w-9 h-9 rounded-xl bg-white/5 border border-white/10 flex items-center justify-center shrink-0">
+                          <item.icon className="w-4 h-4 text-teal-400" />
+                        </div>
+                        <div>
+                          <div className="text-white text-sm font-semibold">{item.label}</div>
+                          <div className="text-white/35 text-xs">{item.sub}</div>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </Reveal>
+              </div>
+
+            </div>
           </div>
         </section>
 
